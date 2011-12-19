@@ -18,6 +18,7 @@ import org.eclipse.e4.ui.workbench.IWorkbench;
 public class ExitHandler {
 	@Execute
 	public void exit(IWorkbench workbench) {
+		System.out.println("SWT2 ExitHandler.exit()");
 		workbench.close();
 	}
 }

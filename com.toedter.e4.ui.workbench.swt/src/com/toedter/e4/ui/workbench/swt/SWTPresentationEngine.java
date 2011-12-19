@@ -20,6 +20,8 @@ import com.toedter.e4.ui.workbench.generic.IRendererFactory;
 @SuppressWarnings("restriction")
 public class SWTPresentationEngine extends GenericPresentationEngine {
 
+	private boolean stopped;
+
 	public SWTPresentationEngine() {
 		System.out.println("SWTPresentationEngine");
 	}
@@ -51,7 +53,8 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 
 			if (appShell != null) {
 				Display display = appShell.getDisplay();
-				while (appShell != null && !appShell.isDisposed()) {
+				stopped = false;
+				while (!stopped && appShell != null && !appShell.isDisposed()) {
 					if (!display.readAndDispatch()) {
 						appContext.processWaiting();
 						display.sleep();
@@ -80,5 +83,11 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 		} catch (Exception e) {
 			logger.warn(e, "Could not create rendering factory");
 		}
+	}
+
+	@Override
+	public void stop() {
+		System.out.println("SWTPresentationEngine.stop()");
+		stopped = true;
 	}
 }
