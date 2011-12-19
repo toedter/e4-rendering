@@ -221,7 +221,7 @@ public class DetailComposite extends Composite {
 	}
 
 	private Text createText(final Composite parent, final String labelText, final String property) {
-		final Label label = new Label(parent, SWT.NONE);
+		final Label label = new Label(parent, SWT.RIGHT);
 		label.setText(labelText + "   "); // the extra space is due to a bug in
 		// font formatting when using css
 		// styling
