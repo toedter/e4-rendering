@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.toedter.e4.ui.workbench.swt.application"
+            name="E4 SWT Contacs Demo">
+         <property
+               name="appName"
+               value="E4 SWT Contacs Demo">
+         </property>
+         <property
+               name="applicationXMI"
+               value="com.toedter.e4.demo.contacts.generic/Application.e4xmi">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="FFFFFF">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="7,252,445,20">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="cssTheme"
+               value="com.toedter.e4.demo.contacts.themes.darkgradient">
+         </property>
+      </product>
+   </extension>
+    <extension
+          id="modelContribution"
+          point="org.eclipse.e4.workbench.model">
+       <processor
+             beforefragment="true"
+             class="com.toedter.e4.demo.contacts.swt.processors.ContributionProcessor">
+          <element
+                id="part:detailsView">
+          </element>
+          <element
+                id="part:listView">
+          </element>
+          <element
+                id="handler:exit">
+          </element>
+          <element
+                id="handler:switchTheme">
+          </element>
+       </processor>
+       <!--
+	   <processor
+	            beforefragment="true"
+	            class="com.toedter.e4.demo.contacts.swt.processors.MenuThemeProcessor">
+	       <element
+	            id="menu:org.eclipse.ui.main.menu">
+	       </element>
+	   </processor>
+
+	   <processor
+	          beforefragment="true"
+	          class="com.toedter.e4.demo.contacts.swt.processors.ToolbarThemeProcessor">
+	       <element
+	          id="toolbar:org.eclipse.ui.main.toolbar">
+	       </element>
+	   </processor>
+	   -->
+    </extension>
+    <extension
+          point="org.eclipse.e4.ui.css.swt.theme">
+       <theme
+             basestylesheeturi="css/dark-gradient.css"
+             id="com.toedter.e4.demo.contacts.themes.darkgradient"
+             label="Dark Gradient Theme">
+       </theme>
+       <theme
+             basestylesheeturi="css/bright-gradient.css"
+             id="com.toedter.e4.demo.contacts.themes.brightgradient"
+             label="Bright Gradient Theme">
+       </theme>
+       <theme
+             basestylesheeturi="css/blue-gradient.css"
+             id="com.toedter.e4.demo.contacts.themes.blue"
+             label="Blue Gradient Theme">
+       </theme>
+    </extension>
+</plugin>

@@ -1,0 +1,72 @@
+.root {
+    -fx-base: #d0d0d0;
+    -fx-background: #f4f4f4;
+    -fx-control-inner-background: white;
+}
+
+.menu-bar {
+    -fx-background-color: linear-gradient(to bottom, -fx-base, derive(-fx-base,+50%));
+    -fx-text-fill: black;
+}
+
+.menu-bar .menu .label {
+    -fx-padding: 0.333em 0.5em 0.333em 0.5em; /* 4 6 4 6*/
+    -fx-text-fill: black;
+}
+
+.my-gridpane {
+	-fx-background-color: radial-gradient(radius 100%, derive(-fx-base,70%), derive(-fx-base,20%));
+}
+
+.separator-label {
+   -fx-text-fill: steelblue ;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.button:hover {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-color: -fx-hover-base;
+}
+
+#window-resize-button {
+    -fx-background-image: url("images/window-corner.png");
+    -fx-background-position: right 1px bottom 1px;
+    -fx-background-repeat: no-repeat;
+}
+
+#window_close {
+    -fx-font-size: 1px;
+    -fx-background-color: null;
+    -fx-background-image: url("images/window-close.png");
+    -fx-padding: 6 6 4 6;
+}
+
+#window_min {
+    -fx-font-size: 1px;
+    -fx-background-color: null;
+    -fx-background-image: url("images/window-min.png");
+    -fx-padding: 6 6 4 6;
+}
+
+#window_max {
+    -fx-font-size: 1px;
+    -fx-background-color: null;
+    -fx-background-image: url("images/window-expand.png");
+    -fx-padding: 6 6 4 6;
+}
+
+#window_close:hover {
+    -fx-background-image: url("images/window-close-over.png");
+}
+
+#window_min:hover {
+    -fx-background-image: url("images/window-min-over.png");
+}
+
+#window_max:hover {
+    -fx-background-image: url("images/window-expand-over.png");
+}
