@@ -22,7 +22,8 @@ public class PartRenderer extends GenericRenderer {
 		Composite parentWidget = (Composite) parent.getWidget();
 		final MPart part = (MPart) element;
 		Composite composite = new Composite(parentWidget, SWT.NONE);
-		composite.setLayout(new FillLayout(SWT.VERTICAL));
+		FillLayout fillLayout = new FillLayout(SWT.VERTICAL);
+		composite.setLayout(fillLayout);
 
 		// Create a context for this part
 		IEclipseContext localContext = part.getContext();

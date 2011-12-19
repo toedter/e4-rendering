@@ -5,7 +5,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.toedter.e4.ui.workbench.swt.application"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
             name="E4 SWT Contacs Demo">
          <property
                name="appName"

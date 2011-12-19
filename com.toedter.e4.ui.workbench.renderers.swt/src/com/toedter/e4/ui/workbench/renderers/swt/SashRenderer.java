@@ -38,6 +38,7 @@ public class SashRenderer extends GenericRenderer {
 		}
 		final MPartSashContainer partSashContainer = (MPartSashContainer) element;
 		sashForm = new SashForm((Composite) parent.getWidget(), SWT.NONE);
+
 		if (parent.getWidget() instanceof Shell) {
 			sashForm.setLayoutData(new BorderLayout.BorderData(BorderLayout.CENTER));
 		}
