@@ -9,7 +9,9 @@ import org.eclipse.e4.ui.internal.workbench.Activator;
 import org.eclipse.e4.ui.internal.workbench.Policy;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
+import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuItem;
 import org.eclipse.jface.resource.DeviceResourceException;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -80,17 +82,16 @@ public class MenuItemRenderer extends ItemRenderer {
 
 	@Override
 	public void hookControllerLogic(MUIElement me) {
-		// if (me instanceof MDirectMenuItem) {
-		// final MDirectMenuItem item = (MDirectMenuItem) me;
-		// item.setObject(contributionFactory.create(item.getContributionURI(),
-		// getContext(item)));
-		//
-		// JMenuItem menuItem = (JMenuItem) item.getWidget();
-		// menuItem.addActionListener(createEventHandler(item));
-		// } else if (me instanceof MHandledMenuItem) {
-		// final MHandledMenuItem item = (MHandledMenuItem) me;
-		// JMenuItem menuItem = (JMenuItem) item.getWidget();
-		// menuItem.addActionListener(createParametrizedCommandEventHandler(item));
-		// }
+		if (me instanceof MDirectMenuItem) {
+			final MDirectMenuItem item = (MDirectMenuItem) me;
+			item.setObject(contributionFactory.create(item.getContributionURI(), getContext(item)));
+
+			MenuItem menuItem = (MenuItem) item.getWidget();
+			menuItem.addListener(SWT.Selection, createEventHandler(item));
+		} else if (me instanceof MHandledMenuItem) {
+			final MHandledMenuItem item = (MHandledMenuItem) me;
+			MenuItem menuItem = (MenuItem) item.getWidget();
+			menuItem.addListener(SWT.Selection, createParametrizedCommandEventHandler(item));
+		}
 	}
 }

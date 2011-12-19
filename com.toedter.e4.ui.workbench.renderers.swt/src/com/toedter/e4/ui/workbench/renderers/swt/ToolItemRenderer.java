@@ -6,6 +6,7 @@ import org.eclipse.e4.core.services.contributions.IContributionFactory;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
+import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolItem;
 import org.eclipse.jface.resource.DeviceResourceException;
@@ -47,18 +48,17 @@ public class ToolItemRenderer extends ItemRenderer {
 
 	@Override
 	public void hookControllerLogic(MUIElement me) {
-		// if (me instanceof MDirectToolItem) {
-		// final MDirectToolItem item = (MDirectToolItem) me;
-		// item.setObject(contributionFactory.create(item.getContributionURI(),
-		// getContext(item)));
-		//
-		// JButton button = (JButton) item.getWidget();
-		// button.addActionListener(createEventHandler(item));
-		// } else if (me instanceof MHandledToolItem) {
-		// final MHandledItem item = (MHandledToolItem) me;
-		//
-		// JButton button = (JButton) item.getWidget();
-		// button.addActionListener(createParametrizedCommandEventHandler(item));
-		// }
+		if (me instanceof MDirectToolItem) {
+			final MDirectToolItem item = (MDirectToolItem) me;
+			item.setObject(contributionFactory.create(item.getContributionURI(), getContext(item)));
+
+			ToolItem toolItem = (ToolItem) item.getWidget();
+			toolItem.addListener(SWT.Selection, createEventHandler(item));
+		} else if (me instanceof MHandledToolItem) {
+			final MHandledItem item = (MHandledToolItem) me;
+
+			ToolItem toolItem = (ToolItem) item.getWidget();
+			toolItem.addListener(SWT.Selection, createParametrizedCommandEventHandler(item));
+		}
 	}
 }

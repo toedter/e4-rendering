@@ -1,7 +1,5 @@
 package com.toedter.e4.ui.workbench.renderers.swt;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -22,6 +20,8 @@ import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MItem;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
 
@@ -43,11 +43,11 @@ public abstract class ItemRenderer extends GenericRenderer {
 		return cmd;
 	}
 
-	protected ActionListener createParametrizedCommandEventHandler(final MHandledItem item) {
-		return new ActionListener() {
-
+	protected Listener createParametrizedCommandEventHandler(final MHandledItem item) {
+		return new Listener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void handleEvent(Event event) {
+
 				final IEclipseContext eclipseContext = getContext(item);
 				EHandlerService service = (EHandlerService) eclipseContext.get(EHandlerService.class.getName());
 				ParameterizedCommand command = item.getWbCommand();
@@ -65,11 +65,10 @@ public abstract class ItemRenderer extends GenericRenderer {
 		};
 	}
 
-	protected ActionListener createEventHandler(final MItem item) {
-		return new ActionListener() {
-
+	protected Listener createEventHandler(final MItem item) {
+		return new Listener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void handleEvent(Event event) {
 				final IEclipseContext eclipseContext = getContext(item);
 				eclipseContext.set(MItem.class, item);
 				if (item instanceof MDirectToolItem) {
