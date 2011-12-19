@@ -61,7 +61,6 @@ public class ListView {
 		contactsViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				System.out.println("ListView.selectionChanged()");
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 				// selectionService.setSelection(selection.getFirstElement());
 				application.getContext().set(Contact.class, (Contact) selection.getFirstElement());

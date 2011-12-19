@@ -195,7 +195,6 @@ public class DetailsView {
 
 	@Inject
 	public void setSelection(@Optional Contact contact) {
-		System.out.println("DetailsView.setSelection(): " + contact);
 		if (contact != null) {
 			if (dirtyable.isDirty()) {
 				MessageDialog dialog = new MessageDialog(detailComposite.getShell(), "Save vCard", null,
