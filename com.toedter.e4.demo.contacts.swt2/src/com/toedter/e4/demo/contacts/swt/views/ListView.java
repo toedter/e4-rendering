@@ -17,8 +17,10 @@ import com.toedter.e4.demo.contacts.generic.model.ContactsRepositoryFactory;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
@@ -28,6 +30,7 @@ import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -42,7 +45,7 @@ public class ListView {
 	private ESelectionService selectionService;
 
 	@Inject
-	public ListView(Composite parent) {
+	public ListView(Composite parent, final MApplication application) {
 		// Table composite (because of TableColumnLayout)
 		final Composite tableComposite = new Composite(parent, SWT.NONE);
 		tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -52,14 +55,16 @@ public class ListView {
 		// Table viewer
 		contactsViewer = new TableViewer(tableComposite, SWT.FULL_SELECTION);
 		contactsViewer.getTable().setHeaderVisible(true);
-		// contactsViewer.getTable().setLinesVisible(true);
+		contactsViewer.getTable().setLinesVisible(true);
 		contactsViewer.setComparator(new ContactViewerComparator());
 
 		contactsViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
+				System.out.println("ListView.selectionChanged()");
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-				selectionService.setSelection(selection.getFirstElement());
+				// selectionService.setSelection(selection.getFirstElement());
+				application.getContext().set(Contact.class, (Contact) selection.getFirstElement());
 			}
 		});
 
@@ -80,10 +85,21 @@ public class ListView {
 		IObservableMap[] attributes = BeansObservables.observeMaps(contentProvider.getKnownElements(), Contact.class,
 				new String[] { "firstName", "lastName" });
 		contactsViewer.setLabelProvider(new ObservableMapLabelProvider(attributes));
-
-		contactsViewer.setInput(ContactsRepositoryFactory.getContactsRepository().getAllContacts());
+		IObservableList allContacts = ContactsRepositoryFactory.getContactsRepository().getAllContacts();
+		contactsViewer.setInput(allContacts);
 
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
+
+		// Hack to select Kai Toedter at startup
+		for (int i = 0; i < allContacts.size(); i++) {
+			Contact contact = (Contact) allContacts.get(i);
+
+			if ("Kai".equalsIgnoreCase(contact.getFirstName()) && "Tödter".equalsIgnoreCase(contact.getLastName())) {
+				contactsViewer.setSelection(new StructuredSelection(contact));
+				break;
+			}
+		}
+
 	}
 
 	@PreDestroy

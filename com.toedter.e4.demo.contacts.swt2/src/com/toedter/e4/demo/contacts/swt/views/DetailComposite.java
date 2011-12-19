@@ -16,7 +16,6 @@ import com.toedter.e4.demo.contacts.generic.databinding.AggregateNameObservableV
 import com.toedter.e4.demo.contacts.generic.model.Contact;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
-import javax.inject.Inject;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.PojoObservables;
@@ -61,7 +60,6 @@ public class DetailComposite extends Composite {
 	private final WritableValue contactValue = new WritableValue();
 	private final IObservableValue scaledImage;
 
-	@Inject
 	public DetailComposite(MDirtyable dirtyable, final Composite parent) {
 		super(parent, SWT.NONE);
 		this.dirtyable = dirtyable;
@@ -70,7 +68,7 @@ public class DetailComposite extends Composite {
 
 		dbc = new DataBindingContext();
 
-		URL url = FileLocator.find(Platform.getBundle("com.toedter.e4.demo.contacts.swt"),
+		URL url = FileLocator.find(Platform.getBundle("com.toedter.e4.demo.contacts.swt2"),
 				new Path("images/dummy.png"), null);
 		ImageDescriptor imageDescriptor = ImageDescriptor.createFromURL(url);
 		if (imageDescriptor != null) {
@@ -175,7 +173,9 @@ public class DetailComposite extends Composite {
 	}
 
 	private void setDirty(boolean dirty) {
-		dirtyable.setDirty(dirty);
+		if (dirtyable != null) {
+			dirtyable.setDirty(dirty);
+		}
 	}
 
 	public boolean checkEmptyString(Object testString) {
