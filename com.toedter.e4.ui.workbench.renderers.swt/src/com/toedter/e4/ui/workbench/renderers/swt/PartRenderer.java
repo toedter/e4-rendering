@@ -19,8 +19,6 @@ public class PartRenderer extends GenericRenderer {
 
 	@Override
 	public void createWidget(MUIElement element, MElementContainer<MUIElement> parent) {
-		System.out.println("PartRenderer.createWidget(): " + parent.getWidget());
-
 		Composite parentWidget = (Composite) parent.getWidget();
 		final MPart part = (MPart) element;
 		Composite composite = new Composite(parentWidget, SWT.NONE);

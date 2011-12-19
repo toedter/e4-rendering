@@ -21,7 +21,6 @@ public class TrimBarRenderer extends GenericRenderer {
 		if (!(element instanceof MTrimBar)) {
 			return;
 		}
-		System.out.println(parent.getWidget());
 		CoolBar coolBar = new CoolBar((Shell) parent.getWidget(), SWT.NONE);
 		coolBar.setLayoutData(new BorderLayout.BorderData(BorderLayout.NORTH));
 
@@ -33,7 +32,6 @@ public class TrimBarRenderer extends GenericRenderer {
 		if (!((MUIElement) container instanceof MTrimBar && container.getWidget() instanceof CoolBar)) {
 			return;
 		}
-		System.out.println("TrimBarRenderer.processContents()");
 		CoolBar coolBar = (CoolBar) container.getWidget();
 		coolBar.layout();
 		for (CoolItem item : coolBar.getItems()) {

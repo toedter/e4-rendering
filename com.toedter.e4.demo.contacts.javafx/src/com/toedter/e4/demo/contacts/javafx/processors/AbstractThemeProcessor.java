@@ -70,7 +70,6 @@ public abstract class AbstractThemeProcessor {
 					if (iconURI != null) {
 						iconURI = iconURI.replace(".css", ".png");
 					}
-					System.out.println(iconURI);
 					processTheme(theme.getName(), switchThemeCommand, parameter, iconURI);
 				}
 
