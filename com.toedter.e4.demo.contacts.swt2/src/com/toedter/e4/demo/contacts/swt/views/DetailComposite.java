@@ -44,6 +44,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+@SuppressWarnings("restriction")
 public class DetailComposite extends Composite {
 
 	private final MDirtyable dirtyable;
