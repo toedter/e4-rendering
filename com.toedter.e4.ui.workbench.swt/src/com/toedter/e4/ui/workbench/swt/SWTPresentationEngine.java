@@ -2,6 +2,7 @@ package com.toedter.e4.ui.workbench.swt;
 
 import javax.annotation.PostConstruct;
 
+import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.contributions.IContributionFactory;
 import org.eclipse.e4.ui.model.application.MApplication;
@@ -9,6 +10,7 @@ import org.eclipse.e4.ui.model.application.MApplicationElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.equinox.app.IApplication;
+import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -23,8 +25,19 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 	}
 
 	@Override
-	public Object run(final MApplicationElement uiRoot, IEclipseContext appContext) {
-		super.run(uiRoot, appContext);
+	public Object run(final MApplicationElement uiRoot, final IEclipseContext appContext) {
+
+		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
+			@Override
+			public void run() {
+				if (uiRoot instanceof MApplication) {
+					MApplication theApp = (MApplication) uiRoot;
+					for (MWindow window : theApp.getChildren()) {
+						createGui(window);
+					}
+				}
+			}
+		});
 
 		Shell appShell = null;
 		if (uiRoot instanceof MApplication) {
@@ -35,11 +48,13 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 					break;
 				}
 			}
+
 			if (appShell != null) {
 				Display display = appShell.getDisplay();
 				while (appShell != null && !appShell.isDisposed()) {
 					if (!display.readAndDispatch()) {
 						appContext.processWaiting();
+						display.sleep();
 					}
 				}
 			}

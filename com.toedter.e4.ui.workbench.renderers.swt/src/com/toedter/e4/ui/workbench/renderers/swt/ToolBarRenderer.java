@@ -4,7 +4,8 @@ import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.CoolBar;
+import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ToolBar;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
@@ -17,22 +18,14 @@ public class ToolBarRenderer extends GenericRenderer {
 		if (!(element instanceof MToolBar)) {
 			return;
 		}
-
-		ToolBar toolBar = new ToolBar((Composite) parent.getWidget(), SWT.FLAT);
+		CoolBar coolbar = (CoolBar) parent.getWidget();
+		final CoolItem item = new CoolItem(coolbar, SWT.DROP_DOWN);
+		ToolBar toolBar = new ToolBar(coolbar, SWT.NONE);
+		item.setControl(toolBar);
 		element.setWidget(toolBar);
 	}
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> container) {
-		// JToolBar toolBar = (JToolBar) container.getWidget();
-		// for (MUIElement element : container.getChildren()) {
-		// if (element instanceof MHandledToolItem || element instanceof
-		// MDirectToolItem) {
-		// toolBar.add((JButton) element.getWidget());
-		// } else if (element instanceof MToolBarSeparator) {
-		// System.out.println("separator");
-		// toolBar.addSeparator();
-		// }
-		// }
 	}
 }

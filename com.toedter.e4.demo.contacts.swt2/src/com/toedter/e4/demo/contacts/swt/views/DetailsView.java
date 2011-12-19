@@ -12,8 +12,16 @@
 
 package com.toedter.e4.demo.contacts.swt.views;
 
+import javax.inject.Inject;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+
 public class DetailsView {
-	public DetailsView() {
+	@Inject
+	public DetailsView(Composite parent) {
 		System.out.println("DetailsView.DetailsView()");
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText("Details");
 	}
 }

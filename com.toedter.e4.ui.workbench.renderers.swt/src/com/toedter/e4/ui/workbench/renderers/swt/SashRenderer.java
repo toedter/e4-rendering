@@ -9,9 +9,11 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
+import com.toedter.e4.ui.workbench.swt.layouts.BorderLayout;
 
 @SuppressWarnings("restriction")
 public class SashRenderer extends GenericRenderer {
@@ -26,6 +28,9 @@ public class SashRenderer extends GenericRenderer {
 		}
 		final MPartSashContainer partSashContainer = (MPartSashContainer) element;
 		SashForm sash = new SashForm((Composite) parent.getWidget(), SWT.NONE);
+		if (parent.getWidget() instanceof Shell) {
+			sash.setLayoutData(new BorderLayout.BorderData(BorderLayout.CENTER));
+		}
 
 		if (partSashContainer.isHorizontal()) {
 			sash.setOrientation(SWT.HORIZONTAL);

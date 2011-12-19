@@ -31,7 +31,6 @@ public class MenuItemRenderer extends ItemRenderer {
 			Menu menu = (Menu) parent.getWidget();
 			MenuItem menuItem = new MenuItem(menu, SWT.PUSH);
 			setItemText((MMenuItem) element, menuItem);
-			System.out.println("MenuItemRenderer.createWidget(): " + menuItem + " for menu " + (Object) menu);
 			element.setWidget(menuItem);
 		}
 	}

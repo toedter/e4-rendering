@@ -24,7 +24,7 @@ public class ToolItemRenderer extends ItemRenderer {
 	@Override
 	public void createWidget(MUIElement element, MElementContainer<MUIElement> parent) {
 		if (element instanceof MHandledToolItem || element instanceof MDirectToolItem) {
-			ToolItem toolItem = new ToolItem((ToolBar) parent.getWidget(), SWT.NONE);
+			ToolItem toolItem = new ToolItem((ToolBar) parent.getWidget(), SWT.PUSH);
 
 			MToolItem item = (MToolItem) element;
 			if (item.getIconURI() != null) {
