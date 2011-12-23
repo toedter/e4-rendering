@@ -1,15 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2010 BestSolution.at, Siemens AG and others.
+ * Copyright (c) 2011 Kai Toedter and others.
  * 
- * All rights reserved. This program and the accompanying materials
+ * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
+ * http://www.eclipse.org/legal/epl-v10.html.
+ * 
  * Contributors:
- *     Tom Schindl <tom.schindl@bestsolution.at> - initial API and implementation
- *     Kai Tödter - Adoption to contacts demo
+ *     Kai Toedter - initial API and implementation
  ******************************************************************************/
+
 package com.toedter.e4.demo.contacts.swt.processors;
 
 import java.util.List;
@@ -36,22 +36,22 @@ public abstract class AbstractThemeProcessor {
 
 	@Execute
 	public void process() {
-		if (!check())
+		if (!check()) {
 			return;
+		}
 
 		// FIXME Remove once bug 314091 is resolved
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		BundleContext context = bundle.getBundleContext();
 
-		ServiceReference reference = context
-				.getServiceReference(IThemeManager.class.getName());
+		ServiceReference reference = context.getServiceReference(IThemeManager.class.getName());
 		IThemeManager mgr = (IThemeManager) context.getService(reference);
 		IThemeEngine engine = mgr.getEngineForDisplay(Display.getCurrent());
 
 		List<ITheme> themes = engine.getThemes();
 		if (themes.size() > 0) {
 			MApplication application = getApplication();
-			
+
 			MCommand switchThemeCommand = null;
 			for (MCommand cmd : application.getCommands()) {
 				if ("contacts.switchTheme".equals(cmd.getElementId())) { //$NON-NLS-1$
@@ -65,16 +65,14 @@ public abstract class AbstractThemeProcessor {
 				preprocess();
 
 				for (ITheme theme : themes) {
-					MParameter parameter = MCommandsFactory.INSTANCE
-							.createParameter();
+					MParameter parameter = MCommandsFactory.INSTANCE.createParameter();
 					parameter.setName("contacts.commands.switchtheme.themeid"); //$NON-NLS-1$
 					parameter.setValue(theme.getId());
 					String iconURI = getCSSUri(theme.getId());
 					if (iconURI != null) {
 						iconURI = iconURI.replace(".css", ".png");
 					}
-					processTheme(theme.getLabel(), switchThemeCommand, parameter,
-							iconURI);
+					processTheme(theme.getLabel(), switchThemeCommand, parameter, iconURI);
 				}
 
 				postprocess();
@@ -86,24 +84,21 @@ public abstract class AbstractThemeProcessor {
 
 	abstract protected void preprocess();
 
-	abstract protected void processTheme(String name, MCommand switchCommand,
-			MParameter themeId, String iconURI);
+	abstract protected void processTheme(String name, MCommand switchCommand, MParameter themeId, String iconURI);
 
 	abstract protected void postprocess();
-	
-	abstract protected MApplication getApplication(); 
+
+	abstract protected MApplication getApplication();
 
 	private String getCSSUri(String themeId) {
 		IExtensionRegistry registry = RegistryFactory.getRegistry();
-		IExtensionPoint extPoint = registry
-				.getExtensionPoint("org.eclipse.e4.ui.css.swt.theme");
+		IExtensionPoint extPoint = registry.getExtensionPoint("org.eclipse.e4.ui.css.swt.theme");
 
 		for (IExtension e : extPoint.getExtensions()) {
 			for (IConfigurationElement ce : e.getConfigurationElements()) {
-				if (ce.getName().equals("theme")
-						&& ce.getAttribute("id").equals(themeId)) {
-					return "platform:/plugin/" + ce.getContributor().getName()
-							+ "/" + ce.getAttribute("basestylesheeturi");
+				if (ce.getName().equals("theme") && ce.getAttribute("id").equals(themeId)) {
+					return "platform:/plugin/" + ce.getContributor().getName() + "/"
+							+ ce.getAttribute("basestylesheeturi");
 				}
 			}
 		}

@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2011 Kai Toedter and others.
+ * 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html.
+ * 
+ * Contributors:
+ *     Kai Toedter - initial API and implementation
+ ******************************************************************************/
+
 package com.toedter.e4.ui.controls.javafx.skin;
 
 import javafx.event.ActionEvent;
@@ -22,8 +34,7 @@ public class CTabPaneSkin extends TabPaneSkin {
 		Image maxImage = new Image(getClass().getResourceAsStream("max.png"));
 		maxButton = new Button("", new ImageView(maxImage));
 		maxButton.setVisible(false); // will be enabled by MinMax addon
-		maxButton
-				.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
+		maxButton.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
 
 		maxButton.translateXProperty().bind(widthProperty().subtract(24.0));
 		maxButton.setLayoutY(6.0);
@@ -31,8 +42,7 @@ public class CTabPaneSkin extends TabPaneSkin {
 		Image minImage = new Image(getClass().getResourceAsStream("min.png"));
 		minButton = new Button("", new ImageView(minImage));
 		minButton.setVisible(false); // will be enabled by MinMax addon
-		minButton
-				.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
+		minButton.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
 
 		minButton.translateXProperty().bind(widthProperty().subtract(44.0));
 		minButton.setLayoutY(6.0);
