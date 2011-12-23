@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: e4 renderers for JavaFX applications
 Bundle-SymbolicName: com.toedter.e4.ui.workbench.renderers.javafx
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Kai Toedter
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: com.toedter.e4.ui.workbench.generic;bundle-version="1.0.0",
+Require-Bundle: com.toedter.e4.ui.workbench.generic;bundle-version="0.1.0",
  at.bestsolution.efxclipse.runtime.workbench,
  org.eclipse.e4.ui.model.workbench;bundle-version="0.9.1",
  org.eclipse.e4.core.contexts;bundle-version="0.9.0",

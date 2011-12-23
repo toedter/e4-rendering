@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: e4 workbench addons
 Bundle-SymbolicName: com.toedter.e4.ui.workbench.addons;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Kai Toedter
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle:  javax.inject;bundle-version="1.0.0",
