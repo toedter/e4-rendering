@@ -22,6 +22,7 @@ import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
 import org.eclipse.emf.ecore.EObject;
 
+@SuppressWarnings("restriction")
 public class MenuThemeProcessor extends AbstractThemeProcessor {
 
 	private static final String BUNDLE_ID = "platform:/plugin/com.toedter.e4.demo.contacts.swt2"; //$NON-NLS-1$

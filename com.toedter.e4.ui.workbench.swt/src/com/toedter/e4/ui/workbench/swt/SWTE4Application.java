@@ -1,11 +1,30 @@
 package com.toedter.e4.ui.workbench.swt;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine;
+import org.eclipse.swt.widgets.Display;
+
 import com.toedter.e4.ui.workbench.generic.GenericE4Application;
 
+@SuppressWarnings("restriction")
 public class SWTE4Application extends GenericE4Application {
 	public SWTE4Application() {
 		System.out.println("SWTE4Application.SwingE4Application()");
 		presentationEngineURI = "platform:/plugin/com.toedter.e4.ui.workbench.swt/"
 				+ "com.toedter.e4.ui.workbench.swt.SWTPresentationEngine";
+	}
+
+	@Override
+	protected void addToContext(IEclipseContext eclipseContext) {
+		final Display display;
+		if (eclipseContext.get(Display.class) != null) {
+			display = eclipseContext.get(Display.class);
+		} else {
+			display = Display.getDefault();
+			eclipseContext.set(Display.class, display);
+		}
+
+		PartRenderingEngine.initializeStyling(display, eclipseContext);
+		System.out.println("SWTE4Application.createE4Workbench(): Styling inintialized");
 	}
 }

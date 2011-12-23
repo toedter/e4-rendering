@@ -95,6 +95,8 @@ public class GenericE4Application implements IApplication {
 		IEclipseContext appContext = createDefaultContext(applicationContext);
 		// IEclipseContext appContext = createDefaultContextOri();
 
+		addToContext(appContext);
+
 		// Create the app model and its context
 		MApplication appModel = loadApplicationModel(applicationContext, appContext);
 		appModel.setContext(appContext);
@@ -110,6 +112,14 @@ public class GenericE4Application implements IApplication {
 		// We need a generic workbench
 		E4Workbench e4Workbench = new E4Workbench(appModel, appContext);
 		return e4Workbench;
+	}
+
+	/*
+	 * Can be used by subclasses to add things to the context before the
+	 * workbench model is loaded
+	 */
+	protected void addToContext(IEclipseContext eclipseContext) {
+
 	}
 
 	private MApplication loadApplicationModel(IApplicationContext appContext, IEclipseContext eclipseContext) {

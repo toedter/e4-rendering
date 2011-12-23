@@ -27,7 +27,14 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 	}
 
 	@Override
-	public Object run(final MApplicationElement uiRoot, final IEclipseContext appContext) {
+	public Object run(final MApplicationElement uiRoot, final IEclipseContext eclipseContext) {
+		final Display display;
+		if (eclipseContext.get(Display.class) != null) {
+			display = eclipseContext.get(Display.class);
+		} else {
+			display = Display.getDefault();
+			eclipseContext.set(Display.class, display);
+		}
 
 		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
 			@Override
@@ -52,11 +59,10 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 			}
 
 			if (appShell != null) {
-				Display display = appShell.getDisplay();
 				stopped = false;
 				while (!stopped && appShell != null && !appShell.isDisposed()) {
 					if (!display.readAndDispatch()) {
-						appContext.processWaiting();
+						eclipseContext.processWaiting();
 						display.sleep();
 					}
 				}
