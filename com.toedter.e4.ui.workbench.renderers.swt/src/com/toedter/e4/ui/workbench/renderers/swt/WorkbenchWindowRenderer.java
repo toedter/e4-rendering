@@ -20,7 +20,7 @@ import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
 import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
-import com.toedter.e4.ui.workbench.swt.layouts.BorderLayout;
+import com.toedter.e4.ui.workbench.swt.layouts.SimpleTrimLayout;
 
 @SuppressWarnings("restriction")
 public class WorkbenchWindowRenderer extends GenericRenderer {
@@ -33,7 +33,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 		if (element instanceof MWindow) {
 			MWindow mWindow = (MWindow) element;
 			Shell shell = new Shell(Display.getCurrent());
-			shell.setLayout(new BorderLayout());
+			shell.setLayout(new SimpleTrimLayout());
 			shell.setBounds(mWindow.getX(), mWindow.getY(), mWindow.getWidth(), mWindow.getHeight());
 			mWindow.getContext().set(Shell.class, shell);
 			element.setWidget(shell);
@@ -139,7 +139,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 			}
 		}
 
-		shell.layout();
+		shell.pack();
 		shell.open();
 
 	}

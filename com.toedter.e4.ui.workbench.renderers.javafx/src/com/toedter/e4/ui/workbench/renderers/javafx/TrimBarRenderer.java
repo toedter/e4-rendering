@@ -21,11 +21,11 @@ public class TrimBarRenderer extends GenericRenderer {
 		if (!(element instanceof MTrimBar)) {
 			return;
 		}
-		final MTrimBar trimModel = (MTrimBar) element;
+		final MTrimBar trimBar = (MTrimBar) element;
 
 		ToolBar toolBar = new ToolBar();
 
-		switch (trimModel.getSide().getValue()) {
+		switch (trimBar.getSide().getValue()) {
 		case SideValue.TOP_VALUE:
 		case SideValue.BOTTOM_VALUE:
 			toolBar.setOrientation(Orientation.HORIZONTAL);
@@ -34,8 +34,6 @@ public class TrimBarRenderer extends GenericRenderer {
 		case SideValue.RIGHT_VALUE:
 			toolBar.setOrientation(Orientation.VERTICAL);
 			break;
-		default:
-			return;
 		}
 
 		element.setWidget(toolBar);

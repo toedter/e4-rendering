@@ -19,7 +19,7 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
-import com.toedter.e4.ui.workbench.swt.layouts.BorderLayout;
+import com.toedter.e4.ui.workbench.swt.layouts.SimpleTrimLayout;
 
 @SuppressWarnings("restriction")
 public class SashRenderer extends GenericRenderer {
@@ -40,7 +40,7 @@ public class SashRenderer extends GenericRenderer {
 		sashForm = new SashForm((Composite) parent.getWidget(), SWT.NONE);
 
 		if (parent.getWidget() instanceof Shell) {
-			sashForm.setLayoutData(new BorderLayout.BorderData(BorderLayout.CENTER));
+			sashForm.setLayoutData(SimpleTrimLayout.CENTER);
 		}
 
 		if (partSashContainer.isHorizontal()) {
