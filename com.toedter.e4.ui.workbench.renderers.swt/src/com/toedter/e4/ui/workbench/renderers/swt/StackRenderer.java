@@ -18,7 +18,7 @@ import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
@@ -29,11 +29,20 @@ public class StackRenderer extends GenericRenderer {
 
 	@Override
 	public void createWidget(MUIElement element, MElementContainer<MUIElement> parent) {
-		CTabFolder tabFolder = new CTabFolder((Composite) parent.getWidget(), SWT.NONE);
+
+		Composite marginComposite = new Composite((Composite) parent.getWidget(), SWT.NONE);
+		FillLayout layout = new FillLayout();
+		layout.marginHeight = 3;
+		layout.marginWidth = 3;
+		marginComposite.setLayout(layout);
+
+		CTabFolder tabFolder = new CTabFolder(marginComposite, SWT.NONE);
 		// tabFolder.setSimple(false);
 		tabFolder.setMaximizeVisible(true);
+		tabFolder.setBorderVisible(true);
 
-		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		// tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+		// false));
 		element.setWidget(tabFolder);
 	}
 
