@@ -13,10 +13,13 @@
 package com.toedter.e4.ui.workbench.renderers.swing;
 
 import java.awt.Component;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
@@ -42,11 +45,21 @@ public class StackRenderer extends GenericRenderer {
 			MUILabel mLabel = (MUILabel) element;
 			ImageIcon icon = null;
 			if (mLabel.getIconURI() != null) {
-				URL url = Util.convertToOSGiURL(URI.createURI(mLabel.getIconURI()));
-				icon = new ImageIcon(url.toExternalForm());
+				try {
+					icon = new ImageIcon(new URL(URI.createURI(mLabel.getIconURI()).toString()));
+				} catch (MalformedURLException e) {
+					// ignore, icon will be null
+				}
 			}
-			parentPane.addTab(mLabel.getLocalizedLabel(), icon, (Component) element.getWidget(),
-					mLabel.getLocalizedTooltip());
+
+			// the following code makes sure, that even in Nimbus L&F the icon
+			// is on the left side
+			JLabel label = new JLabel(mLabel.getLocalizedLabel());
+			label.setIcon(icon);
+			label.setIconTextGap(5);
+			label.setHorizontalTextPosition(SwingConstants.RIGHT);
+			parentPane.add((Component) element.getWidget());
+			parentPane.setTabComponentAt(parentPane.getTabCount() - 1, label);
 		}
 	}
 }
