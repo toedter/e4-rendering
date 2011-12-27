@@ -16,6 +16,7 @@ import javax.swing.JToolBar;
 
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.SideValue;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimBar;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 
@@ -30,23 +31,33 @@ public class TrimBarRenderer extends GenericRenderer {
 			return;
 		}
 		JToolBar toolBar = new JToolBar();
-		// toolBar.setFloatable(false);
+
+		MTrimBar mTrimBar = (MTrimBar) element;
+		int orientation = mTrimBar.getSide().getValue();
+
+		if (orientation == SideValue.TOP_VALUE || orientation == SideValue.BOTTOM_VALUE) {
+			toolBar.setOrientation(JToolBar.HORIZONTAL);
+		} else {
+			toolBar.setOrientation(JToolBar.VERTICAL);
+		}
+		toolBar.setFloatable(false);
 		element.setWidget(toolBar);
 	}
 
 	@Override
 	public void processContents(MElementContainer<MUIElement> container) {
 		IPresentationEngine renderer = (IPresentationEngine) context.get(IPresentationEngine.class.getName());
-		JToolBar panel = (JToolBar) container.getWidget();
+		JToolBar toolBar = (JToolBar) container.getWidget();
 
 		boolean isFirst = true;
 		for (MUIElement element : container.getChildren()) {
 			JToolBar subToolbar = (JToolBar) renderer.createGui(element);
+			subToolbar.setOrientation(toolBar.getOrientation());
 			if (subToolbar != null) {
 				if (!isFirst) {
-					panel.addSeparator();
+					toolBar.addSeparator();
 				}
-				panel.add(subToolbar);
+				toolBar.add(subToolbar);
 				isFirst = false;
 			}
 		}
