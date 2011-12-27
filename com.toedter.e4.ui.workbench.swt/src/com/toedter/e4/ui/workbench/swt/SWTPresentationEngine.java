@@ -79,6 +79,9 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 					}
 				}
 			}
+			if (!display.isDisposed()) {
+				display.dispose();
+			}
 		}
 
 		System.out.println("SWTPresentationEngine.run(): Finished");

@@ -17,19 +17,14 @@ import javax.inject.Inject;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.e4.core.services.contributions.IContributionFactory;
-import org.eclipse.e4.ui.internal.workbench.Activator;
-import org.eclipse.e4.ui.internal.workbench.Policy;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuItem;
-import org.eclipse.jface.resource.DeviceResourceException;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
@@ -59,10 +54,10 @@ public class MenuItemRenderer extends ItemRenderer {
 		// }
 	}
 
-	protected void setItemText(MMenuItem model, MenuItem menuItem) {
-		String text = model.getLocalizedLabel();
-		if (model instanceof MHandledItem) {
-			MHandledItem handledItem = (MHandledItem) model;
+	protected void setItemText(MMenuItem mMenuItem, MenuItem menuItem) {
+		String text = mMenuItem.getLocalizedLabel();
+		if (mMenuItem instanceof MHandledItem) {
+			MHandledItem handledItem = (MHandledItem) mMenuItem;
 			generateParameterizedCommand(handledItem, context);
 			ParameterizedCommand cmd = handledItem.getWbCommand();
 			if (cmd != null && (text == null || text.length() == 0)) {
@@ -75,18 +70,10 @@ public class MenuItemRenderer extends ItemRenderer {
 		}
 		menuItem.setText(text);
 
-		if (model.getIconURI() != null) {
-			String iconURI = model.getIconURI();
-			ImageDescriptor icon = getImageDescriptor(model);
-			LocalResourceManager localResourceManager = new LocalResourceManager(JFaceResources.getResources());
-
-			try {
-				menuItem.setImage(icon == null ? null : localResourceManager.createImage(icon));
-			} catch (DeviceResourceException e) {
-				icon = ImageDescriptor.getMissingImageDescriptor();
-				menuItem.setImage(localResourceManager.createImage(icon));
-				// as we replaced the failed icon, log the message once.
-				Activator.trace(Policy.DEBUG_MENUS, "failed to create image " + iconURI, e); //$NON-NLS-1$
+		if (mMenuItem.getIconURI() != null) {
+			if (mMenuItem.getIconURI() != null) {
+				Image image = getImage(mMenuItem);
+				menuItem.setImage(image);
 			}
 		}
 		// item.setAccelerator(new KeyCharacterCombination("k"));

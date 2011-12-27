@@ -12,8 +12,6 @@
 
 package com.toedter.e4.ui.workbench.renderers.swt;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,20 +23,15 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.commands.MParameter;
-import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MItem;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import com.toedter.e4.ui.workbench.generic.GenericRenderer;
-
 @SuppressWarnings("restriction")
-public abstract class ItemRenderer extends GenericRenderer {
+public abstract class ItemRenderer extends SWTRenderer {
 	protected ParameterizedCommand generateParameterizedCommand(final MHandledItem item,
 			final IEclipseContext lclContext) {
 		ECommandService cmdService = (ECommandService) lclContext.get(ECommandService.class.getName());
@@ -92,22 +85,4 @@ public abstract class ItemRenderer extends GenericRenderer {
 			}
 		};
 	}
-
-	public ImageDescriptor getImageDescriptor(MUILabel element) {
-		String iconURI = element.getIconURI();
-		if (iconURI != null && iconURI.length() > 0) {
-			return imageDescriptorFromURI(URI.createURI(iconURI));
-		}
-		return null;
-	}
-
-	public ImageDescriptor imageDescriptorFromURI(URI iconPath) {
-		try {
-			return ImageDescriptor.createFromURL(new URL(iconPath.toString()));
-		} catch (MalformedURLException e) {
-			System.err.println("iconURI \"" + iconPath.toString() + "\" is invalid, no image will be shown");
-			return null;
-		}
-	}
-
 }

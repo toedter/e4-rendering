@@ -57,7 +57,6 @@ public class TrimBarRenderer extends GenericRenderer {
 		case SideValue.LEFT_VALUE:
 			coolBar.setLayoutData(SimpleTrimLayout.LEFT);
 			coolBar.setLayout(new RowLayout(SWT.VERTICAL));
-			System.out.println("TrimBarRenderer.createWidget() LEFT");
 			break;
 		case SideValue.RIGHT_VALUE:
 			coolBar.setLayoutData(SimpleTrimLayout.RIGHT);

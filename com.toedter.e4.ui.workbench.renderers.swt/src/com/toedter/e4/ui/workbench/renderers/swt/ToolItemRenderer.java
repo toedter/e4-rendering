@@ -21,11 +21,8 @@ import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolItem;
-import org.eclipse.jface.resource.DeviceResourceException;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
@@ -41,14 +38,9 @@ public class ToolItemRenderer extends ItemRenderer {
 
 			MToolItem item = (MToolItem) element;
 			if (item.getIconURI() != null) {
-
-				LocalResourceManager m = new LocalResourceManager(JFaceResources.getResources());
-				ImageDescriptor icon = getImageDescriptor(item);
-				try {
-					toolItem.setImage(icon == null ? null : m.createImage(icon));
-				} catch (DeviceResourceException e) {
-					icon = ImageDescriptor.getMissingImageDescriptor();
-					toolItem.setImage(m.createImage(icon));
+				if (item.getIconURI() != null) {
+					Image image = getImage(item);
+					toolItem.setImage(image);
 				}
 			}
 			if (item.getTooltip() != null) {
