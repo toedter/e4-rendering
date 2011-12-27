@@ -24,6 +24,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -56,9 +57,8 @@ public class DetailsView {
 
 	@Inject
 	public DetailsView(BorderPane parent, final MApplication application) {
-		createDetailsPanel();
-
-		parent.setCenter(grid);
+		Node node = createDetailsPanel();
+		parent.setCenter(node);
 	}
 
 	private Node createDetailsPanel() {
@@ -122,7 +122,11 @@ public class DetailsView {
 		labelConstraints.setHalignment(HPos.RIGHT);
 		grid.getColumnConstraints().add(labelConstraints);
 
-		return grid;
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
+		scrollPane.setContent(grid);
+		scrollPane.autosize();
+		return scrollPane;
 	}
 
 	public void addSeparator(String text) {
@@ -141,7 +145,7 @@ public class DetailsView {
 		grid.add(textField, 2, detailsPanelRow);
 
 		GridPane.setConstraints(textField, 2, detailsPanelRow, span, 1, HPos.LEFT, VPos.BASELINE, Priority.ALWAYS,
-				Priority.NEVER);
+				Priority.ALWAYS);
 
 		detailsPanelRow++;
 		if ("Name".equals(labelText)) {
