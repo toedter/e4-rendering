@@ -43,6 +43,7 @@ public class ToolBarRenderer extends GenericRenderer {
 		if (orientation == Orientation.VERTICAL) {
 			VBox toolBar = new VBox();
 			element.setWidget(toolBar);
+			return;
 		}
 		// Since we use a JavaFX ToolBar for the TrimBar, each e4 tool bar is
 		// rendered as JavaFX HBox
