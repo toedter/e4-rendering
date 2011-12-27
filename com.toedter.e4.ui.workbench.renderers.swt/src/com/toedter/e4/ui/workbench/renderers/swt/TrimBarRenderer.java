@@ -18,6 +18,8 @@ import org.eclipse.e4.ui.model.application.ui.SideValue;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimBar;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.swt.widgets.CoolItem;
@@ -34,7 +36,11 @@ public class TrimBarRenderer extends GenericRenderer {
 		if (!(element instanceof MTrimBar)) {
 			return;
 		}
-		CoolBar coolBar = new CoolBar((Shell) parent.getWidget(), SWT.NONE);
+		// CoolBar coolBar = new CoolBar((Shell) parent.getWidget(), SWT.NONE);
+		Composite coolBar = new Composite((Shell) parent.getWidget(), SWT.NONE);
+
+		// coolBar.setLocked(true);
+		// CoolItem item = new CoolItem(coolBar, SWT.NONE);
 		final MTrimBar trimBar = (MTrimBar) element;
 
 		element.setWidget(coolBar);
@@ -42,15 +48,20 @@ public class TrimBarRenderer extends GenericRenderer {
 		switch (trimBar.getSide().getValue()) {
 		case SideValue.TOP_VALUE:
 			coolBar.setLayoutData(SimpleTrimLayout.TOP);
+			coolBar.setLayout(new RowLayout(SWT.HORIZONTAL));
 			break;
 		case SideValue.BOTTOM_VALUE:
 			coolBar.setLayoutData(SimpleTrimLayout.BOTTOM);
+			coolBar.setLayout(new RowLayout(SWT.HORIZONTAL));
 			break;
 		case SideValue.LEFT_VALUE:
 			coolBar.setLayoutData(SimpleTrimLayout.LEFT);
+			coolBar.setLayout(new RowLayout(SWT.VERTICAL));
+			System.out.println("TrimBarRenderer.createWidget() LEFT");
 			break;
 		case SideValue.RIGHT_VALUE:
 			coolBar.setLayoutData(SimpleTrimLayout.RIGHT);
+			coolBar.setLayout(new RowLayout(SWT.VERTICAL));
 			break;
 		}
 	}

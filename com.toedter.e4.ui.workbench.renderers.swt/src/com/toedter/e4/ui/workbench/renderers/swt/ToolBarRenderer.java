@@ -16,9 +16,11 @@ import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.CoolBar;
-import org.eclipse.swt.widgets.CoolItem;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
 
@@ -30,10 +32,26 @@ public class ToolBarRenderer extends GenericRenderer {
 		if (!(element instanceof MToolBar)) {
 			return;
 		}
-		CoolBar coolbar = (CoolBar) parent.getWidget();
-		final CoolItem item = new CoolItem(coolbar, SWT.DROP_DOWN);
-		ToolBar toolBar = new ToolBar(coolbar, SWT.NONE);
-		item.setControl(toolBar);
+		Composite composite = (Composite) parent.getWidget();
+		Layout layout = composite.getLayout();
+		int orientation = SWT.HORIZONTAL;
+		if (layout instanceof RowLayout) {
+			RowLayout rowLayout = (RowLayout) layout;
+			orientation = rowLayout.type;
+		}
+
+		// final CoolItem item = new CoolItem(coolbar, SWT.ALL);
+		// final CoolItem item = coolbar.getItem(0);
+		// ToolBar toolBar = null;
+		// if (item.getControl() == null) {
+		ToolBar toolBar = new ToolBar(composite, SWT.FLAT | orientation);
+		// item.setControl(toolBar);
+		// } else {
+		// toolBar = (ToolBar) item.getControl();
+		if (composite.getChildren().length > 1) {
+			new ToolItem(toolBar, SWT.SEPARATOR);
+		}
+		// }
 		element.setWidget(toolBar);
 	}
 
