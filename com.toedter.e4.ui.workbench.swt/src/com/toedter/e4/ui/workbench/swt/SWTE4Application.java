@@ -20,8 +20,9 @@ import com.toedter.e4.ui.workbench.generic.GenericE4Application;
 
 @SuppressWarnings("restriction")
 public class SWTE4Application extends GenericE4Application {
+
 	public SWTE4Application() {
-		System.out.println("SWTE4Application.SwingE4Application()");
+		logger.debug("DEBUG SWTE4Application()");
 		presentationEngineURI = "platform:/plugin/com.toedter.e4.ui.workbench.swt/"
 				+ "com.toedter.e4.ui.workbench.swt.SWTPresentationEngine";
 	}
@@ -37,6 +38,6 @@ public class SWTE4Application extends GenericE4Application {
 		}
 
 		PartRenderingEngine.initializeStyling(display, eclipseContext);
-		System.out.println("SWTE4Application.createE4Workbench(): Styling inintialized");
+		logger.debug("SWTE4Application.createE4Workbench(): Styling inintialized");
 	}
 }

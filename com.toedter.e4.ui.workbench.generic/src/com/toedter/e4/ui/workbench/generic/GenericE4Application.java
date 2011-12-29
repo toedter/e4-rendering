@@ -64,6 +64,8 @@ public class GenericE4Application implements IApplication {
 	protected static String presentationEngineURI = "platform:/plugin/com.toedter.e4.ui.workbench.generic/"
 			+ "com.toedter.e4.ui.workbench.generic.GenericPresentationEngine";
 
+	protected Logger logger = new WorkbenchLogger("com.toedter.e4.ui.workbench.generic");
+
 	private String[] args;
 	private IModelResourceHandler modelResourceHandler;
 
@@ -73,7 +75,7 @@ public class GenericE4Application implements IApplication {
 
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
-		System.out.println("GenericE4Application.start()");
+		logger.debug("GenericE4Application.start()");
 		context.applicationRunning();
 		e4Workbench = createE4Workbench(context);
 		e4Workbench.createAndRunUI(e4Workbench.getApplication());
@@ -82,7 +84,7 @@ public class GenericE4Application implements IApplication {
 			if (e4Workbench != null && e4Workbench.getContext() != null) {
 				modelResourceHandler.save();
 				e4Workbench.close();
-				System.out.println("workbench model saved");
+				logger.debug("workbench model saved");
 			}
 		} catch (IOException e) {
 			System.out.println("Warning: cannot save workbench model.");
@@ -100,7 +102,7 @@ public class GenericE4Application implements IApplication {
 	}
 
 	public E4Workbench createE4Workbench(IApplicationContext applicationContext) {
-		System.out.println("GenericE4Application.createE4Workbench()");
+		logger.debug("GenericE4Application.createE4Workbench()");
 
 		args = (String[]) applicationContext.getArguments().get(IApplicationContext.APPLICATION_ARGS);
 
@@ -135,7 +137,7 @@ public class GenericE4Application implements IApplication {
 	}
 
 	private MApplication loadApplicationModel(IApplicationContext appContext, IEclipseContext eclipseContext) {
-		System.out.println("GenericE4Application.loadApplicationModel()");
+		logger.debug("GenericE4Application.loadApplicationModel()");
 		MApplication theApp = null;
 
 		instanceLocation = Activator.getDefault().getInstanceLocation();
@@ -236,8 +238,7 @@ public class GenericE4Application implements IApplication {
 
 		// Temporary to support old property as well
 		if (cssURI != null && !cssURI.startsWith("platform:")) {
-			System.err
-					.println("Warning " + cssURI + " changed its meaning it is used now to run without theme support");
+			logger.warn("Warning " + cssURI + " changed its meaning it is used now to run without theme support");
 			eclipseContext.set(THEME_ID, cssURI);
 		}
 
