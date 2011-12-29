@@ -64,4 +64,10 @@ public class StackRenderer extends SWTRenderer {
 			tabFolder.setSelection(tabItem);
 		}
 	}
+
+	@Override
+	public void setVisible(MUIElement changedElement, boolean visible) {
+		CTabFolder tabFolder = (CTabFolder) changedElement.getWidget();
+		tabFolder.setVisible(visible);
+	}
 }

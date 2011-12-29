@@ -76,6 +76,26 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 		}
 	};
 
+	private final EventHandler visibilityHandler = new EventHandler() {
+		@Override
+		public void handleEvent(Event event) {
+			System.out.println("visibilityHandler: " + event);
+			MUIElement changedElement = (MUIElement) event.getProperty(UIEvents.EventTags.ELEMENT);
+
+			GenericRenderer renderer = (GenericRenderer) changedElement.getRenderer();
+			if (renderer == null) {
+				return;
+			}
+
+			renderer.setVisible(changedElement, changedElement.isVisible());
+
+			GenericRenderer parentRenderer = (GenericRenderer) changedElement.getParent().getRenderer();
+			if (parentRenderer != null) {
+				parentRenderer.processContents(changedElement.getParent());
+			}
+		}
+	};
+
 	@Override
 	public Object createGui(MUIElement element, Object parentWidget, IEclipseContext parentContext) {
 		System.out.println("GenericPresentationEngine.createGui(): This method should not be used.");
@@ -118,12 +138,17 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 		}
 
 		GenericRenderer renderer = rendererFactory.getRenderer(element);
+		element.setRenderer(renderer);
 
 		// TODO check if parents are needed
 		if (parent == null) {
 			System.out.println("GenericPresentationEngine.createGui(): no parent: " + element + " parent: " + parent);
 		}
 		renderer.createWidget(element, parent);
+
+		// TODO set visible here?
+		element.setVisible(true);
+
 		if (element instanceof MElementContainer) {
 
 			// first create the GUI for the children
@@ -218,5 +243,6 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 		}
 
 		eventBroker.subscribe(UIEvents.ElementContainer.CHILDREN, childrenHandler);
+		eventBroker.subscribe(UIEvents.UIElement.TOPIC_VISIBLE, visibilityHandler);
 	}
 }

@@ -12,37 +12,90 @@
 
 package com.toedter.e4.ui.workbench.addons.minmax;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.advanced.MArea;
+import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.e4.ui.workbench.UIEvents.EventTags;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
+import com.toedter.e4.ui.workbench.generic.GenericRenderer;
+
 @SuppressWarnings("restriction")
 public class GenericMinMaxAddon {
+	// tags representing the min/max state
+	private static String MINIMIZED = IPresentationEngine.MINIMIZED;
+	private static String MAXIMIZED = IPresentationEngine.MAXIMIZED;
+	private static String MINIMIZED_BY_ZOOM = IPresentationEngine.MINIMIZED_BY_ZOOM;
+
 	private final IMinMaxAddon uiMinMaxAddon;
 	private final IEventBroker eventBroker;
+	private final EModelService modelService;
+	protected boolean ignoreTagChanges;
 
 	@Inject
-	public GenericMinMaxAddon(IMinMaxAddon uiMinMaxAddon, IEventBroker eventBroker) {
+	public GenericMinMaxAddon(IMinMaxAddon uiMinMaxAddon, IEventBroker eventBroker, EModelService modelService) {
 		System.out.println("Generic GenericMinMaxAddon()");
 		this.uiMinMaxAddon = uiMinMaxAddon;
 		this.eventBroker = eventBroker;
 		this.uiMinMaxAddon.setGenericMinMaxAddon(this);
+		this.modelService = modelService;
 	}
 
 	@PostConstruct
 	void hookListeners() {
-		String topic = UIEvents.buildTopic(UIEvents.UIElement.TOPIC, UIEvents.UIElement.WIDGET);
-		eventBroker.subscribe(topic, widgetListener);
+		System.out.println("GenericMinMaxAddon.hookListeners()");
+		System.out.println("EventBroker: " + eventBroker);
+
+		eventBroker.subscribe(UIEvents.UIElement.TOPIC_WIDGET, widgetListener);
+		eventBroker.subscribe(UIEvents.ApplicationElement.TOPIC_TAGS, tagListener);
 	}
+
+	private final EventHandler tagListener = new EventHandler() {
+		@Override
+		public void handleEvent(Event event) {
+			if (ignoreTagChanges) {
+				return;
+			}
+
+			Object changedObj = event.getProperty(EventTags.ELEMENT);
+			String eventType = (String) event.getProperty(UIEvents.EventTags.TYPE);
+			String tag = (String) event.getProperty(UIEvents.EventTags.NEW_VALUE);
+			String oldVal = (String) event.getProperty(UIEvents.EventTags.OLD_VALUE);
+
+			if (!(changedObj instanceof MUIElement)) {
+				return;
+			}
+
+			final MUIElement changedElement = (MUIElement) changedObj;
+
+			if (UIEvents.EventTypes.ADD.equals(eventType)) {
+				if (MINIMIZED.equals(tag)) {
+					minimize(changedElement);
+				} else if (MAXIMIZED.equals(tag)) {
+					maximize(changedElement);
+				}
+			} else if (UIEvents.EventTypes.REMOVE.equals(eventType)) {
+				if (MINIMIZED.equals(oldVal)) {
+					restore(changedElement);
+				} else if (MAXIMIZED.equals(oldVal)) {
+					unzoom(changedElement);
+				}
+			}
+		}
+	};
 
 	private final EventHandler widgetListener = new EventHandler() {
 		@Override
@@ -63,14 +116,7 @@ public class GenericMinMaxAddon {
 
 		private void maximize(MUIElement element) {
 			System.out.println("Maximized " + element);
-
-			MWindow window = getWindowFor(element);
-			System.out.println(window);
-			System.out.println(window.getChildren());
-
-			if (window != null) {
-				window.getChildren().remove(0);
-			}
+			setState(element, MAXIMIZED);
 		}
 
 		private void minimize(MUIElement element) {
@@ -86,5 +132,105 @@ public class GenericMinMaxAddon {
 		}
 
 	};
+
+	private void setState(MUIElement element, String state) {
+		element.getTags().remove(MINIMIZED_BY_ZOOM);
+		if (MINIMIZED.equals(state)) {
+			element.getTags().remove(MAXIMIZED);
+			element.getTags().add(MINIMIZED);
+		} else if (MAXIMIZED.equals(state)) {
+			element.getTags().remove(MINIMIZED);
+			element.getTags().add(MAXIMIZED);
+		} else {
+			element.getTags().remove(MINIMIZED);
+			element.getTags().remove(MAXIMIZED);
+		}
+	}
+
+	protected void minimize(MUIElement element) {
+		System.out.println("GenericMinMaxAddon.minimize()");
+		if (!element.isToBeRendered()) {
+			return;
+		}
+
+		element.setVisible(false);
+	}
+
+	protected void unzoom(MUIElement element) {
+		System.out.println("GenericMinMaxAddon.unzoom()");
+	}
+
+	protected void restore(MUIElement element) {
+		System.out.println("GenericMinMaxAddon.restore()");
+	}
+
+	protected void maximize(MUIElement element) {
+		System.out.println("GenericMinMaxAddon.maximize()");
+		if (!element.isToBeRendered()) {
+			return;
+		}
+
+		MWindow mWindow = getWindowFor(element);
+		MPerspective persp = null; // TODO handle perspectives?
+
+		List<String> maxTag = new ArrayList<String>();
+		maxTag.add(MAXIMIZED);
+		List<MUIElement> curMax = modelService.findElements(persp == null ? mWindow : persp, null, MUIElement.class,
+				maxTag);
+		if (curMax.size() > 0) {
+			for (MUIElement maxElement : curMax) {
+				if (maxElement == element) {
+					continue;
+				}
+				ignoreTagChanges = true;
+				try {
+					maxElement.getTags().remove(MAXIMIZED);
+				} finally {
+					ignoreTagChanges = false;
+				}
+			}
+		}
+
+		List<MPartStack> stacks = modelService.findElements(persp == null ? mWindow : persp, null, MPartStack.class,
+				null, EModelService.PRESENTATION);
+		for (MPartStack theStack : stacks) {
+			if (theStack == element || !theStack.isToBeRendered()) {
+				continue;
+			}
+
+			// Exclude stacks in DW's
+			if (getWindowFor(theStack) != mWindow) {
+				continue;
+			}
+
+			int location = modelService.getElementLocation(theStack);
+			if (location != EModelService.IN_SHARED_AREA && theStack.getWidget() != null
+					&& !theStack.getTags().contains(MINIMIZED)) {
+				theStack.getTags().add(MINIMIZED_BY_ZOOM);
+				theStack.getTags().add(MINIMIZED);
+			}
+		}
+
+		// now let the parent check if the children are visible
+		GenericRenderer parentRenderer = (GenericRenderer) element.getParent().getRenderer();
+		System.out.println("GenericMinMaxAddon.maximize(): " + parentRenderer);
+		if (parentRenderer != null) {
+			parentRenderer.processContents(element.getParent());
+		}
+
+	}
+
+	private MWindow getWindowFor(MUIElement element) {
+		MUIElement parent = element.getParent();
+
+		// We rely here on the fact that a DW's 'getParent' will return
+		// null since it's not in the 'children' hierarchy
+		while (parent != null && !(parent instanceof MWindow)) {
+			parent = parent.getParent();
+		}
+
+		// A detached window will end up with getParent() == null
+		return (MWindow) parent;
+	}
 
 }

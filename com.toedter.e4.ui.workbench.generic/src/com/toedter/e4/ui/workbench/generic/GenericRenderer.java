@@ -52,7 +52,7 @@ public class GenericRenderer {
 	}
 
 	public void processContents(MElementContainer<MUIElement> element) {
-		System.out.println("GenericRenderer.processChildren(): " + element);
+		System.out.println("GenericRenderer.processContents(): " + element);
 	}
 
 	public void removeChild(MUIElement element, MElementContainer<MUIElement> parent) {
@@ -73,5 +73,9 @@ public class GenericRenderer {
 
 	protected IEclipseContext getContextForParent(MUIElement element) {
 		return modelService.getContainingContext(element);
+	}
+
+	public void setVisible(MUIElement changedElement, boolean visible) {
+		System.out.println("GenericRenderer.setVisible(): " + visible);
 	}
 }

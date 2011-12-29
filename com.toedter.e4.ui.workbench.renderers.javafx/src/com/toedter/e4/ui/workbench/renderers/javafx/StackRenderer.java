@@ -65,4 +65,10 @@ public class StackRenderer extends GenericRenderer {
 			parentPane.getTabs().add(tab);
 		}
 	}
+
+	@Override
+	public void setVisible(MUIElement changedElement, boolean visible) {
+		TabPane tabPane = (TabPane) changedElement.getWidget();
+		tabPane.setVisible(visible);
+	}
 }

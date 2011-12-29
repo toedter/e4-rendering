@@ -41,15 +41,13 @@ public class SashRenderer extends GenericRenderer {
 	private EventHandler sashOrientationHandler;
 	private EventHandler sashWeightHandler;
 
-	private SashForm sashForm;
-
 	@Override
 	public void createWidget(MUIElement element, MElementContainer<MUIElement> parent) {
 		if (!(element instanceof MPartSashContainer)) {
 			return;
 		}
 		final MPartSashContainer partSashContainer = (MPartSashContainer) element;
-		sashForm = new SashForm((Composite) parent.getWidget(), SWT.NONE);
+		SashForm sashForm = new SashForm((Composite) parent.getWidget(), SWT.NONE);
 
 		if (parent.getWidget() instanceof Shell) {
 			sashForm.setLayoutData(SimpleTrimLayout.CENTER);
@@ -65,8 +63,35 @@ public class SashRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> element) {
-		if (!((MUIElement) element instanceof MPartSashContainer)) {
-			return;
+		System.out.println("SashRenderer.processContents()");
+		if (((MUIElement) element instanceof MPartSashContainer)) {
+			if (element.getChildren().size() == 2) {
+				SashForm sashForm = (SashForm) element.getWidget();
+				Shell limbo = new Shell();
+				int visibleChildrenCount = 0;
+				for (int i = 0; i < 2; i++) {
+					MUIElement childElement = element.getChildren().get(i);
+					if (!childElement.isVisible()) {
+						Control[] children = sashForm.getChildren();
+						for (Control child : children) {
+							if (child == childElement.getWidget()
+									|| (!((Control) childElement.getWidget()).isDisposed() && child == ((Control) childElement
+											.getWidget()).getParent())) {
+								boolean result = child.setParent(limbo);
+								System.out.println("SashRenderer.processContents() re-parented: " + child + ":"
+										+ result);
+							}
+						}
+					} else {
+						visibleChildrenCount++;
+					}
+				}
+				sashForm.layout();
+				limbo.dispose();
+				element.setVisible(visibleChildrenCount != 0);
+			} else {
+				System.err.println("A sash has to have 2 children");
+			}
 		}
 	}
 
