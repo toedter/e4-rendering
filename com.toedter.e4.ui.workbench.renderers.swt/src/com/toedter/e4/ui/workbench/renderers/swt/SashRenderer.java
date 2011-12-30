@@ -77,15 +77,19 @@ public class SashRenderer extends GenericRenderer {
 						for (Control child : children) {
 							if (child == childElement.getWidget()
 									|| (child == ((Control) childElement.getWidget()).getParent())) {
-								boolean result = child.setParent(limbo);
+								child.setParent(limbo);
 							}
 						}
 					} else {
 						visibleChildrenCount++;
-						System.out.println("Found visible: " + childControl + ":" + childControl.getParent());
-						if (childControl.getParent().getParent() == limbo) {
+						// do always 2 re-parentings to make sure that the
+						// original order is restored
+						if (childControl.getParent().getParent() == limbo
+								|| childControl.getParent().getParent() == sashForm) {
+							childControl.getParent().setParent(limbo);
 							childControl.getParent().setParent(sashForm);
-						} else if (childControl.getParent() == limbo) {
+						} else if (childControl.getParent() == limbo || childControl.getParent() == sashForm) {
+							childControl.setParent(limbo);
 							childControl.setParent(sashForm);
 						}
 					}
