@@ -53,12 +53,9 @@ public class SashRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> element) {
-		System.out.println("SashRenderer.processContents()");
 		if (element.getChildren().size() == 2) {
 			JSplitPane splitPane = (JSplitPane) element.getWidget();
-			// splitPane.removeAll();
 			int visibleChildrenCount = 0;
-			System.out.println("visble: " + element.getChildren().get(0).isVisible());
 			if (element.getChildren().get(0).isVisible()) {
 				splitPane.setLeftComponent((Component) element.getChildren().get(0).getWidget());
 				visibleChildrenCount++;
@@ -66,7 +63,6 @@ public class SashRenderer extends GenericRenderer {
 				splitPane.setLeftComponent(null);
 			}
 
-			System.out.println("visble: " + element.getChildren().get(0).isVisible());
 			if (element.getChildren().get(1).isVisible()) {
 				splitPane.setRightComponent((Component) element.getChildren().get(1).getWidget());
 				visibleChildrenCount++;
@@ -78,19 +74,16 @@ public class SashRenderer extends GenericRenderer {
 			// but hookControllerLogic() is invoked before processContents()...
 			String dividerPos = element.getContainerData();
 			if (visibleChildrenCount == 2) {
-				splitPane.setDividerSize(5);
+				splitPane.setDividerSize(10);
 				if (dividerPos != null) {
-					System.out.println("SashRenderer.processContents() set divider location " + dividerPos);
 					splitPane.setDividerLocation(Integer.parseInt(dividerPos));
 				}
 			} else {
 				splitPane.setDividerSize(0);
 			}
 
-			System.out.println("SashRenderer.processContents() visible: " + visibleChildrenCount);
 			element.setVisible(visibleChildrenCount != 0);
 			splitPane.revalidate();
-			splitPane.doLayout();
 			splitPane.repaint();
 		} else {
 			System.err.println("A sash has to have 2 children");
@@ -108,7 +101,6 @@ public class SashRenderer extends GenericRenderer {
 				public void propertyChange(PropertyChangeEvent event) {
 					if (splitPane.getLeftComponent() != null && splitPane.getRightComponent() != null) {
 						partSashContainer.setContainerData(((Integer) event.getNewValue()).toString());
-						System.out.println("container data: " + partSashContainer.getContainerData());
 					}
 				}
 			});

@@ -53,6 +53,7 @@ public class CTabbedPane extends JPanel {
 
 	private final JButton minButton = new JButton();
 	private final JButton maxButton = new JButton();
+	private final JButton restoreButton = new JButton();
 	private final JToolBar toolBar = new JToolBar();
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -63,6 +64,8 @@ public class CTabbedPane extends JPanel {
 		maxButton.setIcon(maxIcon);
 		ImageIcon minIcon = new ImageIcon(getClass().getResource("min.png"));
 		minButton.setIcon(minIcon);
+		ImageIcon restoreIcon = new ImageIcon(getClass().getResource("restore.png"));
+		restoreButton.setIcon(restoreIcon);
 		toolBar.add(minButton);
 		toolBar.add(maxButton);
 		super.add(toolBar);
@@ -89,26 +92,30 @@ public class CTabbedPane extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				handler.run();
+				toolBar.remove(maxButton);
+				toolBar.add(restoreButton);
 			}
 		});
 	}
 
 	public void setMinimizeHandler(final Runnable handler) {
-		// minButton.addActionListener(new ActionListener() {
-		//
-		// @Override
-		// public void actionPerformed(ActionEvent e) {
-		// handler.run();
-		// }
-		// });
-	}
-
-	public void setRestoreHandler(final Runnable handler) {
 		minButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				handler.run();
+			}
+		});
+	}
+
+	public void setRestoreHandler(final Runnable handler) {
+		restoreButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handler.run();
+				toolBar.remove(restoreButton);
+				toolBar.add(maxButton);
 			}
 		});
 	}
