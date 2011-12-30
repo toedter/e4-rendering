@@ -47,6 +47,7 @@ public class OpenModelEditorHandler {
 				MemoryModelResource resource = new MemoryModelResource(application);
 				childContext.set(IModelResource.class, resource);
 				childContext.set(Composite.class.getCanonicalName(), shell);
+				childContext.set(Display.class.getCanonicalName(), shell.getDisplay());
 
 				ContextInjectionFactory.make(ApplicationModelEditor.class, childContext);
 
