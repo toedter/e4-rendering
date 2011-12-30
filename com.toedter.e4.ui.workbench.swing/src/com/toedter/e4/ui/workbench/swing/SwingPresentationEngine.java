@@ -85,6 +85,8 @@ public class SwingPresentationEngine extends GenericPresentationEngine {
 	@Override
 	@PostConstruct
 	public void postConstruct(IEclipseContext context) {
+		super.postConstruct(context);
+
 		System.out.println("SwingPresentationEngine.postConstruct()");
 		// Add the presentation engine to the context
 		context.set(IPresentationEngine.class.getName(), this);

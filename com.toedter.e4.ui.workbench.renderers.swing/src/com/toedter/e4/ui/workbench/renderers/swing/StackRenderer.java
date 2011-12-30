@@ -65,6 +65,7 @@ public class StackRenderer extends GenericRenderer {
 
 	@Override
 	public void setVisible(MUIElement changedElement, boolean visible) {
+		System.out.println("StackRenderer.setVisible()");
 		CTabbedPane tabPane = (CTabbedPane) changedElement.getWidget();
 		tabPane.setVisible(visible);
 	}

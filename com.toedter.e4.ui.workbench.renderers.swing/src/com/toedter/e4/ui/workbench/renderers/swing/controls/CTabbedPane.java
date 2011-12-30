@@ -7,11 +7,13 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
 
 @SuppressWarnings("serial")
 public class CTabbedPane extends JPanel {
@@ -44,23 +46,26 @@ public class CTabbedPane extends JPanel {
 
 		@Override
 		public void layoutContainer(Container parent) {
-			maxButton.setBounds(parent.getWidth() - BUTTON_SIZE, 2, BUTTON_SIZE, BUTTON_SIZE);
-			minButton.setBounds(parent.getWidth() - 2 * BUTTON_SIZE, 2, BUTTON_SIZE, BUTTON_SIZE);
+			toolBar.setBounds(parent.getWidth() - BUTTON_SIZE * 2 - 6, 2, BUTTON_SIZE * 2 + 4, BUTTON_SIZE);
 			tabbedPane.setBounds(0, 0, parent.getWidth(), parent.getHeight());
 		}
 	}
 
 	private final JButton minButton = new JButton();
 	private final JButton maxButton = new JButton();
+	private final JToolBar toolBar = new JToolBar();
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 
 	public CTabbedPane() {
+		toolBar.setFloatable(false);
+		toolBar.setBorder(BorderFactory.createEmptyBorder());
 		ImageIcon maxIcon = new ImageIcon(getClass().getResource("max.png"));
 		maxButton.setIcon(maxIcon);
 		ImageIcon minIcon = new ImageIcon(getClass().getResource("min.png"));
 		minButton.setIcon(minIcon);
-		super.add(maxButton);
-		super.add(minButton);
+		toolBar.add(minButton);
+		toolBar.add(maxButton);
+		super.add(toolBar);
 		super.add(tabbedPane);
 		setLayout(new CTabbedPaneLayout());
 	}
@@ -89,6 +94,16 @@ public class CTabbedPane extends JPanel {
 	}
 
 	public void setMinimizeHandler(final Runnable handler) {
+		// minButton.addActionListener(new ActionListener() {
+		//
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		// handler.run();
+		// }
+		// });
+	}
+
+	public void setRestoreHandler(final Runnable handler) {
 		minButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -98,15 +113,11 @@ public class CTabbedPane extends JPanel {
 		});
 	}
 
-	public void setRestoreHandler(final Runnable handler) {
-	}
-
 	@Override
 	public void setVisible(boolean isVisible) {
 		System.out.println("CTabbedPane.setVisible()");
 		super.setVisible(isVisible);
 		tabbedPane.setVisible(isVisible);
-		minButton.setVisible(isVisible);
-		maxButton.setVisible(isVisible);
+		toolBar.setVisible(isVisible);
 	}
 }

@@ -179,6 +179,7 @@ public class GenericMinMaxAddon {
 	}
 
 	protected void restore(MUIElement element) {
+		System.out.println("GenericMinMaxAddon.restore(): " + element);
 		element.getTags().remove(MINIMIZED_BY_ZOOM);
 		element.setVisible(true);
 	}

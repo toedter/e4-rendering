@@ -53,6 +53,7 @@ public class SashRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> element) {
+		System.out.println("SashRenderer.processContents()");
 		if (element.getChildren().size() == 2) {
 			JSplitPane splitPane = (JSplitPane) element.getWidget();
 			// splitPane.removeAll();
@@ -77,16 +78,19 @@ public class SashRenderer extends GenericRenderer {
 			// but hookControllerLogic() is invoked before processContents()...
 			String dividerPos = element.getContainerData();
 			if (visibleChildrenCount == 2) {
+				splitPane.setDividerSize(5);
 				if (dividerPos != null) {
+					System.out.println("SashRenderer.processContents() set divider location " + dividerPos);
 					splitPane.setDividerLocation(Integer.parseInt(dividerPos));
 				}
 			} else {
-				splitPane.setDividerLocation(-1);
+				splitPane.setDividerSize(0);
 			}
 
 			System.out.println("SashRenderer.processContents() visible: " + visibleChildrenCount);
 			element.setVisible(visibleChildrenCount != 0);
 			splitPane.revalidate();
+			splitPane.doLayout();
 			splitPane.repaint();
 		} else {
 			System.err.println("A sash has to have 2 children");
@@ -98,11 +102,14 @@ public class SashRenderer extends GenericRenderer {
 		if (element instanceof MPartSashContainer) {
 			final MPartSashContainer partSashContainer = (MPartSashContainer) element;
 
-			JSplitPane splitPane = (JSplitPane) partSashContainer.getWidget();
+			final JSplitPane splitPane = (JSplitPane) partSashContainer.getWidget();
 			splitPane.addPropertyChangeListener(JSplitPane.DIVIDER_LOCATION_PROPERTY, new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent event) {
-					partSashContainer.setContainerData(((Integer) event.getNewValue()).toString());
+					if (splitPane.getLeftComponent() != null && splitPane.getRightComponent() != null) {
+						partSashContainer.setContainerData(((Integer) event.getNewValue()).toString());
+						System.out.println("container data: " + partSashContainer.getContainerData());
+					}
 				}
 			});
 		}
