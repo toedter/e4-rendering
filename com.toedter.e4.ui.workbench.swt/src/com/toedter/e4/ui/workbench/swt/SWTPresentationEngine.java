@@ -17,12 +17,14 @@ import javax.annotation.PostConstruct;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.contributions.IContributionFactory;
+import org.eclipse.e4.ui.internal.workbench.swt.ShellActivationListener;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -33,6 +35,7 @@ import com.toedter.e4.ui.workbench.generic.IRendererFactory;
 public class SWTPresentationEngine extends GenericPresentationEngine {
 
 	private boolean stopped;
+	private static Shell limbo;
 
 	public SWTPresentationEngine() {
 		System.out.println("SWTPresentationEngine");
@@ -112,4 +115,18 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 		System.out.println("SWTPresentationEngine.stop()");
 		stopped = true;
 	}
+
+	public static Shell getLimboShell() {
+		if (limbo == null) {
+			limbo = new Shell(Display.getCurrent(), SWT.NONE);
+
+			// Place the limbo shell 'off screen'
+			limbo.setLocation(0, 10000);
+
+			limbo.setBackgroundMode(SWT.INHERIT_DEFAULT);
+			limbo.setData(ShellActivationListener.DIALOG_IGNORE_KEY, Boolean.TRUE);
+		}
+		return limbo;
+	}
+
 }

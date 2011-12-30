@@ -36,9 +36,9 @@ import com.toedter.e4.ui.workbench.generic.GenericRenderer;
 @SuppressWarnings("restriction")
 public class GenericMinMaxAddon {
 	// tags representing the min/max state
-	private static String MINIMIZED = IPresentationEngine.MINIMIZED;
-	private static String MAXIMIZED = IPresentationEngine.MAXIMIZED;
-	private static String MINIMIZED_BY_ZOOM = IPresentationEngine.MINIMIZED_BY_ZOOM;
+	public static String MINIMIZED = IPresentationEngine.MINIMIZED;
+	public static String MAXIMIZED = IPresentationEngine.MAXIMIZED;
+	public static String MINIMIZED_BY_ZOOM = IPresentationEngine.MINIMIZED_BY_ZOOM;
 
 	private final IMinMaxAddon uiMinMaxAddon;
 	private final IEventBroker eventBroker;

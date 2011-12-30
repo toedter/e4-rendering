@@ -36,12 +36,8 @@ public class StackRenderer extends SWTRenderer {
 		marginComposite.setLayout(layout);
 
 		CTabFolder tabFolder = new CTabFolder(marginComposite, SWT.NONE);
-		// tabFolder.setSimple(false);
-		tabFolder.setMaximizeVisible(true);
 		tabFolder.setBorderVisible(true);
 
-		// tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
-		// false));
 		element.setWidget(tabFolder);
 	}
 
@@ -68,6 +64,10 @@ public class StackRenderer extends SWTRenderer {
 	@Override
 	public void setVisible(MUIElement changedElement, boolean visible) {
 		CTabFolder tabFolder = (CTabFolder) changedElement.getWidget();
-		tabFolder.setVisible(visible);
+		if (!tabFolder.isDisposed()) {
+			tabFolder.setVisible(visible);
+		} else {
+			System.err.println("Widget is disposed: " + tabFolder);
+		}
 	}
 }

@@ -31,6 +31,7 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
+import com.toedter.e4.ui.workbench.swt.SWTPresentationEngine;
 import com.toedter.e4.ui.workbench.swt.layouts.SimpleTrimLayout;
 
 @SuppressWarnings("restriction")
@@ -63,31 +64,34 @@ public class SashRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> element) {
-		System.out.println("SashRenderer.processContents()");
 		if (((MUIElement) element instanceof MPartSashContainer)) {
 			if (element.getChildren().size() == 2) {
 				SashForm sashForm = (SashForm) element.getWidget();
-				Shell limbo = new Shell();
+				Shell limbo = SWTPresentationEngine.getLimboShell();
 				int visibleChildrenCount = 0;
 				for (int i = 0; i < 2; i++) {
 					MUIElement childElement = element.getChildren().get(i);
+					Control childControl = (Control) childElement.getWidget();
 					if (!childElement.isVisible()) {
 						Control[] children = sashForm.getChildren();
 						for (Control child : children) {
 							if (child == childElement.getWidget()
-									|| (!((Control) childElement.getWidget()).isDisposed() && child == ((Control) childElement
-											.getWidget()).getParent())) {
+									|| (child == ((Control) childElement.getWidget()).getParent())) {
 								boolean result = child.setParent(limbo);
-								System.out.println("SashRenderer.processContents() re-parented: " + child + ":"
-										+ result);
 							}
 						}
 					} else {
 						visibleChildrenCount++;
+						System.out.println("Found visible: " + childControl + ":" + childControl.getParent());
+						if (childControl.getParent().getParent() == limbo) {
+							childControl.getParent().setParent(sashForm);
+						} else if (childControl.getParent() == limbo) {
+							childControl.setParent(sashForm);
+						}
 					}
 				}
+				sashForm.setVisible(visibleChildrenCount != 0);
 				sashForm.layout();
-				limbo.dispose();
 				element.setVisible(visibleChildrenCount != 0);
 			} else {
 				System.err.println("A sash has to have 2 children");
@@ -182,4 +186,10 @@ public class SashRenderer extends GenericRenderer {
 		}
 	}
 
+	@Override
+	public void setVisible(MUIElement element, boolean visible) {
+		System.out.println("SWT SashRenderer.setVisible()");
+		SashForm sashForm = (SashForm) element.getWidget();
+		sashForm.setVisible(visible);
+	}
 }
