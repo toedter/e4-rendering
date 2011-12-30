@@ -56,7 +56,6 @@ public class SashRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> element) {
-		System.out.println("SashRenderer.processContents()");
 		if (element.getChildren().size() == 2) {
 			SplitPane splitPane = (SplitPane) element.getWidget();
 			splitPane.getItems().retainAll(); // remove all elements

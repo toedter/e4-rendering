@@ -31,10 +31,23 @@ public class MinMaxAddon implements IMinMaxAddon {
 	}
 
 	@Override
-	public void setMaximizedHandler(MUIElement element, Runnable maximizedHandler) {
-		System.out.println("JavaFX MinMaxAddon.setMaximizedHandler()");
+	public void setMaximizeHandler(MUIElement element, Runnable maximizeHandler) {
 		if (element.getWidget() instanceof CTabPane) {
-			((CTabPane) element.getWidget()).setMaximizedHandler(maximizedHandler);
+			((CTabPane) element.getWidget()).setMaximizeHandler(maximizeHandler);
+		}
+	}
+
+	@Override
+	public void setMinimizeHandler(MUIElement element, Runnable minimizeHandler) {
+		if (element.getWidget() instanceof CTabPane) {
+			((CTabPane) element.getWidget()).setMinimizeHandler(minimizeHandler);
+		}
+	}
+
+	@Override
+	public void setRestoreHandler(MUIElement element, Runnable restoreHandler) {
+		if (element.getWidget() instanceof CTabPane) {
+			((CTabPane) element.getWidget()).setRestoreHandler(restoreHandler);
 		}
 	}
 }

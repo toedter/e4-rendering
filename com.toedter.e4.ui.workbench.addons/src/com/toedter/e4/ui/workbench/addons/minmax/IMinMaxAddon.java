@@ -18,5 +18,9 @@ import org.eclipse.e4.ui.model.application.ui.MUIElement;
 public interface IMinMaxAddon {
 	void setGenericMinMaxAddon(GenericMinMaxAddon genericMinMaxAddon);
 
-	void setMaximizedHandler(MUIElement element, Runnable maximizedHandler);
+	void setMaximizeHandler(MUIElement element, Runnable maximizeHandler);
+
+	void setMinimizeHandler(MUIElement element, Runnable minimizeHandler);
+
+	void setRestoreHandler(MUIElement element, Runnable restoreHandler);
 }

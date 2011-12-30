@@ -33,7 +33,7 @@ public class MinMaxAddon implements IMinMaxAddon {
 	}
 
 	@Override
-	public void setMaximizedHandler(MUIElement element, final Runnable maximizedHandler) {
+	public void setMaximizeHandler(MUIElement element, final Runnable maximizedHandler) {
 		System.out.println("SWT MinMaxAddon.setMaximizedHandler(): " + element);
 		if (element.getWidget() instanceof CTabFolder) {
 
@@ -68,5 +68,17 @@ public class MinMaxAddon implements IMinMaxAddon {
 				}
 			});
 		}
+	}
+
+	@Override
+	public void setMinimizeHandler(MUIElement element, Runnable maximizedHandler) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setRestoreHandler(MUIElement element, Runnable restoreHandler) {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -111,26 +111,36 @@ public class GenericMinMaxAddon {
 					maximize(element);
 				}
 			};
-			uiMinMaxAddon.setMaximizedHandler(element, maximizeRunnable);
+			uiMinMaxAddon.setMaximizeHandler(element, maximizeRunnable);
+			final Runnable minimizeRunnable = new Runnable() {
+
+				@Override
+				public void run() {
+					minimize(element);
+				}
+			};
+			uiMinMaxAddon.setMinimizeHandler(element, minimizeRunnable);
+			final Runnable restoreRunnable = new Runnable() {
+
+				@Override
+				public void run() {
+					restore(element);
+				}
+			};
+			uiMinMaxAddon.setRestoreHandler(element, restoreRunnable);
 		}
 
 		private void maximize(MUIElement element) {
-			System.out.println("Maximized " + element);
 			setState(element, MAXIMIZED);
 		}
 
 		private void minimize(MUIElement element) {
-			System.out.println("Minimized " + element);
+			setState(element, MINIMIZED);
 		}
 
-		private MWindow getWindowFor(MUIElement element) {
-			MUIElement parent = element.getParent();
-			while (parent != null && !(parent instanceof MWindow)) {
-				parent = parent.getParent();
-			}
-			return (MWindow) parent;
+		public void restore(MUIElement element) {
+			setState(element, null);
 		}
-
 	};
 
 	private void setState(MUIElement element, String state) {
@@ -158,10 +168,22 @@ public class GenericMinMaxAddon {
 
 	protected void unzoom(MUIElement element) {
 		System.out.println("GenericMinMaxAddon.unzoom()");
+		MWindow win = modelService.getTopLevelWindowFor(element);
+
+		List<MPartStack> stacks = modelService.findElements(win, null, MPartStack.class, null,
+				EModelService.PRESENTATION);
+		for (MPartStack theStack : stacks) {
+			if (theStack.getWidget() != null && theStack.getTags().contains(MINIMIZED)
+					&& theStack.getTags().contains(MINIMIZED_BY_ZOOM)) {
+				theStack.getTags().remove(MINIMIZED);
+			}
+		}
 	}
 
 	protected void restore(MUIElement element) {
 		System.out.println("GenericMinMaxAddon.restore()");
+		element.getTags().remove(MINIMIZED_BY_ZOOM);
+		element.setVisible(true);
 	}
 
 	protected void maximize(MUIElement element) {

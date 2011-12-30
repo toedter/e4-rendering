@@ -43,13 +43,18 @@ public class CTabPane extends TabPane {
 		this.isMinimized = isMinimized;
 	}
 
-	public void setMaximizedHandler(Runnable handler) {
-		skin.setMaximizedHandler(handler);
+	public void setMaximizeHandler(Runnable handler) {
+		skin.setMaximizeHandler(handler);
 		skin.setMaximizeVisible(true);
 	}
 
-	public void setMinimizedHandler(Runnable handler) {
-		skin.setMinimizedHandler(handler);
+	public void setMinimizeHandler(Runnable handler) {
+		skin.setMinimizeHandler(handler);
 		skin.setMinimizeVisible(true);
+	}
+
+	public void setRestoreHandler(Runnable handler) {
+		skin.setRestoreHandler(handler);
+		skin.setMaximizeVisible(true);
 	}
 }

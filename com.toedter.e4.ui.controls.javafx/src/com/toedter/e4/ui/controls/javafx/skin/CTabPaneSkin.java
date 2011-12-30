@@ -27,17 +27,33 @@ public class CTabPaneSkin extends TabPaneSkin {
 	Group minMaxGroup = new Group();
 	private final Button maxButton;
 	private final Button minButton;
+	private final Button restoreButton;
+	private final ImageView maxImageView;
+
+	private final ImageView restoreImageView;
 
 	public CTabPaneSkin(TabPane tabPane) {
 		super(tabPane);
 
 		Image maxImage = new Image(getClass().getResourceAsStream("max.png"));
-		maxButton = new Button("", new ImageView(maxImage));
+		maxImageView = new ImageView(maxImage);
+
+		maxButton = new Button("", maxImageView);
 		maxButton.setVisible(false); // will be enabled by MinMax addon
 		maxButton.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
 
 		maxButton.translateXProperty().bind(widthProperty().subtract(24.0));
 		maxButton.setLayoutY(6.0);
+
+		Image restoreImage = new Image(getClass().getResourceAsStream("restore.png"));
+		restoreImageView = new ImageView(restoreImage);
+
+		restoreButton = new Button("", restoreImageView);
+		restoreButton.setVisible(false); // will be enabled by MinMax addon
+		restoreButton.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
+
+		restoreButton.translateXProperty().bind(widthProperty().subtract(24.0));
+		restoreButton.setLayoutY(6.0);
 
 		Image minImage = new Image(getClass().getResourceAsStream("min.png"));
 		minButton = new Button("", new ImageView(minImage));
@@ -49,12 +65,27 @@ public class CTabPaneSkin extends TabPaneSkin {
 
 		minMaxGroup.getChildren().add(minButton);
 		minMaxGroup.getChildren().add(maxButton);
+		minMaxGroup.getChildren().add(restoreButton);
 
 		getChildren().add(minMaxGroup);
 	}
 
-	public void setMaximizedHandler(final Runnable handler) {
+	public void setMaximizeHandler(final Runnable handler) {
+		System.out.println("CTabPaneSkin.setMaximizeHandler()");
 		maxButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("CTabPaneSkin.setMaximizeHandler(...).new EventHandler() {...}.handle()");
+				handler.run();
+				setMaximizeVisible(false);
+				setRestoreVisible(true);
+			}
+		});
+	}
+
+	public void setMinimizeHandler(final Runnable handler) {
+		minButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -63,12 +94,14 @@ public class CTabPaneSkin extends TabPaneSkin {
 		});
 	}
 
-	public void setMinimizedHandler(final Runnable handler) {
-		minButton.setOnAction(new EventHandler<ActionEvent>() {
+	public void setRestoreHandler(final Runnable handler) {
+		restoreButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				handler.run();
+				setMaximizeVisible(true);
+				setRestoreVisible(false);
 			}
 		});
 	}
@@ -81,6 +114,10 @@ public class CTabPaneSkin extends TabPaneSkin {
 		maxButton.setVisible(isMaximizeVisible);
 	}
 
+	public void setRestoreVisible(boolean isRestoreVisible) {
+		restoreButton.setVisible(isRestoreVisible);
+	}
+
 	public boolean isMinimizeVisible() {
 		return minButton.isVisible();
 	}
@@ -88,4 +125,5 @@ public class CTabPaneSkin extends TabPaneSkin {
 	public boolean isMaximizeVisible() {
 		return maxButton.isVisible();
 	}
+
 }
