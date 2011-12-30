@@ -18,7 +18,6 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
@@ -27,19 +26,20 @@ import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.emf.common.util.URI;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
+import com.toedter.e4.ui.workbench.renderers.swing.controls.CTabbedPane;
 
 @SuppressWarnings("restriction")
 public class StackRenderer extends GenericRenderer {
 
 	@Override
 	public void createWidget(MUIElement element, MElementContainer<MUIElement> parent) {
-		JTabbedPane tabPane = new JTabbedPane();
+		CTabbedPane tabPane = new CTabbedPane();
 		element.setWidget(tabPane);
 	}
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> container) {
-		JTabbedPane parentPane = (JTabbedPane) container.getWidget();
+		CTabbedPane parentPane = (CTabbedPane) container.getWidget();
 
 		for (MUIElement element : container.getChildren()) {
 			MUILabel mLabel = (MUILabel) element;
@@ -62,4 +62,11 @@ public class StackRenderer extends GenericRenderer {
 			parentPane.setTabComponentAt(parentPane.getTabCount() - 1, label);
 		}
 	}
+
+	@Override
+	public void setVisible(MUIElement changedElement, boolean visible) {
+		CTabbedPane tabPane = (CTabbedPane) changedElement.getWidget();
+		tabPane.setVisible(visible);
+	}
+
 }

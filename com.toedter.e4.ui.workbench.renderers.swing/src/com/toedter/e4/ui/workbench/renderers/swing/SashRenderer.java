@@ -55,14 +55,22 @@ public class SashRenderer extends GenericRenderer {
 	public void processContents(final MElementContainer<MUIElement> element) {
 		if (element.getChildren().size() == 2) {
 			JSplitPane splitPane = (JSplitPane) element.getWidget();
+			// splitPane.removeAll();
 			int visibleChildrenCount = 0;
+			System.out.println("visble: " + element.getChildren().get(0).isVisible());
 			if (element.getChildren().get(0).isVisible()) {
 				splitPane.setLeftComponent((Component) element.getChildren().get(0).getWidget());
 				visibleChildrenCount++;
+			} else {
+				splitPane.setLeftComponent(null);
 			}
+
+			System.out.println("visble: " + element.getChildren().get(0).isVisible());
 			if (element.getChildren().get(1).isVisible()) {
 				splitPane.setRightComponent((Component) element.getChildren().get(1).getWidget());
 				visibleChildrenCount++;
+			} else {
+				splitPane.setRightComponent(null);
 			}
 
 			// TODO This is not a good position to hook the controller logic
@@ -72,8 +80,14 @@ public class SashRenderer extends GenericRenderer {
 				if (dividerPos != null) {
 					splitPane.setDividerLocation(Integer.parseInt(dividerPos));
 				}
+			} else {
+				splitPane.setDividerLocation(-1);
 			}
 
+			System.out.println("SashRenderer.processContents() visible: " + visibleChildrenCount);
+			element.setVisible(visibleChildrenCount != 0);
+			splitPane.revalidate();
+			splitPane.repaint();
 		} else {
 			System.err.println("A sash has to have 2 children");
 		}
@@ -128,7 +142,7 @@ public class SashRenderer extends GenericRenderer {
 				String dividerPos = element.getContainerData();
 				JSplitPane splitPane = ((JSplitPane) element.getWidget());
 				if (dividerPos != null && dividerPos != ((Integer) splitPane.getDividerLocation()).toString()) {
-					splitPane.setDividerLocation(Float.parseFloat(dividerPos));
+					splitPane.setDividerLocation(Integer.parseInt(dividerPos));
 				}
 			}
 		};

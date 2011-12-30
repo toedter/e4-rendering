@@ -158,7 +158,6 @@ public class GenericMinMaxAddon {
 	}
 
 	protected void minimize(MUIElement element) {
-		System.out.println("GenericMinMaxAddon.minimize()");
 		if (!element.isToBeRendered()) {
 			return;
 		}
@@ -167,7 +166,6 @@ public class GenericMinMaxAddon {
 	}
 
 	protected void unzoom(MUIElement element) {
-		System.out.println("GenericMinMaxAddon.unzoom()");
 		MWindow win = modelService.getTopLevelWindowFor(element);
 
 		List<MPartStack> stacks = modelService.findElements(win, null, MPartStack.class, null,
@@ -181,13 +179,11 @@ public class GenericMinMaxAddon {
 	}
 
 	protected void restore(MUIElement element) {
-		System.out.println("GenericMinMaxAddon.restore()");
 		element.getTags().remove(MINIMIZED_BY_ZOOM);
 		element.setVisible(true);
 	}
 
 	protected void maximize(MUIElement element) {
-		System.out.println("GenericMinMaxAddon.maximize()");
 		if (!element.isToBeRendered()) {
 			return;
 		}

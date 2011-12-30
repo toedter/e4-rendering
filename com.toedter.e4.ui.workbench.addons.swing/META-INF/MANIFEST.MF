@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: e4 workbench addons for JavaFX
+Bundle-SymbolicName: com.toedter.e4.ui.workbench.addons.swing;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Kai Toedter
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: javax.inject;bundle-version="1.0.0",
+ org.eclipse.e4.core.di;bundle-version="1.1.0",
+ org.eclipse.e4.ui.model.workbench;bundle-version="0.10.0",
+ org.eclipse.osgi.services;bundle-version="3.3.0",
+ org.eclipse.e4.ui.workbench;bundle-version="0.10.1",
+ org.eclipse.e4.core.services;bundle-version="0.10.0",
+ org.eclipse.e4.core.contexts;bundle-version="1.0.0",
+ org.eclipse.osgi;bundle-version="3.8.0",
+ org.eclipse.core.runtime;bundle-version="3.8.0",
+ com.toedter.e4.ui.workbench.addons;bundle-version="0.1.0",
+ com.toedter.e4.ui.workbench.renderers.swing;bundle-version="0.1.0"
+Service-Component: OSGI-INF/minMaxAddon.xml
+Export-Package: com.toedter.e4.ui.workbench.addons.swing.minmax
+Bundle-ActivationPolicy: lazy
+
