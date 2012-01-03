@@ -253,7 +253,6 @@ public class GenericMinMaxAddon {
 
 		// now let the parent check if the children are visible
 		GenericRenderer parentRenderer = (GenericRenderer) element.getParent().getRenderer();
-		System.out.println("GenericMinMaxAddon.maximize(): " + parentRenderer);
 		if (parentRenderer != null) {
 			parentRenderer.processContents(element.getParent());
 		}

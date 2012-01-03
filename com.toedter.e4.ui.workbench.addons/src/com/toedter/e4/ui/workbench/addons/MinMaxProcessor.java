@@ -69,6 +69,7 @@ public class MinMaxProcessor {
 		mainMenu.getChildren().add(windowMenu);
 
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
+		menuItem.setContributorURI(BUNDLE_ID);
 		menuItem.setLabel("%resetWindows"); //$NON-NLS-1$
 		menuItem.setCommand(resetWindowsCommand);
 		windowMenu.getChildren().add(menuItem);
