@@ -17,9 +17,14 @@ import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.commands.MHandler;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 
 @SuppressWarnings("restriction")
 public class ContributionProcessor {
+
+	@Inject
+	@Named("mainWindow")
+	private MWindow mainWindow;
 
 	@Inject
 	@Named("part:detailsView")
@@ -39,6 +44,9 @@ public class ContributionProcessor {
 
 	@Execute
 	public void process() {
+		mainWindow.setLabel("e4 SWT Contacts Demo (with New Rendering Engine)");
+		// mainWindow.setLabel("%windowTitle"); // does not work
+
 		listView.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swt2/com.toedter.e4.demo.contacts.swt.views.ListView");
 		detailsView
 				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swt2/com.toedter.e4.demo.contacts.swt.views.DetailsView");

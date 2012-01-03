@@ -55,6 +55,9 @@
           <element
                 id="handler:switchTheme">
           </element>
+          <element
+                id="mainWindow">
+          </element>
        </processor>
        <processor
              beforefragment="true"

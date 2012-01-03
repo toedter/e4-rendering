@@ -73,6 +73,9 @@
           <element
                 id="handler:exit">
           </element>
+          <element
+                id="mainWindow">
+          </element>
         </processor>
 	    <processor
 	            beforefragment="true"

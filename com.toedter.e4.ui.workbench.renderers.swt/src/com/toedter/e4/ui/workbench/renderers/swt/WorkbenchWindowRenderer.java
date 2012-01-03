@@ -45,6 +45,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 		if (element instanceof MWindow) {
 			MWindow mWindow = (MWindow) element;
 			Shell shell = new Shell(Display.getCurrent());
+			shell.setText(mWindow.getLabel());
 			shell.setLayout(new SimpleTrimLayout());
 			shell.setBounds(mWindow.getX(), mWindow.getY(), mWindow.getWidth(), mWindow.getHeight());
 			mWindow.getContext().set(Shell.class, shell);
