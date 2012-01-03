@@ -46,7 +46,7 @@ public class CTabbedPane extends JPanel {
 
 		@Override
 		public void layoutContainer(Container parent) {
-			toolBar.setBounds(parent.getWidth() - BUTTON_SIZE * 2 - 6, 2, BUTTON_SIZE * 2 + 4, BUTTON_SIZE);
+			toolBar.setBounds(parent.getWidth() - BUTTON_SIZE * 2 - 7, 2, BUTTON_SIZE * 2 + 6, BUTTON_SIZE);
 			tabbedPane.setBounds(0, 0, parent.getWidth(), parent.getHeight());
 		}
 	}
