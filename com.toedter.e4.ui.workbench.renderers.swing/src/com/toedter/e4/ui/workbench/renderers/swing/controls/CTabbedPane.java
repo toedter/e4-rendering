@@ -122,7 +122,6 @@ public class CTabbedPane extends JPanel {
 
 	@Override
 	public void setVisible(boolean isVisible) {
-		System.out.println("CTabbedPane.setVisible()");
 		super.setVisible(isVisible);
 		tabbedPane.setVisible(isVisible);
 		toolBar.setVisible(isVisible);

@@ -178,8 +178,29 @@ public class GenericMinMaxAddon {
 		}
 	}
 
+	public void resetWindows(MUIElement element) {
+		ignoreTagChanges = true;
+		MWindow win = modelService.getTopLevelWindowFor(element);
+
+		List<MPartStack> stacks = modelService.findElements(win, null, MPartStack.class, null,
+				EModelService.PRESENTATION);
+		for (MPartStack partStack : stacks) {
+			if (partStack.getWidget() != null) {
+				if (partStack.getTags().contains(MINIMIZED)) {
+					partStack.getTags().remove(MINIMIZED);
+				}
+				if (partStack.getTags().contains(MAXIMIZED)) {
+					partStack.getTags().remove(MAXIMIZED);
+				}
+				if (partStack.getTags().contains(MINIMIZED_BY_ZOOM)) {
+					partStack.getTags().remove(MINIMIZED_BY_ZOOM);
+				}
+			}
+		}
+		ignoreTagChanges = false;
+	}
+
 	protected void restore(MUIElement element) {
-		System.out.println("GenericMinMaxAddon.restore(): " + element);
 		element.getTags().remove(MINIMIZED_BY_ZOOM);
 		element.setVisible(true);
 	}

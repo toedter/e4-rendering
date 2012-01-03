@@ -17,4 +17,5 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  com.toedter.e4.ui.workbench.generic;bundle-version="0.1.0"
 Export-Package: com.toedter.e4.ui.workbench.addons,
  com.toedter.e4.ui.workbench.addons.minmax
+Bundle-Localization: plugin
 
