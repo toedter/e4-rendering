@@ -95,7 +95,7 @@ public class JavaFXPresentationEngine extends GenericPresentationEngine {
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
 			rendererFactory = (IRendererFactory) contribFactory.create(
-					"platform:/plugin/com.toedter.e4.ui.workbench.renderers.javafx/"
+					"bundleclass://com.toedter.e4.ui.workbench.renderers.javafx/"
 							+ "com.toedter.e4.ui.workbench.renderers.javafx.JavaFXRendererFactory", context);
 		} catch (Exception e) {
 			logger.warn(e, "Could not create rendering factory");

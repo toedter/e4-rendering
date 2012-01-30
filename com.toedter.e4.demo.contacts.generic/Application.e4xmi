@@ -4,23 +4,23 @@
     <tags>no-decoration#topdecoration.fxml</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_SeXUCu8EEd6FC9cDb6iV7g" elementId="_SeXUCu8EEd6FC9cDb6iV7g" horizontal="true">
       <children xsi:type="basic:PartStack" xmi:id="_SeXUC-8EEd6FC9cDb6iV7g" elementId="_SeXUC-8EEd6FC9cDb6iV7g" containerData="30">
-        <children xsi:type="basic:Part" xmi:id="_SeXUDO8EEd6FC9cDb6iV7g" elementId="part:listView" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.views.ListView" label="%contactsList" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/folder_user.png" tooltip="%contactsTooltip"/>
+        <children xsi:type="basic:Part" xmi:id="_SeXUDO8EEd6FC9cDb6iV7g" elementId="part:listView" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.views.ListView" label="%contactsList" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/folder_user.png" tooltip="%contactsTooltip"/>
       </children>
       <children xsi:type="basic:PartStack" xmi:id="_SeXUDe8EEd6FC9cDb6iV7g" elementId="com.toedter.e4.demo.contacts.generic.partstacks.second" containerData="70">
-        <children xsi:type="basic:Part" xmi:id="DetailsView" elementId="part:detailsView" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.views.DetailsView" label="%partDetails" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/report_user.png" tooltip="%detailsTooltip"/>
+        <children xsi:type="basic:Part" xmi:id="DetailsView" elementId="part:detailsView" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.views.DetailsView" label="%partDetails" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/report_user.png" tooltip="%detailsTooltip"/>
       </children>
     </children>
     <mainMenu xmi:id="menu:org.eclipse.ui.main.menu" elementId="menu:org.eclipse.ui.main.menu">
       <children xsi:type="menu:Menu" xmi:id="_SeXUD-8EEd6FC9cDb6iV7g" elementId="_SeXUD-8EEd6FC9cDb6iV7g" label="%fileMenu">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_SeXUEO8EEd6FC9cDb6iV7g" elementId="_SeXUEO8EEd6FC9cDb6iV7g" label="%menuLabelSave" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/disk.png" command="contacts.save"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_SeXUEe8EEd6FC9cDb6iV7g" elementId="_SeXUEe8EEd6FC9cDb6iV7g" label="%menuLabelDelete" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/user_delete.png" command="contacts.delete"/>
-        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUEu8EEd6FC9cDb6iV7g" elementId="_SeXUEu8EEd6FC9cDb6iV7g" label="%menuLabelDirectExit" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.ExitHandler"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUEu8EEd6FC9cDb6iV7g" elementId="_SeXUEu8EEd6FC9cDb6iV7g" label="%menuLabelDirectExit" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.ExitHandler"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_SeXUE-8EEd6FC9cDb6iV7g" elementId="_SeXUE-8EEd6FC9cDb6iV7g" label="%menuLabelExit" command="contacts.exit"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="_SeXUAu8EEd6FC9cDb6iV7g" elementId="toolbar:org.eclipse.ui.main.toolbar">
       <children xsi:type="menu:ToolBar" xmi:id="toolbar:org.eclipse.ui.main.toolbar" elementId="">
-        <children xsi:type="menu:DirectToolItem" xmi:id="_SeXUBO8EEd6FC9cDb6iV7g" elementId="_SeXUBO8EEd6FC9cDb6iV7g" label="" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/disk.png" tooltip="%toolbarSaveTooltip" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.SaveHandler"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_SeXUBO8EEd6FC9cDb6iV7g" elementId="_SeXUBO8EEd6FC9cDb6iV7g" label="" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/disk.png" tooltip="%toolbarSaveTooltip" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.SaveHandler"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6RnVUE8FEeCyZoR8urPqaw" elementId="">
         <children xsi:type="menu:HandledToolItem" xmi:id="_9UPfUBqZEeGFVucrmhucYg" iconURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/icons/silk/user_add.png" tooltip="%menuLabelAdd" command="_I7WTwCDZEeGWLaml_QLjug"/>
@@ -28,11 +28,11 @@
       </children>
     </trimBars>
   </children>
-  <handlers xmi:id="_SeXUF-8EEd6FC9cDb6iV7g" elementId="handler:exit" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.ExitHandler" command="contacts.exit"/>
-  <handlers xmi:id="_SeXUGO8EEd6FC9cDb6iV7g" elementId="_SeXUGO8EEd6FC9cDb6iV7g" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.SaveHandler" command="contacts.save"/>
-  <handlers xmi:id="_SeXUGe8EEd6FC9cDb6iV7g" elementId="_SeXUGe8EEd6FC9cDb6iV7g" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.DeleteContactHandler" command="contacts.delete"/>
-  <handlers xmi:id="_SeXUG=8EEd6FC9cDb6iV7g" elementId="handler:switchTheme" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.SwitchThemeHandler" command="contacts.switchTheme"/>
-  <handlers xmi:id="_FfssQCDZEeGWLaml_QLjug" elementId="handler:add" contributionURI="platform:/plugin/com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.AddContactHandler" command="_I7WTwCDZEeGWLaml_QLjug"/>
+  <handlers xmi:id="_SeXUF-8EEd6FC9cDb6iV7g" elementId="handler:exit" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.ExitHandler" command="contacts.exit"/>
+  <handlers xmi:id="_SeXUGO8EEd6FC9cDb6iV7g" elementId="_SeXUGO8EEd6FC9cDb6iV7g" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.SaveHandler" command="contacts.save"/>
+  <handlers xmi:id="_SeXUGe8EEd6FC9cDb6iV7g" elementId="_SeXUGe8EEd6FC9cDb6iV7g" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.DeleteContactHandler" command="contacts.delete"/>
+  <handlers xmi:id="_SeXUG=8EEd6FC9cDb6iV7g" elementId="handler:switchTheme" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.SwitchThemeHandler" command="contacts.switchTheme"/>
+  <handlers xmi:id="_FfssQCDZEeGWLaml_QLjug" elementId="handler:add" contributionURI="bundleclass://com.toedter.e4.demo.contacts.generic/com.toedter.e4.demo.contacts.generic.handlers.AddContactHandler" command="_I7WTwCDZEeGWLaml_QLjug"/>
   <bindingTables xmi:id="_SeXUEO8EEd6FC9cDb6iV7x" elementId="_SeXUEO8EEd6FC9cDb6iV7x" bindingContext="_SeXUHO8EEd6FC9cDb6iV7y">
     <bindings xmi:id="_SeXUHu8EEd6FC9cDb6iV7g" elementId="_SeXUHu8EEd6FC9cDb6iV7g" keySequence="CTRL+S" command="contacts.save"/>
     <bindings xmi:id="_SeXUH-8EEd6FC9cDb6iV7g" elementId="_SeXUH-8EEd6FC9cDb6iV7g" keySequence="Delete" command="contacts.delete"/>
@@ -49,8 +49,8 @@
     <parameters xmi:id="contacts.commands.switchtheme.themeid" elementId="contacts.commands.switchtheme.themeid" name="Theme Id" typeId="" optional="false"/>
   </commands>
   <commands xmi:id="_I7WTwCDZEeGWLaml_QLjug" elementId="contacts.add" commandName="%menuLabelAdd"/>
-  <addons xmi:id="_XGB3wPZlEd-XstlTZ6nTXg" elementId="org.eclipse.e4.core.commands.service" contributionURI="platform:/plugin/org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
-  <addons xmi:id="_XGB3wPZlEd-XstlTZ6nTXh" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="platform:/plugin/org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
-  <addons xmi:id="_LK0NgPZmEd-XstlTZ6nTXj" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
-  <addons xmi:id="_LK0NgPZmEd-XstlTZ6nTXk" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_XGB3wPZlEd-XstlTZ6nTXg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_XGB3wPZlEd-XstlTZ6nTXh" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_LK0NgPZmEd-XstlTZ6nTXj" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_LK0NgPZmEd-XstlTZ6nTXk" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
 </application:Application>

@@ -23,7 +23,7 @@ public class SWTE4Application extends GenericE4Application {
 
 	public SWTE4Application() {
 		logger.debug("DEBUG SWTE4Application()");
-		presentationEngineURI = "platform:/plugin/com.toedter.e4.ui.workbench.swt/"
+		presentationEngineURI = "bundleclass://com.toedter.e4.ui.workbench.swt/"
 				+ "com.toedter.e4.ui.workbench.swt.SWTPresentationEngine";
 	}
 

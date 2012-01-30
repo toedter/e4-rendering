@@ -43,7 +43,7 @@ public class Processor {
 		application.getCommands().add(command);
 
 		MHandler handler = MCommandsFactory.INSTANCE.createHandler();
-		handler.setContributionURI("platform:/plugin/com.toedter.e4.tools.modeleditor/com.toedter.e4.tools.modeleditor.OpenModelEditorHandler");
+		handler.setContributionURI("bundleclass://com.toedter.e4.tools.modeleditor/com.toedter.e4.tools.modeleditor.OpenModelEditorHandler");
 		handler.setCommand(command);
 		application.getHandlers().add(handler);
 

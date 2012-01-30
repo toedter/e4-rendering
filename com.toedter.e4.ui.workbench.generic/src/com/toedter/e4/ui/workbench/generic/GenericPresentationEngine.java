@@ -236,7 +236,7 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
 			rendererFactory = (IRendererFactory) contribFactory.create(
-					"platform:/plugin/com.toedter.e4.ui.workbench.generic/"
+					"bundleclass://com.toedter.e4.ui.workbench.generic/"
 							+ "com.toedter.e4.ui.workbench.generic.GenericRendererFactory", context);
 		} catch (Exception e) {
 			logger.warn(e, "Could not create rendering factory");

@@ -46,12 +46,12 @@ public class ContributionProcessor {
 	public void process() {
 		mainWindow.setLabel("e4 JavaFX Contacts Demo");
 		// mainWindow.setLabel("%windowTitle"); // does not work
-		listView.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.views.ListView");
+		listView.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.views.ListView");
 		detailsView
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.views.DetailsView");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.views.DetailsView");
 		switchThemeHandler
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.handlers.SwitchThemeHandler");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.handlers.SwitchThemeHandler");
 		exitHandler
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.handlers.ExitHandler");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.javafx/com.toedter.e4.demo.contacts.javafx.handlers.ExitHandler");
 	}
 }

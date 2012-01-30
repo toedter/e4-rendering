@@ -33,7 +33,7 @@ import com.toedter.e4.ui.workbench.generic.GenericRendererFactory;
 @SuppressWarnings("restriction")
 public class SWTRendererFactory extends GenericRendererFactory {
 
-	public static final String JAVAFX_RENDERER_FACTORY_URI = "platform:/plugin/com.toedter.e4.ui.workbench.renderers.swt/"
+	public static final String JAVAFX_RENDERER_FACTORY_URI = "bundleclass://com.toedter.e4.ui.workbench.renderers.swt/"
 			+ "com.toedter.e4.ui.workbench.renderers.swt.SWTRendererFactory";
 
 	private WorkbenchWindowRenderer workbenchWindowRenderer;

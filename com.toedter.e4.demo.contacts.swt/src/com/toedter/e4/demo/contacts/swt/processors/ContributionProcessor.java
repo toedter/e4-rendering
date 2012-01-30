@@ -47,12 +47,12 @@ public class ContributionProcessor {
 		mainWindow.setLabel("e4 SWT Contacts Demo (with Original Rendering Engine)");
 		// mainWindow.setLabel("%windowTitle"); // does not work
 
-		listView.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.views.ListView");
+		listView.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.views.ListView");
 		detailsView
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.views.DetailsView");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.views.DetailsView");
 		exitHandler
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.handlers.ExitHandler");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.handlers.ExitHandler");
 		switchThemeHandler
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.handlers.SwitchThemeHandler");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swt/com.toedter.e4.demo.contacts.swt.handlers.SwitchThemeHandler");
 	}
 }

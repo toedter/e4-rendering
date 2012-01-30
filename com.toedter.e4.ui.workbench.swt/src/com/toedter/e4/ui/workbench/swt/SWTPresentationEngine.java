@@ -103,7 +103,7 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
 			rendererFactory = (IRendererFactory) contribFactory.create(
-					"platform:/plugin/com.toedter.e4.ui.workbench.renderers.swt/"
+					"bundleclass://com.toedter.e4.ui.workbench.renderers.swt/"
 							+ "com.toedter.e4.ui.workbench.renderers.swt.SWTRendererFactory", context);
 		} catch (Exception e) {
 			logger.warn(e, "Could not create rendering factory");

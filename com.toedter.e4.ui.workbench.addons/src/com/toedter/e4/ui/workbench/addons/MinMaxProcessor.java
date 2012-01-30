@@ -29,6 +29,7 @@ import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
 @SuppressWarnings("restriction")
 public class MinMaxProcessor {
 	private static final String BUNDLE_ID = "platform:/plugin/com.toedter.e4.ui.workbench.addons"; //$NON-NLS-1$
+	private static final String BUNDLE_CLASS = "bundleclass://com.toedter.e4.ui.workbench.addons"; //$NON-NLS-1$
 
 	@Execute
 	void addMinMaxAddon(MApplication application) {
@@ -44,7 +45,7 @@ public class MinMaxProcessor {
 		// Insert the addon into the system
 		MAddon minMaxAddon = ApplicationFactoryImpl.eINSTANCE.createAddon();
 		minMaxAddon.setElementId("GenericMinMaxAddon"); //$NON-NLS-1$
-		minMaxAddon.setContributionURI(BUNDLE_ID + "/com.toedter.e4.ui.workbench.addons.minmax.GenericMinMaxAddon"); //$NON-NLS-1$
+		minMaxAddon.setContributionURI(BUNDLE_CLASS + "/com.toedter.e4.ui.workbench.addons.minmax.GenericMinMaxAddon"); //$NON-NLS-1$
 		application.getAddons().add(minMaxAddon);
 
 		MCommand resetWindowsCommand = MCommandsFactory.INSTANCE.createCommand();
@@ -54,7 +55,7 @@ public class MinMaxProcessor {
 		application.getCommands().add(resetWindowsCommand);
 
 		MHandler resetWindowsHandler = MCommandsFactory.INSTANCE.createHandler();
-		resetWindowsHandler.setContributionURI(BUNDLE_ID
+		resetWindowsHandler.setContributionURI(BUNDLE_CLASS
 				+ "/com.toedter.e4.ui.workbench.addons.minmax.ResetWindowsHandler");
 		resetWindowsHandler.setCommand(resetWindowsCommand);
 		application.getHandlers().add(resetWindowsHandler);

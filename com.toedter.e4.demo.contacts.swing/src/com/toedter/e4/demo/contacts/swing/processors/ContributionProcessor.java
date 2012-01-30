@@ -47,12 +47,12 @@ public class ContributionProcessor {
 		mainWindow.setLabel("e4 Swing Contacts Demo");
 		// mainWindow.setLabel("%windowTitle"); // does not work
 
-		listView.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.views.ListView");
+		listView.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.views.ListView");
 		detailsView
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.views.DetailsView");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.views.DetailsView");
 		exitHandler
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.handlers.ExitHandler");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.handlers.ExitHandler");
 		switchThemeHandler
-				.setContributionURI("platform:/plugin/com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.handlers.SwitchThemeHandler");
+				.setContributionURI("bundleclass://com.toedter.e4.demo.contacts.swing/com.toedter.e4.demo.contacts.swing.handlers.SwitchThemeHandler");
 	}
 }

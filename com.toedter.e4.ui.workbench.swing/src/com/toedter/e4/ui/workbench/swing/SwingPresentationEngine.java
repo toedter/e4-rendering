@@ -95,7 +95,7 @@ public class SwingPresentationEngine extends GenericPresentationEngine {
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
 			rendererFactory = (IRendererFactory) contribFactory.create(
-					"platform:/plugin/com.toedter.e4.ui.workbench.renderers.swing/"
+					"bundleclass://com.toedter.e4.ui.workbench.renderers.swing/"
 							+ "com.toedter.e4.ui.workbench.renderers.swing.SwingRendererFactory", context);
 		} catch (Exception e) {
 			logger.warn(e, "Could not create rendering factory");
