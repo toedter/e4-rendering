@@ -18,12 +18,19 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.SideValue;
 import org.eclipse.e4.ui.model.application.ui.advanced.MArea;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
+import org.eclipse.e4.ui.model.application.ui.basic.MTrimBar;
+import org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
+import org.eclipse.e4.ui.model.application.ui.menu.MToolItem;
+import org.eclipse.e4.ui.model.application.ui.menu.impl.MenuFactoryImpl;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.e4.ui.workbench.UIEvents.EventTags;
@@ -32,9 +39,12 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
+import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
 
 @SuppressWarnings("restriction")
 public class GenericMinMaxAddon {
+	static String ID_SUFFIX = "(minimized)"; //$NON-NLS-1$
+
 	// tags representing the min/max state
 	public static String MINIMIZED = IPresentationEngine.MINIMIZED;
 	public static String MAXIMIZED = IPresentationEngine.MAXIMIZED;
@@ -44,6 +54,9 @@ public class GenericMinMaxAddon {
 	private final IEventBroker eventBroker;
 	private final EModelService modelService;
 	protected boolean ignoreTagChanges;
+
+	@Inject
+	private IEclipseContext context;
 
 	@Inject
 	public GenericMinMaxAddon(IMinMaxAddon uiMinMaxAddon, IEventBroker eventBroker, EModelService modelService) {
@@ -161,7 +174,7 @@ public class GenericMinMaxAddon {
 		if (!element.isToBeRendered()) {
 			return;
 		}
-
+		createTrim(element);
 		element.setVisible(false);
 	}
 
@@ -270,6 +283,64 @@ public class GenericMinMaxAddon {
 
 		// A detached window will end up with getParent() == null
 		return (MWindow) parent;
+	}
+
+	private void createTrim(MUIElement element) {
+		MTrimmedWindow window = (MTrimmedWindow) getWindowFor(element);
+
+		// Is there already a TrimControl there ?
+		String trimId = element.getElementId() + getMinimizedElementSuffix(element);
+		MToolBar trimStack = (MToolBar) modelService.find(trimId, window);
+
+		if (trimStack == null) {
+			trimStack = MenuFactoryImpl.eINSTANCE.createToolBar();
+			trimStack.setElementId(trimId);
+
+			MToolItem toolItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
+			trimStack.getChildren().add(toolItem);
+			// Check if we have a cached location
+			MTrimBar bar = getBarForElement(element, window);
+			bar.getChildren().add(trimStack);
+			bar.setVisible(true);
+
+			// get the parent trim bar, see bug 320756
+			if (bar.getWidget() == null) {
+				// ask it to be rendered
+				bar.setToBeRendered(true);
+
+				// create the widget
+				IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
+				presentationEngine.createGui(bar, bar.getParent());
+			}
+		} else {
+			// get the parent trim bar, see bug 320756
+			MUIElement parent = trimStack.getParent();
+			parent.setVisible(true);
+			if (parent.getWidget() == null) {
+				// ask it to be rendered
+				parent.setToBeRendered(true);
+				// create the widget
+				IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
+				presentationEngine.createGui(parent, parent.getParent());
+			}
+			trimStack.setToBeRendered(true);
+		}
+	}
+
+	private MTrimBar getBarForElement(MUIElement element, MTrimmedWindow window) {
+		SideValue side = SideValue.LEFT;
+		MTrimBar bar = modelService.getTrim(window, side);
+
+		return bar;
+	}
+
+	private String getMinimizedElementSuffix(MUIElement element) {
+		String id = ID_SUFFIX;
+		MPerspective persp = modelService.getPerspectiveFor(element);
+		if (persp != null) {
+			id = '(' + persp.getElementId() + ')';
+		}
+		return id;
 	}
 
 }
