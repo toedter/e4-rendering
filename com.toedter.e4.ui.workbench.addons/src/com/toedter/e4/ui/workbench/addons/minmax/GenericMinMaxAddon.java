@@ -28,8 +28,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimBar;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
-import org.eclipse.e4.ui.model.application.ui.menu.MToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.impl.MenuFactoryImpl;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.UIEvents;
@@ -296,7 +296,12 @@ public class GenericMinMaxAddon {
 			trimStack = MenuFactoryImpl.eINSTANCE.createToolBar();
 			trimStack.setElementId(trimId);
 
-			MToolItem toolItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
+			MDirectToolItem toolItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
+			toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons/icons/fastview_restore.gif");
+
+			// MHandler handler = MCommandsFactory.INSTANCE.createHandler();
+			// handler.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.RestoreHandler");
+			toolItem.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.RestoreHandler");
 			trimStack.getChildren().add(toolItem);
 			// Check if we have a cached location
 			MTrimBar bar = getBarForElement(element, window);
