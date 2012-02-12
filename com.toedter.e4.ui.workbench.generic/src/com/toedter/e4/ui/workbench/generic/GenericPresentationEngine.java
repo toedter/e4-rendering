@@ -146,6 +146,11 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 		}
 		renderer.createWidget(element, parent);
 
+		// Does not work: why?
+		// if (parent != null) {
+		// element.setParent(parent);
+		// }
+
 		// TODO set visible here?
 		element.setVisible(true);
 
@@ -162,6 +167,7 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 			renderer.processContents(container);
 		}
 		renderer.hookControllerLogic(element);
+
 		return element.getWidget();
 	}
 

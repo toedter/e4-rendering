@@ -86,6 +86,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(MElementContainer<MUIElement> element) {
+		System.out.println("Swing WorkbenchWindowRenderer.processContents()");
 		if ((MUIElement) element instanceof MWindow) {
 			JFrame jFrame = (JFrame) element.getWidget();
 			for (MUIElement e : element.getChildren()) {
@@ -108,6 +109,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 				for (MTrimBar trim : tWindow.getTrimBars()) {
 					Component n = (Component) engine.createGui(trim);
 					if (n != null) {
+						System.out.println("Found trim: " + trim);
 						switch (trim.getSide()) {
 						case BOTTOM:
 							root.add(n, BorderLayout.SOUTH);
@@ -126,6 +128,8 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 				}
 			}
 
+			jFrame.invalidate();
+			jFrame.doLayout();
 			jFrame.setVisible(true);
 		}
 	}

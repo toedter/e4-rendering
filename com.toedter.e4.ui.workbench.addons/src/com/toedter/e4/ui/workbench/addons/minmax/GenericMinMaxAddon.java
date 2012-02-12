@@ -315,7 +315,7 @@ public class GenericMinMaxAddon {
 
 				// create the widget
 				IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
-				presentationEngine.createGui(bar, bar.getParent());
+				presentationEngine.createGui(bar);
 			}
 		} else {
 			// get the parent trim bar, see bug 320756
@@ -326,7 +326,7 @@ public class GenericMinMaxAddon {
 				parent.setToBeRendered(true);
 				// create the widget
 				IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
-				presentationEngine.createGui(parent, parent.getParent());
+				presentationEngine.createGui(parent);
 			}
 			trimStack.setToBeRendered(true);
 		}
