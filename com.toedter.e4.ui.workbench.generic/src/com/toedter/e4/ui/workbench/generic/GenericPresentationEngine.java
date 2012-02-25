@@ -251,4 +251,10 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 		eventBroker.subscribe(UIEvents.ElementContainer.CHILDREN, childrenHandler);
 		eventBroker.subscribe(UIEvents.UIElement.TOPIC_VISIBLE, visibilityHandler);
 	}
+
+	@Override
+	public void refreshGui(MUIElement element) {
+		GenericRenderer renderer = rendererFactory.getRenderer(element);
+		renderer.processContents((MElementContainer<MUIElement>) element);
+	}
 }

@@ -309,14 +309,15 @@ public class GenericMinMaxAddon {
 			bar.setVisible(true);
 
 			// get the parent trim bar, see bug 320756
+			IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
 			if (bar.getWidget() == null) {
 				// ask it to be rendered
 				bar.setToBeRendered(true);
 
 				// create the widget
-				IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
 				presentationEngine.createGui(bar);
 			}
+			presentationEngine.refreshGui(window);
 		} else {
 			// get the parent trim bar, see bug 320756
 			MUIElement parent = trimStack.getParent();

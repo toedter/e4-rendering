@@ -118,6 +118,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 			}
 			MWindow window = (MWindow) (MUIElement) element;
 
+			topBox.getChildren().removeAll(topBox.getChildren());
 			if (window.getMainMenu() != null) {
 				Node node = (Node) renderer.createGui(window.getMainMenu(), element);
 				if (node != null) {
@@ -128,20 +129,20 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 			if (window instanceof MTrimmedWindow) {
 				MTrimmedWindow tWindow = (MTrimmedWindow) window;
 				for (MTrimBar trim : tWindow.getTrimBars()) {
-					Node n = (Node) renderer.createGui(trim);
-					if (n != null) {
+					Node node = (Node) renderer.createGui(trim);
+					if (node != null) {
 						switch (trim.getSide()) {
 						case BOTTOM:
-							root.setBottom(n);
+							root.setBottom(node);
 							break;
 						case LEFT:
-							root.setLeft(n);
+							root.setLeft(node);
 							break;
 						case RIGHT:
-							root.setRight(n);
+							root.setRight(node);
 							break;
 						case TOP:
-							topBox.getChildren().add(n);
+							topBox.getChildren().add(node);
 							break;
 						}
 					}
