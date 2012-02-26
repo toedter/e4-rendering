@@ -118,7 +118,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 			}
 			MWindow window = (MWindow) (MUIElement) element;
 
-			topBox.getChildren().removeAll(topBox.getChildren());
+			// topBox.getChildren().removeAll(topBox.getChildren());
 			if (window.getMainMenu() != null) {
 				Node node = (Node) renderer.createGui(window.getMainMenu(), element);
 				if (node != null) {
@@ -151,6 +151,39 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 
 			// now the hole stage is created and we can show it
 			stage.show();
+		}
+	}
+
+	@Override
+	public void doLayout(MElementContainer<MUIElement> element) {
+		if ((MUIElement) element instanceof MWindow) {
+			Stage stage = (Stage) element.getWidget();
+			BorderPane root = (BorderPane) stage.getScene().getRoot();
+			VBox topBox = (VBox) root.getTop();
+
+			MWindow window = (MWindow) (MUIElement) element;
+
+			if (window instanceof MTrimmedWindow) {
+				MTrimmedWindow tWindow = (MTrimmedWindow) window;
+				for (MTrimBar trim : tWindow.getTrimBars()) {
+					Node node = (Node) trim.getWidget();
+					if (!trim.isVisible()) {
+						node = null;
+					}
+					switch (trim.getSide()) {
+					case BOTTOM:
+						root.setBottom(node);
+						break;
+					case LEFT:
+						root.setLeft(node);
+						break;
+					case RIGHT:
+						root.setRight(node);
+						break;
+					}
+
+				}
+			}
 		}
 	}
 

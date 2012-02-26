@@ -79,8 +79,8 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 	private final EventHandler visibilityHandler = new EventHandler() {
 		@Override
 		public void handleEvent(Event event) {
-			System.out.println("visibilityHandler: " + event);
 			MUIElement changedElement = (MUIElement) event.getProperty(UIEvents.EventTags.ELEMENT);
+			System.out.println("visibilityHandler: " + changedElement);
 
 			GenericRenderer renderer = (GenericRenderer) changedElement.getRenderer();
 			if (renderer == null) {
@@ -89,9 +89,14 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 
 			renderer.setVisible(changedElement, changedElement.isVisible());
 
-			GenericRenderer parentRenderer = (GenericRenderer) changedElement.getParent().getRenderer();
+			MElementContainer<MUIElement> parent = changedElement.getParent();
+			if (parent == null) {
+				parent = (MElementContainer<MUIElement>) ((EObject) changedElement).eContainer();
+			}
+
+			GenericRenderer parentRenderer = (GenericRenderer) parent.getRenderer();
 			if (parentRenderer != null) {
-				parentRenderer.processContents(changedElement.getParent());
+				parentRenderer.doLayout(parent);
 			}
 		}
 	};
@@ -255,6 +260,6 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 	@Override
 	public void refreshGui(MUIElement element) {
 		GenericRenderer renderer = rendererFactory.getRenderer(element);
-		renderer.processContents((MElementContainer<MUIElement>) element);
+		renderer.doLayout((MElementContainer<MUIElement>) element);
 	}
 }

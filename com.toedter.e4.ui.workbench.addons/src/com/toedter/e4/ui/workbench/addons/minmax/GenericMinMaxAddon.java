@@ -193,9 +193,9 @@ public class GenericMinMaxAddon {
 
 	public void resetWindows(MUIElement element) {
 		ignoreTagChanges = true;
-		MWindow win = modelService.getTopLevelWindowFor(element);
+		MWindow window = modelService.getTopLevelWindowFor(element);
 
-		List<MPartStack> stacks = modelService.findElements(win, null, MPartStack.class, null,
+		List<MPartStack> stacks = modelService.findElements(window, null, MPartStack.class, null,
 				EModelService.PRESENTATION);
 		for (MPartStack partStack : stacks) {
 			if (partStack.getWidget() != null) {
@@ -211,6 +211,19 @@ public class GenericMinMaxAddon {
 			}
 		}
 		ignoreTagChanges = false;
+
+		if (window instanceof MTrimmedWindow) {
+			MTrimmedWindow trimmedWindow = (MTrimmedWindow) window;
+			List<MTrimBar> trimBars = trimmedWindow.getTrimBars();
+			for (MTrimBar trimBar : trimBars) {
+				if (trimBar.getSide() == SideValue.LEFT || trimBar.getSide() == SideValue.RIGHT) {
+					System.out.println("set LEFT Visible false: " + trimBar);
+					trimBar.setVisible(false);
+				}
+			}
+		}
+		IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
+		presentationEngine.refreshGui(window);
 	}
 
 	protected void restore(MUIElement element) {
@@ -267,7 +280,7 @@ public class GenericMinMaxAddon {
 		// now let the parent check if the children are visible
 		GenericRenderer parentRenderer = (GenericRenderer) element.getParent().getRenderer();
 		if (parentRenderer != null) {
-			parentRenderer.processContents(element.getParent());
+			parentRenderer.doLayout(element.getParent());
 		}
 
 	}

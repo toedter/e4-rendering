@@ -86,7 +86,6 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(MElementContainer<MUIElement> element) {
-		System.out.println("Swing WorkbenchWindowRenderer.processContents()");
 		if ((MUIElement) element instanceof MWindow) {
 			JFrame jFrame = (JFrame) element.getWidget();
 			for (MUIElement e : element.getChildren()) {
@@ -109,7 +108,6 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 				for (MTrimBar trim : tWindow.getTrimBars()) {
 					Component n = (Component) engine.createGui(trim);
 					if (n != null) {
-						System.out.println("Found trim: " + trim);
 						switch (trim.getSide()) {
 						case BOTTOM:
 							root.add(n, BorderLayout.SOUTH);
@@ -123,6 +121,49 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 						case TOP:
 							root.add(n, BorderLayout.NORTH);
 							break;
+						}
+					}
+				}
+			}
+
+			jFrame.invalidate();
+			jFrame.doLayout();
+			jFrame.setVisible(true);
+		}
+	}
+
+	@Override
+	public void doLayout(MElementContainer<MUIElement> element) {
+		if ((MUIElement) element instanceof MWindow) {
+			JFrame jFrame = (JFrame) element.getWidget();
+
+			IPresentationEngine2 engine = (IPresentationEngine2) context.get(IPresentationEngine.class.getName());
+			MWindow window = (MWindow) ((MUIElement) element);
+
+			Container root = (Container) jFrame.getContentPane();
+			if (window instanceof MTrimmedWindow) {
+				MTrimmedWindow tWindow = (MTrimmedWindow) window;
+				for (MTrimBar trim : tWindow.getTrimBars()) {
+					Component n = (Component) trim.getWidget();
+					if (n != null) {
+						boolean isVisible = trim.isVisible();
+						if (!isVisible) {
+							root.remove(n);
+						} else {
+							switch (trim.getSide()) {
+							case BOTTOM:
+								root.add(n, BorderLayout.SOUTH);
+								break;
+							case LEFT:
+								root.add(n, BorderLayout.WEST);
+								break;
+							case RIGHT:
+								root.add(n, BorderLayout.EAST);
+								break;
+							case TOP:
+								root.add(n, BorderLayout.NORTH);
+								break;
+							}
 						}
 					}
 				}

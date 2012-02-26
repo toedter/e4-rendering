@@ -24,6 +24,7 @@ import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
@@ -32,6 +33,7 @@ import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
 import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
+import com.toedter.e4.ui.workbench.swt.SWTPresentationEngine;
 import com.toedter.e4.ui.workbench.swt.layouts.SimpleTrimLayout;
 
 @SuppressWarnings("restriction")
@@ -154,7 +156,29 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 
 		shell.pack();
 		shell.open();
+	}
 
+	@Override
+	public void doLayout(MElementContainer<MUIElement> element) {
+		if (!(((MUIElement) element) instanceof MWindow)) {
+			return;
+		}
+		MWindow mWindow = (MWindow) ((MUIElement) element);
+		Shell shell = (Shell) element.getWidget();
+
+		if (mWindow instanceof MTrimmedWindow) {
+			MTrimmedWindow tWindow = (MTrimmedWindow) mWindow;
+			Shell limbo = SWTPresentationEngine.getLimboShell();
+			for (MTrimBar trimBar : tWindow.getTrimBars()) {
+				if (!trimBar.isVisible()) {
+					((Composite) trimBar.getWidget()).setParent(limbo);
+				} else {
+					((Composite) trimBar.getWidget()).setParent(shell);
+				}
+			}
+		}
+		shell.layout(true, true);
+		shell.pack();
 	}
 
 	@Override

@@ -68,4 +68,10 @@ public class TrimBarRenderer extends GenericRenderer {
 			}
 		}
 	}
+
+	@Override
+	public void setVisible(MUIElement changedElement, boolean visible) {
+		ToolBar toolBar = (ToolBar) changedElement.getWidget();
+		toolBar.setVisible(visible);
+	};
 }
