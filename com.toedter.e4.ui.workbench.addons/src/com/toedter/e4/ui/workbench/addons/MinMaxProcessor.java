@@ -31,7 +31,7 @@ public class MinMaxProcessor {
 	private static final String BUNDLE_ID = "platform:/plugin/com.toedter.e4.ui.workbench.addons"; //$NON-NLS-1$
 	private static final String BUNDLE_CLASS = "bundleclass://com.toedter.e4.ui.workbench.addons"; //$NON-NLS-1$
 
-	private static final String GEN_MIN_MAX_CONTRIBUTION_URI = BUNDLE_CLASS
+	public static final String GEN_MIN_MAX_CONTRIBUTION_URI = BUNDLE_CLASS
 			+ "/com.toedter.e4.ui.workbench.addons.minmax.GenericMinMaxAddon";
 
 	@Execute
@@ -40,7 +40,7 @@ public class MinMaxProcessor {
 
 		// Prevent multiple copies
 		for (MAddon addon : addons) {
-			if (addon.getContributionURI().contains("com.toedter.e4.ui.workbench.addons.minmax.GenericMinMaxAddon")) {
+			if (addon.getContributionURI().equals(GEN_MIN_MAX_CONTRIBUTION_URI)) {
 				return;
 			}
 		}
@@ -48,7 +48,7 @@ public class MinMaxProcessor {
 		// Insert the addon into the system
 		MAddon minMaxAddon = ApplicationFactoryImpl.eINSTANCE.createAddon();
 		minMaxAddon.setElementId("GenericMinMaxAddon"); //$NON-NLS-1$
-		minMaxAddon.setContributionURI(GEN_MIN_MAX_CONTRIBUTION_URI); //$NON-NLS-1$
+		minMaxAddon.setContributionURI(GEN_MIN_MAX_CONTRIBUTION_URI);
 		application.getAddons().add(minMaxAddon);
 
 		MCommand resetWindowsCommand = MCommandsFactory.INSTANCE.createCommand();
