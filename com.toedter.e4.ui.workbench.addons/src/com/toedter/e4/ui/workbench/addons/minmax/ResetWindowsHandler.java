@@ -17,7 +17,7 @@ public class ResetWindowsHandler {
 
 		// Prevent multiple copies
 		for (MAddon addon : addons) {
-			System.out.println(addon.getContributionURI());
+			// System.out.println(addon.getContributionURI());
 			if (addon.getContributionURI().equals(MinMaxProcessor.GEN_MIN_MAX_CONTRIBUTION_URI)) {
 				if (addon.getObject() instanceof GenericMinMaxAddon) {
 					for (MWindow window : application.getChildren()) {

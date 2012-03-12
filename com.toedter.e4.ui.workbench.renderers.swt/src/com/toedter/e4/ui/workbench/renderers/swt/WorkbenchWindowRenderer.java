@@ -159,7 +159,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 	}
 
 	@Override
-	public void doLayout(MElementContainer<MUIElement> element) {
+	public void doLayout(MElementContainer<?> element) {
 		if (!(((MUIElement) element) instanceof MWindow)) {
 			return;
 		}

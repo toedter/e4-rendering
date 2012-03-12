@@ -20,6 +20,7 @@ import org.eclipse.e4.ui.css.swt.theme.IThemeEngine;
 public class SwitchThemeHandler {
 	@Execute
 	public void switchTheme(@Named("contacts.commands.switchtheme.themeid") String themeId, IThemeEngine engine) {
+		System.out.println("SwitchThemeHandler.switchTheme()");
 		engine.setTheme(themeId, true);
 	}
 }
