@@ -86,6 +86,12 @@ public class SashRenderer extends GenericRenderer {
 	}
 
 	@Override
+	public void doLayout(MElementContainer<?> element) {
+		System.out.println("SashRenderer.doLayout()");
+		processContents((MElementContainer<MUIElement>) element);
+	}
+
+	@Override
 	public void hookControllerLogic(MUIElement element) {
 		if (element instanceof MPartSashContainer) {
 			final MPartSashContainer partSashContainer = (MPartSashContainer) element;

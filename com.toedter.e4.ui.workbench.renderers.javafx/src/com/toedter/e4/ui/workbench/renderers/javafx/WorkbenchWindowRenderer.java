@@ -155,8 +155,8 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 	}
 
 	@Override
-	public void doLayout(MElementContainer<MUIElement> element) {
-		if ((MUIElement) element instanceof MWindow) {
+	public void doLayout(MElementContainer<?> element) {
+		if (element instanceof MWindow) {
 			Stage stage = (Stage) element.getWidget();
 			BorderPane root = (BorderPane) stage.getScene().getRoot();
 			VBox topBox = (VBox) root.getTop();
@@ -164,8 +164,8 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 			MWindow window = (MWindow) (MUIElement) element;
 
 			if (window instanceof MTrimmedWindow) {
-				MTrimmedWindow tWindow = (MTrimmedWindow) window;
-				for (MTrimBar trim : tWindow.getTrimBars()) {
+				MTrimmedWindow trimmedWindow = (MTrimmedWindow) window;
+				for (MTrimBar trim : trimmedWindow.getTrimBars()) {
 					Node node = (Node) trim.getWidget();
 					if (!trim.isVisible()) {
 						node = null;
@@ -181,7 +181,6 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 						root.setRight(node);
 						break;
 					}
-
 				}
 			}
 		}

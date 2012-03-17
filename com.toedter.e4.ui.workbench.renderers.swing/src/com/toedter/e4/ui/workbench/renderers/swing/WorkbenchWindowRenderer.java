@@ -133,7 +133,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 	}
 
 	@Override
-	public void doLayout(MElementContainer<MUIElement> element) {
+	public void doLayout(MElementContainer<?> element) {
 		if ((MUIElement) element instanceof MWindow) {
 			JFrame jFrame = (JFrame) element.getWidget();
 

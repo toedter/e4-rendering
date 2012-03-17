@@ -20,5 +20,5 @@ import org.eclipse.e4.ui.workbench.IPresentationEngine;
 public interface IPresentationEngine2 extends IPresentationEngine {
 	public Object createGui(MUIElement element, MElementContainer<MUIElement> parent);
 
-	public void refreshGui(MUIElement element);
+	public void refreshGui(MElementContainer<?> element);
 }
