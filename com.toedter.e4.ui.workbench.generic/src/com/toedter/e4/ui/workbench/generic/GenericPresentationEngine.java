@@ -260,6 +260,12 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 	@Override
 	public void refreshGui(MUIElement element) {
 		GenericRenderer renderer = rendererFactory.getRenderer(element);
-		renderer.doLayout((MElementContainer<MUIElement>) element);
+		if (element instanceof MElementContainer<?>) {
+			MElementContainer<MUIElement> container = (MElementContainer<MUIElement>) element;
+			renderer.doLayout(container);
+			// for (MUIElement listElement : container.getChildren()) {
+			// refreshGui(listElement);
+			// }
+		}
 	}
 }

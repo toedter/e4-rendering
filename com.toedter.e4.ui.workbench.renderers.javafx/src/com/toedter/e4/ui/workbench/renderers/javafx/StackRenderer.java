@@ -41,6 +41,7 @@ public class StackRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(final MElementContainer<MUIElement> container) {
+		System.out.println("StackRenderer.processContents()");
 		TabPane parentPane = (TabPane) container.getWidget();
 
 		for (MUIElement element : container.getChildren()) {
@@ -68,6 +69,7 @@ public class StackRenderer extends GenericRenderer {
 
 	@Override
 	public void setVisible(MUIElement changedElement, boolean visible) {
+		System.out.println("StackRenderer.setVisible(): " + visible);
 		TabPane tabPane = (TabPane) changedElement.getWidget();
 		tabPane.setVisible(visible);
 	}

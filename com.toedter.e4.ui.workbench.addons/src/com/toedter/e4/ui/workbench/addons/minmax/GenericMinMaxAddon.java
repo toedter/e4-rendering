@@ -209,6 +209,7 @@ public class GenericMinMaxAddon {
 					partStack.getTags().remove(MINIMIZED_BY_ZOOM);
 				}
 			}
+			partStack.setVisible(true);
 		}
 		ignoreTagChanges = false;
 

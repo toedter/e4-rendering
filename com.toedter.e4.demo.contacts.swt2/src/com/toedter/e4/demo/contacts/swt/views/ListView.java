@@ -21,7 +21,6 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.MApplication;
-import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -37,12 +36,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
+@SuppressWarnings("restriction")
 public class ListView {
 
 	private final TableViewer contactsViewer;
-
-	@Inject
-	private ESelectionService selectionService;
 
 	@Inject
 	public ListView(Composite parent, final MApplication application) {

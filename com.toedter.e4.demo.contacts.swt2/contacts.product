@@ -29,6 +29,7 @@
    </vm>
 
    <plugins>
+      <plugin id="at.bestsolution.efxclipse.runtime.osgi" fragment="true"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.toedter.e4.demo.contacts.generic"/>
       <plugin id="com.toedter.e4.demo.contacts.swt2"/>

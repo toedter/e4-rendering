@@ -35,6 +35,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Composite;
 
+@SuppressWarnings("restriction")
 public class DetailsView {
 
 	@Inject
