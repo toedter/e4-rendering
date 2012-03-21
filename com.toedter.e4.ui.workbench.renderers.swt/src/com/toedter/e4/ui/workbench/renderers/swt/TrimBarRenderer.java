@@ -66,7 +66,9 @@ public class TrimBarRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(MElementContainer<MUIElement> container) {
-		System.out.println("TrimBarRenderer.processContents()");
+		// This is not an optimal solution but works for resetting the trim area
+
+		// System.out.println("TrimBarRenderer.processContents()");
 		if (!((MUIElement) container instanceof MTrimBar && container.getWidget() instanceof Composite)) {
 			return;
 		}
