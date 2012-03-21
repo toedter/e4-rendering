@@ -54,6 +54,7 @@ public class ToolBarRenderer extends GenericRenderer {
 	@Override
 	public void processContents(final MElementContainer<MUIElement> container) {
 		Pane toolBar = (Pane) container.getWidget();
+		toolBar.getChildren().removeAll(toolBar.getChildren());
 		for (MUIElement element : container.getChildren()) {
 			if (element instanceof MHandledToolItem || element instanceof MDirectToolItem) {
 				toolBar.getChildren().add((Button) element.getWidget());
@@ -79,5 +80,4 @@ public class ToolBarRenderer extends GenericRenderer {
 		}
 		return Orientation.HORIZONTAL;
 	}
-
 }

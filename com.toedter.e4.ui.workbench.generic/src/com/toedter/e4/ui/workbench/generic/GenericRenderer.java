@@ -57,6 +57,7 @@ public class GenericRenderer {
 
 	public void doLayout(MElementContainer<?> element) {
 		System.out.println("GenericRenderer.doLayout(): " + element);
+		processContents((MElementContainer<MUIElement>) element);
 	}
 
 	public void removeChild(MUIElement element, MElementContainer<MUIElement> parent) {

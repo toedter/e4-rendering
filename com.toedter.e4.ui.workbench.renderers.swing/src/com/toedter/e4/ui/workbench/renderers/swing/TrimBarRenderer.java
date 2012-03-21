@@ -50,6 +50,7 @@ public class TrimBarRenderer extends GenericRenderer {
 		JToolBar toolBar = (JToolBar) container.getWidget();
 
 		boolean isFirst = true;
+		toolBar.removeAll();
 		for (MUIElement element : container.getChildren()) {
 			JToolBar subToolbar = (JToolBar) renderer.createGui(element);
 			subToolbar.setOrientation(toolBar.getOrientation());

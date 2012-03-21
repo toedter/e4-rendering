@@ -41,6 +41,7 @@ public class ToolBarRenderer extends GenericRenderer {
 	@Override
 	public void processContents(final MElementContainer<MUIElement> container) {
 		JToolBar toolBar = (JToolBar) container.getWidget();
+		toolBar.removeAll();
 		for (MUIElement element : container.getChildren()) {
 			if (element instanceof MHandledToolItem || element instanceof MDirectToolItem) {
 				toolBar.add((JButton) element.getWidget());

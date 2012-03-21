@@ -21,7 +21,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.Shell;
 
@@ -67,14 +66,18 @@ public class TrimBarRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(MElementContainer<MUIElement> container) {
-		if (!((MUIElement) container instanceof MTrimBar && container.getWidget() instanceof CoolBar)) {
+		System.out.println("TrimBarRenderer.processContents()");
+		if (!((MUIElement) container instanceof MTrimBar && container.getWidget() instanceof Composite)) {
 			return;
 		}
-		CoolBar coolBar = (CoolBar) container.getWidget();
-		coolBar.layout();
-		for (CoolItem item : coolBar.getItems()) {
-			calcSize(item);
+		Composite coolBar = (Composite) container.getWidget();
+
+		if (container.getChildren() == null || container.getChildren().size() == 0) {
+			for (Control control : coolBar.getChildren()) {
+				control.dispose();
+			}
 		}
+		coolBar.layout();
 		coolBar.getParent().layout();
 	}
 

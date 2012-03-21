@@ -53,17 +53,24 @@ public class TrimBarRenderer extends GenericRenderer {
 
 	@Override
 	public void processContents(MElementContainer<MUIElement> container) {
+		System.out.println("TrimBarRenderer.processContents(): " + container.getElementId());
 		IPresentationEngine renderer = (IPresentationEngine) context.get(IPresentationEngine.class.getName());
 		ToolBar toolbar = (ToolBar) container.getWidget();
 
 		boolean isFirst = true;
+		toolbar.getItems().removeAll(toolbar.getItems());
 		for (MUIElement element : container.getChildren()) {
-			Node node = (Node) renderer.createGui(element);
+			Node node = (Node) element.getWidget();
 			if (node != null) {
 				if (!isFirst) {
 					toolbar.getItems().add(new Separator());
 				}
-				toolbar.getItems().add(node);
+				try {
+					toolbar.getItems().add(node);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				isFirst = false;
 			}
 		}

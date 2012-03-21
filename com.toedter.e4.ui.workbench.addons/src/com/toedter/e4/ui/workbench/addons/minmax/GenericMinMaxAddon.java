@@ -20,10 +20,13 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.e4.ui.model.application.ui.SideValue;
 import org.eclipse.e4.ui.model.application.ui.advanced.MArea;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
+import org.eclipse.e4.ui.model.application.ui.advanced.MPlaceholder;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimBar;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow;
@@ -213,17 +216,19 @@ public class GenericMinMaxAddon {
 		}
 		ignoreTagChanges = false;
 
+		IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
 		if (window instanceof MTrimmedWindow) {
 			MTrimmedWindow trimmedWindow = (MTrimmedWindow) window;
 			List<MTrimBar> trimBars = trimmedWindow.getTrimBars();
 			for (MTrimBar trimBar : trimBars) {
 				if (trimBar.getSide() == SideValue.LEFT || trimBar.getSide() == SideValue.RIGHT) {
 					System.out.println("set LEFT Visible false: " + trimBar);
+					trimBar.getChildren().clear();
 					trimBar.setVisible(false);
+					presentationEngine.refreshGui(trimBar);
 				}
 			}
 		}
-		IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
 		presentationEngine.refreshGui(window);
 	}
 
@@ -304,6 +309,7 @@ public class GenericMinMaxAddon {
 
 		// Is there already a TrimControl there ?
 		String trimId = element.getElementId() + getMinimizedElementSuffix(element);
+		System.out.println("Trim Id: " + trimId);
 		MToolBar trimStack = (MToolBar) modelService.find(trimId, window);
 
 		if (trimStack == null) {
@@ -324,13 +330,33 @@ public class GenericMinMaxAddon {
 
 			// get the parent trim bar, see bug 320756
 			IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
+
+			MElementContainer<MUIElement> partStack = (MElementContainer<MUIElement>) element;
+			for (MUIElement stackElement : partStack.getChildren()) {
+				if (!stackElement.isToBeRendered()) {
+					continue;
+				}
+
+				MDirectToolItem partItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
+				partItem.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.FastViewHandler");
+
+				MUILabel labelElement = getLabelElement(stackElement);
+				partItem.setIconURI(labelElement.getIconURI());
+				trimStack.getChildren().add(partItem);
+			}
+
 			if (bar.getWidget() == null) {
 				// ask it to be rendered
 				bar.setToBeRendered(true);
 
 				// create the widget
 				presentationEngine.createGui(bar);
+			} else {
+				trimStack.setToBeRendered(true);
+				presentationEngine.createGui(trimStack);
+				presentationEngine.refreshGui(bar);
 			}
+
 			presentationEngine.refreshGui(window);
 		} else {
 			// get the parent trim bar, see bug 320756
@@ -345,6 +371,14 @@ public class GenericMinMaxAddon {
 			}
 			trimStack.setToBeRendered(true);
 		}
+	}
+
+	private MUILabel getLabelElement(MUIElement element) {
+		if (element instanceof MPlaceholder) {
+			element = ((MPlaceholder) element).getRef();
+		}
+
+		return (MUILabel) (element instanceof MUILabel ? element : null);
 	}
 
 	private MTrimBar getBarForElement(MUIElement element, MTrimmedWindow window) {
