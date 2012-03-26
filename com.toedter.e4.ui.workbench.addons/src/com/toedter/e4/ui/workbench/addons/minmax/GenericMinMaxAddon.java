@@ -18,8 +18,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
@@ -46,6 +48,8 @@ import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
 
 @SuppressWarnings("restriction")
 public class GenericMinMaxAddon {
+	public static final String ADDONS_MINMAX_TRIM_STACK_ID = "com.toedter.e4.ui.workbench.addons.minmax.trimStackId";
+
 	static String ID_SUFFIX = "(minimized)"; //$NON-NLS-1$
 
 	// tags representing the min/max state
@@ -62,7 +66,14 @@ public class GenericMinMaxAddon {
 	private IEclipseContext context;
 
 	@Inject
-	public GenericMinMaxAddon(IMinMaxAddon uiMinMaxAddon, IEventBroker eventBroker, EModelService modelService) {
+	private EHandlerService handlerService;
+
+	private final MApplication application;
+
+	@Inject
+	public GenericMinMaxAddon(IMinMaxAddon uiMinMaxAddon, IEventBroker eventBroker, EModelService modelService,
+			MApplication application) {
+		this.application = application;
 		System.out.println("Generic GenericMinMaxAddon()");
 		this.uiMinMaxAddon = uiMinMaxAddon;
 		this.eventBroker = eventBroker;
@@ -222,7 +233,6 @@ public class GenericMinMaxAddon {
 			List<MTrimBar> trimBars = trimmedWindow.getTrimBars();
 			for (MTrimBar trimBar : trimBars) {
 				if (trimBar.getSide() == SideValue.LEFT || trimBar.getSide() == SideValue.RIGHT) {
-					System.out.println("set LEFT Visible false: " + trimBar);
 					trimBar.getChildren().clear();
 					trimBar.setVisible(false);
 					presentationEngine.refreshGui(trimBar);
@@ -234,6 +244,7 @@ public class GenericMinMaxAddon {
 
 	protected void restore(MUIElement element) {
 		element.getTags().remove(MINIMIZED_BY_ZOOM);
+		element.getTags().remove(MINIMIZED);
 		element.setVisible(true);
 	}
 
@@ -316,12 +327,40 @@ public class GenericMinMaxAddon {
 			trimStack = MenuFactoryImpl.eINSTANCE.createToolBar();
 			trimStack.setElementId(trimId);
 
-			MDirectToolItem toolItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
-			toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons/icons/fastview_restore.gif");
-
+			// MCommand command = MCommandsFactory.INSTANCE.createCommand();
+			// command.setElementId("com.toedter.e4.ui.workbench.addons.minmax.restore");
+			// command.setCommandName("Restore Stack");
+			// command.setDescription("xxx");
+			// command.setContributorURI("kai");
+			//
 			// MHandler handler = MCommandsFactory.INSTANCE.createHandler();
 			// handler.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.RestoreHandler");
+			// handler.setCommand(command);
+			//
+			// MHandledToolItem toolItem =
+			// MMenuFactory.INSTANCE.createHandledToolItem();
+			// // command.getParameters().add(mCommandParameter);
+			// MParameter parameter =
+			// MCommandsFactory.INSTANCE.createParameter();
+			// parameter.setName(ADDONS_MINMAX_TRIM_STACK_ID);
+			// parameter.setValue(element.getElementId());
+			// toolItem.getParameters().add(parameter);
+			// toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons/icons/fastview_restore.gif");
+			// toolItem.setCommand(command);
+			//
+			// application.getHandlers().add(handler);
+			// // window.getHandlers().add(handler);
+			// application.getCommands().add(command);
+			// handlerService.activateHandler(command.getElementId(), handler);
+
+			// MCommandParameter mCommandParameter =
+			// MCommandsFactory.INSTANCE.createCommandParameter();
+
+			MDirectToolItem toolItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
+			toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons/icons/fastview_restore.gif");
 			toolItem.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.RestoreHandler");
+			toolItem.setContainerData(element.getElementId());
+
 			trimStack.getChildren().add(toolItem);
 			// Check if we have a cached location
 			MTrimBar bar = getBarForElement(element, window);
@@ -331,6 +370,7 @@ public class GenericMinMaxAddon {
 			// get the parent trim bar, see bug 320756
 			IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
 
+			@SuppressWarnings("unchecked")
 			MElementContainer<MUIElement> partStack = (MElementContainer<MUIElement>) element;
 			for (MUIElement stackElement : partStack.getChildren()) {
 				if (!stackElement.isToBeRendered()) {
