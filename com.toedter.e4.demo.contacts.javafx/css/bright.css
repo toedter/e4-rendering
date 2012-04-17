@@ -5,7 +5,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: linear-gradient(to bottom, -fx-base, derive(-fx-base,+50%));
+    -fx-background-color: linear-gradient(to bottom, #d0d0d0, derive(#d0d0d0,+50%));
     -fx-text-fill: black;
 }
 

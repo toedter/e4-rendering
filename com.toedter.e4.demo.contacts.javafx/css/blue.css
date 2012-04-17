@@ -35,9 +35,8 @@
 }
 
 .menu-bar {
-    -fx-background-color: linear-gradient(to bottom, -fx-base, derive(-fx-base,+50%));
-    -fx-text-fill: black;
-}
+    -fx-background-color: linear-gradient(to bottom, #7eaacc, derive(#7eaacc,+50%));
+ }
 
 .menu-bar .menu .label {
     -fx-padding: 0.333em 0.5em 0.333em 0.5em; /* 4 6 4 6*/
