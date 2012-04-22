@@ -9,7 +9,7 @@ for the Eclipse 4 Application platform. I provide engines for
 Setup
 -----
 * Install JavaFX (SDK or Runtime) for your platform
-* Install e(fx)clipse for your platform, see efxclipse.org
+* Install e(fx)clipse for your platform, see http://efxclipse.org
 * Open the Eclipse SDK and set the JavaFX SDK location in the prefences
 * Restart Eclipse
 * Import all projects from this git repo
