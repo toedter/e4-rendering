@@ -31,7 +31,7 @@ import at.bestsolution.efxclipse.runtime.databinding.JFXRealm;
 import at.bestsolution.efxclipse.runtime.services.theme.ThemeManager;
 
 import com.toedter.e4.ui.workbench.generic.GenericPresentationEngine;
-import com.toedter.e4.ui.workbench.generic.IRendererFactory;
+import com.toedter.e4.ui.workbench.generic.RendererFactory;
 
 @SuppressWarnings("restriction")
 public class JavaFXPresentationEngine extends GenericPresentationEngine {
@@ -94,7 +94,7 @@ public class JavaFXPresentationEngine extends GenericPresentationEngine {
 		// TODO use parameter or registry
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
-			rendererFactory = (IRendererFactory) contribFactory.create(
+			rendererFactory = (RendererFactory) contribFactory.create(
 					"bundleclass://com.toedter.e4.ui.workbench.renderers.javafx/"
 							+ "com.toedter.e4.ui.workbench.renderers.javafx.JavaFXRendererFactory", context);
 		} catch (Exception e) {

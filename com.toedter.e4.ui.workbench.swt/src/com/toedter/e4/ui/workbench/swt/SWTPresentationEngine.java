@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.toedter.e4.ui.workbench.generic.GenericPresentationEngine;
-import com.toedter.e4.ui.workbench.generic.IRendererFactory;
+import com.toedter.e4.ui.workbench.generic.RendererFactory;
 
 @SuppressWarnings("restriction")
 public class SWTPresentationEngine extends GenericPresentationEngine {
@@ -102,7 +102,7 @@ public class SWTPresentationEngine extends GenericPresentationEngine {
 		// TODO use parameter or registry
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
-			rendererFactory = (IRendererFactory) contribFactory.create(
+			rendererFactory = (RendererFactory) contribFactory.create(
 					"bundleclass://com.toedter.e4.ui.workbench.renderers.swt/"
 							+ "com.toedter.e4.ui.workbench.renderers.swt.SWTRendererFactory", context);
 		} catch (Exception e) {

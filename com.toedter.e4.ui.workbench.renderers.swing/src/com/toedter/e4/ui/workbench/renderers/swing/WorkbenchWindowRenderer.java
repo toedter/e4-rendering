@@ -32,7 +32,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
-import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
+import com.toedter.e4.ui.workbench.generic.PresentationEngine;
 
 @SuppressWarnings("restriction")
 public class WorkbenchWindowRenderer extends GenericRenderer {
@@ -94,7 +94,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 				}
 			}
 
-			IPresentationEngine2 engine = (IPresentationEngine2) context.get(IPresentationEngine.class.getName());
+			PresentationEngine engine = (PresentationEngine) context.get(IPresentationEngine.class.getName());
 			MWindow window = (MWindow) ((MUIElement) element);
 
 			if (window.getMainMenu() != null) {
@@ -137,7 +137,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 		if ((MUIElement) element instanceof MWindow) {
 			JFrame jFrame = (JFrame) element.getWidget();
 
-			IPresentationEngine2 engine = (IPresentationEngine2) context.get(IPresentationEngine.class.getName());
+			PresentationEngine engine = (PresentationEngine) context.get(IPresentationEngine.class.getName());
 			MWindow window = (MWindow) ((MUIElement) element);
 
 			Container root = (Container) jFrame.getContentPane();

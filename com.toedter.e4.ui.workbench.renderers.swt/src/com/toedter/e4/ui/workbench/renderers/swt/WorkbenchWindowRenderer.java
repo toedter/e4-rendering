@@ -32,7 +32,7 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
-import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
+import com.toedter.e4.ui.workbench.generic.PresentationEngine;
 import com.toedter.e4.ui.workbench.swt.SWTPresentationEngine;
 import com.toedter.e4.ui.workbench.swt.layouts.SimpleTrimLayout;
 
@@ -135,7 +135,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 		Shell shell = (Shell) element.getWidget();
 
 		// Populate the main menu
-		IPresentationEngine2 renderer = (IPresentationEngine2) context.get(IPresentationEngine.class.getName());
+		PresentationEngine renderer = (PresentationEngine) context.get(IPresentationEngine.class.getName());
 		if (mWindow.getMainMenu() != null) {
 			renderer.createGui(mWindow.getMainMenu(), element);
 			shell.setMenuBar((Menu) mWindow.getMainMenu().getWidget());

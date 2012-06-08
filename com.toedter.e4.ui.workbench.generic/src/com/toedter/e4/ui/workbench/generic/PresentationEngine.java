@@ -17,7 +17,7 @@ import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 
 @SuppressWarnings("restriction")
-public interface IPresentationEngine2 extends IPresentationEngine {
+public interface PresentationEngine extends IPresentationEngine {
 	public Object createGui(MUIElement element, MElementContainer<MUIElement> parent);
 
 	public void refreshGui(MElementContainer<?> element);

@@ -18,7 +18,7 @@ import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
 import com.toedter.e4.ui.workbench.addons.generic.MinMaxProcessor;
-import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
+import com.toedter.e4.ui.workbench.generic.PresentationEngine;
 
 @SuppressWarnings("restriction")
 public class RestoreHandler {
@@ -39,7 +39,7 @@ public class RestoreHandler {
 			}
 		}
 
-		IPresentationEngine2 presentationEngine = (IPresentationEngine2) application.getContext().get(
+		PresentationEngine presentationEngine = (PresentationEngine) application.getContext().get(
 				IPresentationEngine.class);
 		MToolBar barToBeRemoved = null;
 		MTrimBar currentTrimBar = null;

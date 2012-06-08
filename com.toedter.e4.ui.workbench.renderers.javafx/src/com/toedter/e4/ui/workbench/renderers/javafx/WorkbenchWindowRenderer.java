@@ -38,7 +38,7 @@ import at.bestsolution.efxclipse.runtime.services.theme.Theme;
 import at.bestsolution.efxclipse.runtime.services.theme.ThemeManager;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
-import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
+import com.toedter.e4.ui.workbench.generic.PresentationEngine;
 
 @SuppressWarnings("restriction")
 public class WorkbenchWindowRenderer extends GenericRenderer {
@@ -111,7 +111,7 @@ public class WorkbenchWindowRenderer extends GenericRenderer {
 			Stage stage = (Stage) element.getWidget();
 			BorderPane root = (BorderPane) stage.getScene().getRoot();
 			VBox topBox = (VBox) root.getTop();
-			IPresentationEngine2 renderer = (IPresentationEngine2) context.get(IPresentationEngine.class.getName());
+			PresentationEngine renderer = (PresentationEngine) context.get(IPresentationEngine.class.getName());
 
 			for (MUIElement child : element.getChildren()) {
 				root.setCenter((Node) child.getWidget());

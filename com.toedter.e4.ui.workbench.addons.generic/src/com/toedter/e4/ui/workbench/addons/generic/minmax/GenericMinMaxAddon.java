@@ -44,7 +44,7 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
-import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
+import com.toedter.e4.ui.workbench.generic.PresentationEngine;
 
 @SuppressWarnings("restriction")
 public class GenericMinMaxAddon {
@@ -227,7 +227,7 @@ public class GenericMinMaxAddon {
 		}
 		ignoreTagChanges = false;
 
-		IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
+		PresentationEngine presentationEngine = (PresentationEngine) context.get(IPresentationEngine.class);
 		if (window instanceof MTrimmedWindow) {
 			MTrimmedWindow trimmedWindow = (MTrimmedWindow) window;
 			List<MTrimBar> trimBars = trimmedWindow.getTrimBars();
@@ -368,7 +368,7 @@ public class GenericMinMaxAddon {
 			bar.setVisible(true);
 
 			// get the parent trim bar, see bug 320756
-			IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
+			PresentationEngine presentationEngine = (PresentationEngine) context.get(IPresentationEngine.class);
 
 			@SuppressWarnings("unchecked")
 			MElementContainer<MUIElement> partStack = (MElementContainer<MUIElement>) element;
@@ -406,7 +406,7 @@ public class GenericMinMaxAddon {
 				// ask it to be rendered
 				parent.setToBeRendered(true);
 				// create the widget
-				IPresentationEngine2 presentationEngine = (IPresentationEngine2) context.get(IPresentationEngine.class);
+				PresentationEngine presentationEngine = (PresentationEngine) context.get(IPresentationEngine.class);
 				presentationEngine.createGui(parent);
 			}
 			trimStack.setToBeRendered(true);

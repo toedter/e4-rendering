@@ -27,7 +27,7 @@ import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.equinox.app.IApplication;
 
 import com.toedter.e4.ui.workbench.generic.GenericPresentationEngine;
-import com.toedter.e4.ui.workbench.generic.IRendererFactory;
+import com.toedter.e4.ui.workbench.generic.RendererFactory;
 
 @SuppressWarnings("restriction")
 public class SwingPresentationEngine extends GenericPresentationEngine {
@@ -94,7 +94,7 @@ public class SwingPresentationEngine extends GenericPresentationEngine {
 		// TODO use parameter or registry
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
-			rendererFactory = (IRendererFactory) contribFactory.create(
+			rendererFactory = (RendererFactory) contribFactory.create(
 					"bundleclass://com.toedter.e4.ui.workbench.renderers.swing/"
 							+ "com.toedter.e4.ui.workbench.renderers.swing.SwingRendererFactory", context);
 		} catch (Exception e) {

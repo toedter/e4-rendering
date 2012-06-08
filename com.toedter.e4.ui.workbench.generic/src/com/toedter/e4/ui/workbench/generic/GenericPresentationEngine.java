@@ -37,12 +37,12 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 @SuppressWarnings("restriction")
-public class GenericPresentationEngine implements IPresentationEngine2 {
+public class GenericPresentationEngine implements PresentationEngine {
 
 	@Inject
 	protected Logger logger;
 
-	protected IRendererFactory rendererFactory;
+	protected RendererFactory rendererFactory;
 
 	@Inject
 	EModelService modelService;
@@ -246,7 +246,7 @@ public class GenericPresentationEngine implements IPresentationEngine2 {
 		// TODO use parameter or registry
 		IContributionFactory contribFactory = context.get(IContributionFactory.class);
 		try {
-			rendererFactory = (IRendererFactory) contribFactory.create(
+			rendererFactory = (RendererFactory) contribFactory.create(
 					"bundleclass://com.toedter.e4.ui.workbench.generic/"
 							+ "com.toedter.e4.ui.workbench.generic.GenericRendererFactory", context);
 		} catch (Exception e) {
