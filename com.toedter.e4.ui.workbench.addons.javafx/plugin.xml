@@ -7,7 +7,7 @@
          point="org.eclipse.e4.workbench.model">
       <processor
             beforefragment="true"
-            class="com.toedter.e4.ui.workbench.addons.MinMaxProcessor">
+            class="com.toedter.e4.ui.workbench.addons.generic.MinMaxProcessor">
       </processor>
    </extension>
 </plugin>

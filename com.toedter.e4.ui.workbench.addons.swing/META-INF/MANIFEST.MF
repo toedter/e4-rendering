@@ -14,7 +14,7 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.e4.core.contexts;bundle-version="1.0.0",
  org.eclipse.osgi;bundle-version="3.8.0",
  org.eclipse.core.runtime;bundle-version="3.8.0",
- com.toedter.e4.ui.workbench.addons;bundle-version="0.1.0",
+ com.toedter.e4.ui.workbench.addons.generic;bundle-version="0.1.0",
  com.toedter.e4.ui.workbench.renderers.swing;bundle-version="0.1.0"
 Service-Component: OSGI-INF/minMaxAddon.xml
 Export-Package: com.toedter.e4.ui.workbench.addons.swing.minmax

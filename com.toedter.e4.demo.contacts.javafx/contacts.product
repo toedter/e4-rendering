@@ -43,7 +43,7 @@
       <plugin id="com.toedter.e4.demo.contacts.generic"/>
       <plugin id="com.toedter.e4.demo.contacts.javafx"/>
       <plugin id="com.toedter.e4.ui.controls.javafx"/>
-      <plugin id="com.toedter.e4.ui.workbench.addons"/>
+      <plugin id="com.toedter.e4.ui.workbench.addons.generic"/>
       <plugin id="com.toedter.e4.ui.workbench.addons.javafx"/>
       <plugin id="com.toedter.e4.ui.workbench.generic"/>
       <plugin id="com.toedter.e4.ui.workbench.javafx"/>

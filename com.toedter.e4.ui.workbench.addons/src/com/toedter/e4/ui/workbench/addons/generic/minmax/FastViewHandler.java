@@ -1,4 +1,4 @@
-package com.toedter.e4.ui.workbench.addons.minmax;
+package com.toedter.e4.ui.workbench.addons.generic.minmax;
 
 import org.eclipse.e4.core.di.annotations.Execute;
 

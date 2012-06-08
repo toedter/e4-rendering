@@ -1,4 +1,4 @@
-package com.toedter.e4.ui.workbench.addons.minmax;
+package com.toedter.e4.ui.workbench.addons.generic.minmax;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import org.eclipse.e4.ui.model.application.ui.menu.MToolBarElement;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
-import com.toedter.e4.ui.workbench.addons.MinMaxProcessor;
+import com.toedter.e4.ui.workbench.addons.generic.MinMaxProcessor;
 import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
 
 @SuppressWarnings("restriction")

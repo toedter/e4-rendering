@@ -33,7 +33,7 @@
       <plugin id="com.ibm.icu"/>
       <plugin id="com.toedter.e4.demo.contacts.generic"/>
       <plugin id="com.toedter.e4.demo.contacts.swing"/>
-      <plugin id="com.toedter.e4.ui.workbench.addons"/>
+      <plugin id="com.toedter.e4.ui.workbench.addons.generic"/>
       <plugin id="com.toedter.e4.ui.workbench.addons.swing"/>
       <plugin id="com.toedter.e4.ui.workbench.generic"/>
       <plugin id="com.toedter.e4.ui.workbench.renderers.swing"/>

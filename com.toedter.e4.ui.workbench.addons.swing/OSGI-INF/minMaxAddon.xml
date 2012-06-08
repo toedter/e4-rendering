@@ -2,6 +2,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.toedter.e4.ui.workbench.javafx.minmaxaddon">
    <implementation class="com.toedter.e4.ui.workbench.addons.swing.minmax.MinMaxAddon"/>
    <service>
-      <provide interface="com.toedter.e4.ui.workbench.addons.minmax.IMinMaxAddon"/>
+      <provide interface="com.toedter.e4.ui.workbench.addons.generic.minmax.IMinMaxAddon"/>
    </service>
 </scr:component>

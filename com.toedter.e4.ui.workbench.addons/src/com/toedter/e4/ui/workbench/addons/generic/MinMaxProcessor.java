@@ -10,7 +10,7 @@
  *     Kai Toedter - initial API and implementation
  ******************************************************************************/
 
-package com.toedter.e4.ui.workbench.addons;
+package com.toedter.e4.ui.workbench.addons.generic;
 
 import java.util.List;
 
@@ -28,11 +28,11 @@ import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
 
 @SuppressWarnings("restriction")
 public class MinMaxProcessor {
-	private static final String BUNDLE_ID = "platform:/plugin/com.toedter.e4.ui.workbench.addons"; //$NON-NLS-1$
-	private static final String BUNDLE_CLASS = "bundleclass://com.toedter.e4.ui.workbench.addons"; //$NON-NLS-1$
+	private static final String BUNDLE_ID = "platform:/plugin/com.toedter.e4.ui.workbench.addons.generic"; //$NON-NLS-1$
+	private static final String BUNDLE_CLASS = "bundleclass://com.toedter.e4.ui.workbench.addons.generic"; //$NON-NLS-1$
 
 	public static final String GEN_MIN_MAX_CONTRIBUTION_URI = BUNDLE_CLASS
-			+ "/com.toedter.e4.ui.workbench.addons.minmax.GenericMinMaxAddon";
+			+ "/com.toedter.e4.ui.workbench.addons.generic.minmax.GenericMinMaxAddon";
 
 	@Execute
 	void addMinMaxAddon(MApplication application) {
@@ -52,14 +52,14 @@ public class MinMaxProcessor {
 		application.getAddons().add(minMaxAddon);
 
 		MCommand resetWindowsCommand = MCommandsFactory.INSTANCE.createCommand();
-		resetWindowsCommand.setElementId("com.toedter.e4.ui.workbench.addons.testCommand");
+		resetWindowsCommand.setElementId("com.toedter.e4.ui.workbench.addons.generic.testCommand");
 		resetWindowsCommand.setCommandName("testCommand");
 		resetWindowsCommand.setDescription("testCommand description");
 		application.getCommands().add(resetWindowsCommand);
 
 		MHandler resetWindowsHandler = MCommandsFactory.INSTANCE.createHandler();
 		resetWindowsHandler.setContributionURI(BUNDLE_CLASS
-				+ "/com.toedter.e4.ui.workbench.addons.minmax.ResetWindowsHandler");
+				+ "/com.toedter.e4.ui.workbench.addons.generic.minmax.ResetWindowsHandler");
 		resetWindowsHandler.setCommand(resetWindowsCommand);
 		application.getHandlers().add(resetWindowsHandler);
 

@@ -14,8 +14,8 @@ package com.toedter.e4.ui.workbench.addons.swing.minmax;
 
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 
-import com.toedter.e4.ui.workbench.addons.minmax.GenericMinMaxAddon;
-import com.toedter.e4.ui.workbench.addons.minmax.IMinMaxAddon;
+import com.toedter.e4.ui.workbench.addons.generic.minmax.GenericMinMaxAddon;
+import com.toedter.e4.ui.workbench.addons.generic.minmax.IMinMaxAddon;
 import com.toedter.e4.ui.workbench.renderers.swing.controls.CTabbedPane;
 
 @SuppressWarnings("restriction")

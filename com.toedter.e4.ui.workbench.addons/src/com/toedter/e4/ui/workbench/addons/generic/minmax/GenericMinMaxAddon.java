@@ -10,7 +10,7 @@
  *     Kai Toedter - initial API and implementation
  ******************************************************************************/
 
-package com.toedter.e4.ui.workbench.addons.minmax;
+package com.toedter.e4.ui.workbench.addons.generic.minmax;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ import com.toedter.e4.ui.workbench.generic.IPresentationEngine2;
 
 @SuppressWarnings("restriction")
 public class GenericMinMaxAddon {
-	public static final String ADDONS_MINMAX_TRIM_STACK_ID = "com.toedter.e4.ui.workbench.addons.minmax.trimStackId";
+	public static final String ADDONS_MINMAX_TRIM_STACK_ID = "com.toedter.e4.ui.workbench.addons.generic.minmax.trimStackId";
 
 	static String ID_SUFFIX = "(minimized)"; //$NON-NLS-1$
 
@@ -328,13 +328,13 @@ public class GenericMinMaxAddon {
 			trimStack.setElementId(trimId);
 
 			// MCommand command = MCommandsFactory.INSTANCE.createCommand();
-			// command.setElementId("com.toedter.e4.ui.workbench.addons.minmax.restore");
+			// command.setElementId("com.toedter.e4.ui.workbench.addons.generic.minmax.restore");
 			// command.setCommandName("Restore Stack");
 			// command.setDescription("xxx");
 			// command.setContributorURI("kai");
 			//
 			// MHandler handler = MCommandsFactory.INSTANCE.createHandler();
-			// handler.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.RestoreHandler");
+			// handler.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons.generic/com.toedter.e4.ui.workbench.addons.generic.minmax.RestoreHandler");
 			// handler.setCommand(command);
 			//
 			// MHandledToolItem toolItem =
@@ -345,7 +345,7 @@ public class GenericMinMaxAddon {
 			// parameter.setName(ADDONS_MINMAX_TRIM_STACK_ID);
 			// parameter.setValue(element.getElementId());
 			// toolItem.getParameters().add(parameter);
-			// toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons/icons/fastview_restore.gif");
+			// toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons.generic/icons/fastview_restore.gif");
 			// toolItem.setCommand(command);
 			//
 			// application.getHandlers().add(handler);
@@ -357,8 +357,8 @@ public class GenericMinMaxAddon {
 			// MCommandsFactory.INSTANCE.createCommandParameter();
 
 			MDirectToolItem toolItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
-			toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons/icons/fastview_restore.gif");
-			toolItem.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.RestoreHandler");
+			toolItem.setIconURI("platform:/plugin/com.toedter.e4.ui.workbench.addons.generic/icons/fastview_restore.gif");
+			toolItem.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons.generic/com.toedter.e4.ui.workbench.addons.generic.minmax.RestoreHandler");
 			toolItem.setContainerData(element.getElementId());
 
 			trimStack.getChildren().add(toolItem);
@@ -378,7 +378,7 @@ public class GenericMinMaxAddon {
 				}
 
 				MDirectToolItem partItem = MenuFactoryImpl.eINSTANCE.createDirectToolItem();
-				partItem.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons/com.toedter.e4.ui.workbench.addons.minmax.FastViewHandler");
+				partItem.setContributionURI("bundleclass://com.toedter.e4.ui.workbench.addons.generic/com.toedter.e4.ui.workbench.addons.generic.minmax.FastViewHandler");
 
 				MUILabel labelElement = getLabelElement(stackElement);
 				partItem.setIconURI(labelElement.getIconURI());

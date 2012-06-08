@@ -10,7 +10,7 @@
  *     Kai Toedter - initial API and implementation
  ******************************************************************************/
 
-package com.toedter.e4.ui.workbench.addons.minmax;
+package com.toedter.e4.ui.workbench.addons.generic.minmax;
 
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 

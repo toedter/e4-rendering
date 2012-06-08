@@ -19,8 +19,8 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabFolder2Listener;
 import org.eclipse.swt.custom.CTabFolderEvent;
 
-import com.toedter.e4.ui.workbench.addons.minmax.GenericMinMaxAddon;
-import com.toedter.e4.ui.workbench.addons.minmax.IMinMaxAddon;
+import com.toedter.e4.ui.workbench.addons.generic.minmax.GenericMinMaxAddon;
+import com.toedter.e4.ui.workbench.addons.generic.minmax.IMinMaxAddon;
 
 @SuppressWarnings("restriction")
 public class MinMaxAddon implements IMinMaxAddon {
