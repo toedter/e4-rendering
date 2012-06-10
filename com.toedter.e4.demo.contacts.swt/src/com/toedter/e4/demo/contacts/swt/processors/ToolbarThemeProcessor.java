@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 
 @SuppressWarnings("restriction")
 public class ToolbarThemeProcessor extends AbstractThemeProcessor {
+	private final static String PROCESSOR_ID = "com.toedter.e4.demo.contacts.swt.processors.theme.toolbar";
 
 	@Inject
 	@Named("toolbar:org.eclipse.ui.main.toolbar")
@@ -33,6 +34,9 @@ public class ToolbarThemeProcessor extends AbstractThemeProcessor {
 
 	@Override
 	protected boolean check() {
+		if (isAreadyProcessed(PROCESSOR_ID))
+			return false;
+
 		return topBar != null;
 	}
 
@@ -43,8 +47,10 @@ public class ToolbarThemeProcessor extends AbstractThemeProcessor {
 	}
 
 	@Override
-	protected void processTheme(String name, MCommand switchCommand, MParameter themeId, String iconURI) {
-		MHandledToolItem toolItem = MMenuFactory.INSTANCE.createHandledToolItem();
+	protected void processTheme(String name, MCommand switchCommand,
+			MParameter themeId, String iconURI) {
+		MHandledToolItem toolItem = MMenuFactory.INSTANCE
+				.createHandledToolItem();
 		toolItem.setTooltip(name);
 		toolItem.setCommand(switchCommand);
 		toolItem.getParameters().add(themeId);

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 public class MenuThemeProcessor extends AbstractThemeProcessor {
 
 	private static final String BUNDLE_ID = "platform:/plugin/com.toedter.e4.demo.contacts.swt2"; //$NON-NLS-1$
+	private final static String PROCESSOR_ID = "com.toedter.e4.demo.contacts.swt2.processors.theme.menu";
 
 	@Inject
 	@Named("menu:org.eclipse.ui.main.menu")
@@ -34,6 +35,9 @@ public class MenuThemeProcessor extends AbstractThemeProcessor {
 
 	@Override
 	protected boolean check() {
+		if (isAreadyProcessed(PROCESSOR_ID))
+			return false;
+
 		return menu != null;
 	}
 
@@ -45,8 +49,10 @@ public class MenuThemeProcessor extends AbstractThemeProcessor {
 	}
 
 	@Override
-	protected void processTheme(String name, MCommand switchCommand, MParameter themeId, String iconURI) {
-		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
+	protected void processTheme(String name, MCommand switchCommand,
+			MParameter themeId, String iconURI) {
+		MHandledMenuItem menuItem = MMenuFactory.INSTANCE
+				.createHandledMenuItem();
 		menuItem.setLabel(name);
 		menuItem.setCommand(switchCommand);
 		menuItem.getParameters().add(themeId);

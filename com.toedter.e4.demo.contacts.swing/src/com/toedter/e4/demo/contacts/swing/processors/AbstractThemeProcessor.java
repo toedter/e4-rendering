@@ -12,6 +12,7 @@
 
 package com.toedter.e4.demo.contacts.swing.processors;
 
+import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -47,7 +48,8 @@ public abstract class AbstractThemeProcessor {
 				preprocess();
 
 				for (LookAndFeelInfo lookAndFeelInfo : lnfs) {
-					MParameter parameter = MCommandsFactory.INSTANCE.createParameter();
+					MParameter parameter = MCommandsFactory.INSTANCE
+							.createParameter();
 					parameter.setName("contacts.commands.switchtheme.themeid"); //$NON-NLS-1$
 					parameter.setValue(lookAndFeelInfo.getClassName());
 					String iconURI = "platform:/plugin/com.toedter.e4.demo.contacts.swing/icons/";
@@ -65,7 +67,8 @@ public abstract class AbstractThemeProcessor {
 						icon = "napkin.png";
 					}
 
-					processTheme(lookAndFeelInfo.getName(), switchThemeCommand, parameter, iconURI + icon);
+					processTheme(lookAndFeelInfo.getName(), switchThemeCommand,
+							parameter, iconURI + icon);
 				}
 
 				postprocess();
@@ -73,11 +76,23 @@ public abstract class AbstractThemeProcessor {
 		}
 	}
 
+	protected boolean isAreadyProcessed(String processorId) {
+		MApplication application = getApplication();
+		List<String> tags = application.getTags();
+		for (String tag : tags) {
+			if (processorId.equals(tag))
+				return true; // already processed
+		}
+		tags.add(processorId);
+		return false;
+	}
+
 	abstract protected boolean check();
 
 	abstract protected void preprocess();
 
-	abstract protected void processTheme(String name, MCommand switchCommand, MParameter themeId, String iconURI);
+	abstract protected void processTheme(String name, MCommand switchCommand,
+			MParameter themeId, String iconURI);
 
 	abstract protected void postprocess();
 

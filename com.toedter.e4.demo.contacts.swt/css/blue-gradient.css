@@ -53,7 +53,7 @@ Table {
 }
 
 ETabFolder {
-	simple: true;
+	swt-simple: true;
 }
 
 CTabItem {

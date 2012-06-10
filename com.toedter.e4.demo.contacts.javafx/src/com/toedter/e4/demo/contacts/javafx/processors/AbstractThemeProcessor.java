@@ -43,8 +43,10 @@ public abstract class AbstractThemeProcessor {
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		BundleContext context = bundle.getBundleContext();
 
-		ServiceReference<?> reference = context.getServiceReference(ThemeManager.class.getName());
-		ThemeManager themeManager = (ThemeManager) context.getService(reference);
+		ServiceReference<?> reference = context
+				.getServiceReference(ThemeManager.class.getName());
+		ThemeManager themeManager = (ThemeManager) context
+				.getService(reference);
 
 		List<Theme> themes = themeManager.getAvailableThemes();
 		if (themes.size() > 0) {
@@ -63,14 +65,16 @@ public abstract class AbstractThemeProcessor {
 				preprocess();
 
 				for (Theme theme : themes) {
-					MParameter parameter = MCommandsFactory.INSTANCE.createParameter();
+					MParameter parameter = MCommandsFactory.INSTANCE
+							.createParameter();
 					parameter.setName("contacts.commands.switchtheme.themeid"); //$NON-NLS-1$
 					parameter.setValue(theme.getId());
 					String iconURI = getCSSUri(theme.getId());
 					if (iconURI != null) {
 						iconURI = iconURI.replace(".css", ".png");
 					}
-					processTheme(theme.getName(), switchThemeCommand, parameter, iconURI);
+					processTheme(theme.getName(), switchThemeCommand,
+							parameter, iconURI);
 				}
 
 				postprocess();
@@ -82,7 +86,8 @@ public abstract class AbstractThemeProcessor {
 
 	abstract protected void preprocess();
 
-	abstract protected void processTheme(String name, MCommand switchCommand, MParameter themeId, String iconURI);
+	abstract protected void processTheme(String name, MCommand switchCommand,
+			MParameter themeId, String iconURI);
 
 	abstract protected void postprocess();
 
@@ -90,16 +95,29 @@ public abstract class AbstractThemeProcessor {
 
 	private String getCSSUri(String themeId) {
 		IExtensionRegistry registry = RegistryFactory.getRegistry();
-		IExtensionPoint extPoint = registry.getExtensionPoint("at.bestsolution.efxclipse.runtime.theme");
+		IExtensionPoint extPoint = registry
+				.getExtensionPoint("at.bestsolution.efxclipse.runtime.theme");
 
 		for (IExtension e : extPoint.getExtensions()) {
 			for (IConfigurationElement ce : e.getConfigurationElements()) {
-				if (ce.getName().equals("theme") && ce.getAttribute("id").equals(themeId)) {
-					return "platform:/plugin/" + ce.getContributor().getName() + "/"
-							+ ce.getAttribute("basestylesheet");
+				if (ce.getName().equals("theme")
+						&& ce.getAttribute("id").equals(themeId)) {
+					return "platform:/plugin/" + ce.getContributor().getName()
+							+ "/" + ce.getAttribute("basestylesheet");
 				}
 			}
 		}
 		return null;
+	}
+
+	protected boolean isAreadyProcessed(String processorId) {
+		MApplication application = getApplication();
+		List<String> tags = application.getTags();
+		for (String tag : tags) {
+			if (processorId.equals(tag))
+				return true; // already processed
+		}
+		tags.add(processorId);
+		return false;
 	}
 }

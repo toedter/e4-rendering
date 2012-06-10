@@ -44,7 +44,8 @@ public abstract class AbstractThemeProcessor {
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		BundleContext context = bundle.getBundleContext();
 
-		ServiceReference reference = context.getServiceReference(IThemeManager.class.getName());
+		ServiceReference reference = context
+				.getServiceReference(IThemeManager.class.getName());
 		IThemeManager mgr = (IThemeManager) context.getService(reference);
 		IThemeEngine engine = mgr.getEngineForDisplay(Display.getCurrent());
 
@@ -65,14 +66,16 @@ public abstract class AbstractThemeProcessor {
 				preprocess();
 
 				for (ITheme theme : themes) {
-					MParameter parameter = MCommandsFactory.INSTANCE.createParameter();
+					MParameter parameter = MCommandsFactory.INSTANCE
+							.createParameter();
 					parameter.setName("contacts.commands.switchtheme.themeid"); //$NON-NLS-1$
 					parameter.setValue(theme.getId());
 					String iconURI = getCSSUri(theme.getId());
 					if (iconURI != null) {
 						iconURI = iconURI.replace(".css", ".png");
 					}
-					processTheme(theme.getLabel(), switchThemeCommand, parameter, iconURI);
+					processTheme(theme.getLabel(), switchThemeCommand,
+							parameter, iconURI);
 				}
 
 				postprocess();
@@ -80,11 +83,23 @@ public abstract class AbstractThemeProcessor {
 		}
 	}
 
+	protected boolean isAreadyProcessed(String processorId) {
+		MApplication application = getApplication();
+		List<String> tags = application.getTags();
+		for (String tag : tags) {
+			if (processorId.equals(tag))
+				return true; // already processed
+		}
+		tags.add(processorId);
+		return false;
+	}
+
 	abstract protected boolean check();
 
 	abstract protected void preprocess();
 
-	abstract protected void processTheme(String name, MCommand switchCommand, MParameter themeId, String iconURI);
+	abstract protected void processTheme(String name, MCommand switchCommand,
+			MParameter themeId, String iconURI);
 
 	abstract protected void postprocess();
 
@@ -92,13 +107,15 @@ public abstract class AbstractThemeProcessor {
 
 	private String getCSSUri(String themeId) {
 		IExtensionRegistry registry = RegistryFactory.getRegistry();
-		IExtensionPoint extPoint = registry.getExtensionPoint("org.eclipse.e4.ui.css.swt.theme");
+		IExtensionPoint extPoint = registry
+				.getExtensionPoint("org.eclipse.e4.ui.css.swt.theme");
 
 		for (IExtension e : extPoint.getExtensions()) {
 			for (IConfigurationElement ce : e.getConfigurationElements()) {
-				if (ce.getName().equals("theme") && ce.getAttribute("id").equals(themeId)) {
-					return "platform:/plugin/" + ce.getContributor().getName() + "/"
-							+ ce.getAttribute("basestylesheeturi");
+				if (ce.getName().equals("theme")
+						&& ce.getAttribute("id").equals(themeId)) {
+					return "platform:/plugin/" + ce.getContributor().getName()
+							+ "/" + ce.getAttribute("basestylesheeturi");
 				}
 			}
 		}

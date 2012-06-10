@@ -92,9 +92,11 @@ public class DetailsView {
 
 		titleText.heightProperty().addListener(new ChangeListener<Number>() {
 
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
 				Image image = imageView.getImage();
-				double scaleFactor = ((Double) newValue + 3.5) * 4 / image.getHeight();
+				double scaleFactor = ((Double) newValue + 3.5) * 4
+						/ image.getHeight();
 				imageView.setFitHeight(scaleFactor * image.getHeight());
 				imageView.setFitWidth(scaleFactor * image.getWidth());
 			}
@@ -136,7 +138,7 @@ public class DetailsView {
 	}
 
 	public TextField addProperty(String labelText, String property, int span) {
-		Label label = new Label(labelText + ":");
+		Label label = new Label(labelText);
 
 		grid.add(label, 1, detailsPanelRow);
 
@@ -144,14 +146,16 @@ public class DetailsView {
 
 		grid.add(textField, 2, detailsPanelRow);
 
-		GridPane.setConstraints(textField, 2, detailsPanelRow, span, 1, HPos.LEFT, VPos.BASELINE, Priority.ALWAYS,
-				Priority.ALWAYS);
+		GridPane.setConstraints(textField, 2, detailsPanelRow, span, 1,
+				HPos.LEFT, VPos.BASELINE, Priority.ALWAYS, Priority.ALWAYS);
 
 		detailsPanelRow++;
 		if ("Name".equals(labelText)) {
-			ctx.bindValue(uiProp.observe(textField), new AggregateNameObservableValue(writableValue));
+			ctx.bindValue(uiProp.observe(textField),
+					new AggregateNameObservableValue(writableValue));
 		} else {
-			ctx.bindValue(uiProp.observe(textField), BeanProperties.value(property).observeDetail(writableValue));
+			ctx.bindValue(uiProp.observe(textField),
+					BeanProperties.value(property).observeDetail(writableValue));
 		}
 
 		return textField;
