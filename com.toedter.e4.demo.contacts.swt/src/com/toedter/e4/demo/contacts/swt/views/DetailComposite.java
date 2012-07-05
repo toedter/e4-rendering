@@ -280,6 +280,9 @@ public class DetailComposite extends Composite {
 	}
 
 	private void setTextEnabled(Composite composite, boolean enabled) {
+		if(composite.isDisposed())
+			return;
+		
 		for (Control control : composite.getChildren()) {
 			if (control instanceof Composite) {
 				setTextEnabled((Composite) control, enabled);
