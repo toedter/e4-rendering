@@ -67,7 +67,7 @@ public class DetailsView {
 
 	@Inject
 	public DetailsView(Composite parent) {
-		parent.setData("org.eclipse.e4.ui.css.id", "DetailsView");
+		// parent.setData("org.eclipse.e4.ui.css.id", "DetailsView");
 
 		detailComposite = new DetailComposite(dirtyable, parent);
 	}

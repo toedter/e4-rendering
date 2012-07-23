@@ -10,7 +10,7 @@
  *     Kai Tödter - initial implementation
  ******************************************************************************/
 
-Label {
+Label, Button[style~='SWT.CHECK'] {
 	font: Verdana 8px;
 	color: black;
 }
@@ -57,9 +57,9 @@ CTabFolder {
 	 * background from the tabfolder's background (or it's parent?)
 	 * and so the gradient doesn't come through. So just set the
 	 * tabfolder's background to a color */
-	/*background-color: #777777 #373737 #202020 50% 50%;*/
-	background-color: #e8e8e8;
-	color: rgb(150, 150, 150);
+	/*background-color: white #dddddd #eeeeee 35% 25% 25%;*/
+	background-color: #eeeeee;
+	color: white;
 	swt-simple: true;	
 }
 
@@ -82,4 +82,5 @@ CTabItem.active:selected {
 
 Shell {
     background-color: #e8e8e8 #cccccc 60%;
+    swt-background-mode: default;
 }
