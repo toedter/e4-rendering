@@ -10,7 +10,7 @@
  *     Kai Tödter - initial implementation
  ******************************************************************************/
 
-Label {
+Label, Button[style~='SWT.CHECK'] {
 	font: Verdana 8px;
 	color: black;
 }
@@ -52,8 +52,15 @@ Table {
 	font: Verdana 8px;
 }
 
-ETabFolder {
-	swt-simple: true;
+CTabFolder {
+	/* The tab rendering background for the min/max toolbar pulls 
+	 * background from the tabfolder's background (or it's parent?)
+	 * and so the gradient doesn't come through. So just set the
+	 * tabfolder's background to a color */
+	/*background-color: #e3efff #c1d5ef;*/
+	background-color: #c1d5ef;
+	color: white;
+	swt-simple: true;	
 }
 
 CTabItem {
@@ -75,4 +82,5 @@ CTabItem.active:selected {
 
 Shell {
     background-color: #e3efff #c1d5ef 60%;
+    swt-background-mode: default;
 }

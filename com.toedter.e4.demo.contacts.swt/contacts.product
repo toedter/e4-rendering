@@ -33,7 +33,6 @@
       <plugin id="com.ibm.icu"/>
       <plugin id="com.toedter.e4.demo.contacts.generic"/>
       <plugin id="com.toedter.e4.demo.contacts.swt"/>
-      <plugin id="com.toedter.e4.ui.workbench.generic"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="org.apache.batik.css"/>

@@ -12,6 +12,8 @@
 
 package com.toedter.e4.demo.contacts.swt.views;
 
+import org.eclipse.swt.widgets.Composite;
+
 import com.toedter.e4.demo.contacts.generic.model.Contact;
 import com.toedter.e4.demo.contacts.swt.handlers.ThemeUtil;
 import java.io.IOException;
@@ -41,7 +43,6 @@ public class DetailsView {
 	@Inject
 	private MDirtyable dirtyable;
 
-	@Inject
 	private DetailComposite detailComposite;
 
 	@Inject
@@ -55,6 +56,12 @@ public class DetailsView {
 
 	@Inject
 	private MUILabel uiItem;
+
+	@Inject
+	public DetailsView(Composite parent) {
+		detailComposite = new DetailComposite(dirtyable, parent);
+		detailComposite.setData("org.eclipse.e4.ui.css.id", "DetailsView");
+	}
 
 	@Focus
 	void setFocus() {

@@ -33,7 +33,7 @@
          </property>
          <property
                name="cssTheme"
-               value="com.toedter.e4.demo.contacts.themes.darkgradient">
+               value="com.toedter.e4.demo.contacts.themes.brightgradient">
          </property>
       </product>
    </extension>
