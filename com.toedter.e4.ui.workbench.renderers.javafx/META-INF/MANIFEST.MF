@@ -6,7 +6,6 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Kai Toedter
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: com.toedter.e4.ui.workbench.generic;bundle-version="0.1.0",
- at.bestsolution.efxclipse.runtime.workbench,
  org.eclipse.e4.ui.model.workbench;bundle-version="0.9.1",
  org.eclipse.e4.core.contexts;bundle-version="0.9.0",
  javax.inject;bundle-version="1.0.0",
