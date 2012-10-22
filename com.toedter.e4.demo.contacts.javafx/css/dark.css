@@ -12,6 +12,11 @@
     -fx-background-color: linear-gradient(to bottom, -fx-base, derive(-fx-base,30%));
 }
 
+.MTrimBar {
+	-fx-background-color:
+         linear-gradient(to bottom, derive(-fx-base,+50%),derive(-fx-base,-40%), derive(-fx-base,-20%));
+}
+
 .tool-bar:horizontal {
     -fx-background-color:
          linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(-fx-base,-20%));

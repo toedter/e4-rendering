@@ -38,10 +38,11 @@ import org.eclipse.core.databinding.beans.BeanProperties;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.osgi.internal.signedcontent.Base64;
 
 @SuppressWarnings("restriction")
-public class DetailsView {
+public class DetailsView extends com.toedter.e4.demo.contacts.generic.views.DetailsView {
 	private final WritableValue writableValue = new WritableValue();
 
 	private int detailsPanelRow;
@@ -56,9 +57,13 @@ public class DetailsView {
 	private TextField titleText;
 
 	@Inject
+	private EPartService partService;
+
+	@Inject
 	public DetailsView(BorderPane parent, final MApplication application) {
 		Node node = createDetailsPanel();
 		parent.setCenter(node);
+		System.out.println("dirtyable: " + dirtyable);
 	}
 
 	private Node createDetailsPanel() {
@@ -92,11 +97,9 @@ public class DetailsView {
 
 		titleText.heightProperty().addListener(new ChangeListener<Number>() {
 
-			public void changed(ObservableValue<? extends Number> observable,
-					Number oldValue, Number newValue) {
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				Image image = imageView.getImage();
-				double scaleFactor = ((Double) newValue + 3.5) * 4
-						/ image.getHeight();
+				double scaleFactor = ((Double) newValue + 3.5) * 4 / image.getHeight();
 				imageView.setFitHeight(scaleFactor * image.getHeight());
 				imageView.setFitWidth(scaleFactor * image.getWidth());
 			}
@@ -128,6 +131,7 @@ public class DetailsView {
 		scrollPane.setFitToWidth(true);
 		scrollPane.setContent(grid);
 		scrollPane.autosize();
+
 		return scrollPane;
 	}
 
@@ -146,16 +150,14 @@ public class DetailsView {
 
 		grid.add(textField, 2, detailsPanelRow);
 
-		GridPane.setConstraints(textField, 2, detailsPanelRow, span, 1,
-				HPos.LEFT, VPos.BASELINE, Priority.ALWAYS, Priority.ALWAYS);
+		GridPane.setConstraints(textField, 2, detailsPanelRow, span, 1, HPos.LEFT, VPos.BASELINE, Priority.ALWAYS,
+				Priority.ALWAYS);
 
 		detailsPanelRow++;
 		if ("Name".equals(labelText)) {
-			ctx.bindValue(uiProp.observe(textField),
-					new AggregateNameObservableValue(writableValue));
+			ctx.bindValue(uiProp.observe(textField), new AggregateNameObservableValue(writableValue));
 		} else {
-			ctx.bindValue(uiProp.observe(textField),
-					BeanProperties.value(property).observeDetail(writableValue));
+			ctx.bindValue(uiProp.observe(textField), BeanProperties.value(property).observeDetail(writableValue));
 		}
 
 		return textField;

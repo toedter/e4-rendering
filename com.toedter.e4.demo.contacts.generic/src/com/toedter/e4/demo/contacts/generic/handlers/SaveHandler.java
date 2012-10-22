@@ -24,15 +24,18 @@ public class SaveHandler {
 
 	@CanExecute
 	public boolean canExecute(EPartService partService) {
-		MPart details = partService.findPart("DetailsView");
-		return details.isDirty();
+		MPart details = partService.findPart("part:detailsView");
+		if (details != null) {
+			return details.isDirty();
+		}
+		return true;
 	}
 
 	@Execute
 	public void execute(IEclipseContext context, @Optional IStylingEngine engine, final EPartService partService)
 			throws InvocationTargetException, InterruptedException {
 		System.out.println("SaveHandler.execute()");
-		final MPart details = partService.findPart("DetailsView");
+		final MPart details = partService.findPart("part:detailsView");
 		final IEclipseContext pmContext = context.createChild();
 
 		if (pmContext != null) {

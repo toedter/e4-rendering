@@ -12,7 +12,14 @@
 
 package com.toedter.e4.demo.contacts.generic.views;
 
+import javax.inject.Inject;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
+
 public class DetailsView {
+
+	@Inject
+	protected MDirtyable dirtyable;
+
 	public DetailsView() {
 		System.out.println("TODO: Please provide a UI toolkit specific DetailsView implementetion.");
 	}

@@ -24,7 +24,8 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
 Bundle-Activator: com.toedter.e4.demo.contacts.generic.BundleActivatorImpl
 Export-Package: com.toedter.e4.demo.contacts.generic.databinding,
- com.toedter.e4.demo.contacts.generic.model
+ com.toedter.e4.demo.contacts.generic.model,
+ com.toedter.e4.demo.contacts.generic.views
 Bundle-Localization: plugin
 
 
