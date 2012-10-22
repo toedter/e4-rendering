@@ -42,7 +42,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.osgi.internal.signedcontent.Base64;
 
 @SuppressWarnings("restriction")
-public class DetailsView extends com.toedter.e4.demo.contacts.generic.views.DetailsView {
+public class DetailsView {
 	private final WritableValue writableValue = new WritableValue();
 
 	private int detailsPanelRow;
@@ -63,7 +63,6 @@ public class DetailsView extends com.toedter.e4.demo.contacts.generic.views.Deta
 	public DetailsView(BorderPane parent, final MApplication application) {
 		Node node = createDetailsPanel();
 		parent.setCenter(node);
-		System.out.println("dirtyable: " + dirtyable);
 	}
 
 	private Node createDetailsPanel() {
