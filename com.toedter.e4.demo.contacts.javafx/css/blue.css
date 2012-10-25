@@ -94,7 +94,8 @@
 	-fx-background-color:
         linear-gradient(to bottom, derive(-fx-base,-30%), derive(-fx-base,-60%)),
         linear-gradient(to bottom, derive(-fx-base,65%) 2%, derive(-fx-base,-20%) 95%);
-}
+    }
+
 
 .MTrimBar .tool-bar {
     -fx-border-style: solid;
@@ -102,3 +103,11 @@
     -fx-border-color:  null;
     -fx-border-width: 0px;
 }
+
+.tool-bar {
+    -fx-border-style: solid;
+    -fx-border-color:  linear-gradient(to bottom, derive(-fx-base,-30%), derive(-fx-base,-60%)),
+        linear-gradient(to bottom, derive(-fx-base,65%) 2%, derive(-fx-base,-20%) 95%);
+    -fx-border-width: 1px;
+}
+
