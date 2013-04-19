@@ -5,7 +5,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="at.bestsolution.efxclipse.runtime.workbench.fx.application"
+            application="com.toedter.e4.ui.workbench.javafx.application"
             name="E4 JavaFX Contacs Demo">
          <property
                name="appName"

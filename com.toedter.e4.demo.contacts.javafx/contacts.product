@@ -33,6 +33,7 @@
       <plugin id="at.bestsolution.efxclipse.runtime.bindings"/>
       <plugin id="at.bestsolution.efxclipse.runtime.bindings.e4"/>
       <plugin id="at.bestsolution.efxclipse.runtime.bindings.generic"/>
+      <plugin id="at.bestsolution.efxclipse.runtime.core"/>
       <plugin id="at.bestsolution.efxclipse.runtime.databinding"/>
       <plugin id="at.bestsolution.efxclipse.runtime.di"/>
       <plugin id="at.bestsolution.efxclipse.runtime.javafx"/>
