@@ -12,8 +12,8 @@ Setup
 -----
 * Install the latest JDK 7 (this includes the current JavaFX)
 * Clone this git repo
-* Import all projects from this git repo
-* set the target platform from the project com.toedter.e4.demo.contacts.target
+* Import all projects from this git repo into an Eclipse IDE
+* Set the target platform from the project com.toedter.e4.demo.contacts.target
 * Use the predefined run configurations to launch the JavaFX, Swing and SWT demos
 
 License
