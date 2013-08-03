@@ -2,17 +2,18 @@ e4-rendering
 ============
 e4-rendering is a proof of concept for providing new rendering engines
 for the Eclipse 4 Application platform. I provide engines for
-* JavaFX 2.1
+* JavaFX 2.x
 * Swing
 * SWT (alternative renderer to prove that the generic concepts are working with SWT)
 
+The current source code is compatible with Eclipse 4.3 and efxclipse nightly builds
+
 Setup
 -----
-* Install JavaFX (SDK or Runtime) for your platform
-* Install e(fx)clipse for your platform, see http://efxclipse.org
-* Open the Eclipse SDK and set the JavaFX SDK location in the prefences
-* Restart Eclipse
+* Install the latest JDK 7 (this includes the current JavaFX)
+* Clone this git repo
 * Import all projects from this git repo
+* set the target platform from the project com.toedter.e4.demo.contacts.target
 * Use the predefined run configurations to launch the JavaFX, Swing and SWT demos
 
 License
