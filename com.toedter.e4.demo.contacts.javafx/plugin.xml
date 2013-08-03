@@ -5,7 +5,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="at.bestsolution.efxclipse.runtime.workbench.fx.application"
+            application="org.eclipse.fx.ui.workbench.fx.application"
             name="E4 JavaFX Contacs Demo">
          <property
                name="appName"
@@ -36,24 +36,6 @@
                value="5,275,445,15">
          </property>
       </product>
-   </extension>
-    <extension
-         point="at.bestsolution.efxclipse.runtime.theme">
-      <theme
-            basestylesheet="css/dark.css"
-            id="themes.dark"
-            name="Dark Gradient">
-      </theme>
-      <theme
-            basestylesheet="css/bright.css"
-            id="themes.bright"
-            name="Bright Gradient">
-      </theme>
-      <theme
-            basestylesheet="css/blue.css"
-            id="themes.blue"
-            name="Blue Gradient">
-      </theme>
    </extension>
     <extension
           id="modelContribution"
@@ -92,4 +74,22 @@
 	       </element>
 	    </processor>
      </extension>
+    <extension
+          point="org.eclipse.fx.ui.theme">
+       <theme
+             basestylesheet="css/dark.css"
+             id="themes.dark"
+             name="Dark Gradient">
+       </theme>
+       <theme
+             basestylesheet="css/bright.css"
+             id="themes.bright"
+             name="Bright Gradient">
+       </theme>
+       <theme
+             basestylesheet="css/blue.css"
+             id="themes.blue"
+             name="Blue Gradient">
+       </theme>
+    </extension>
 </plugin>

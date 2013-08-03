@@ -7,7 +7,7 @@
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Dosgi.framework.extensions=at.bestsolution.efxclipse.runtime.osgi</vmArgs>
+      <vmArgs>-Dosgi.framework.extensions=org.eclipse.fx.osgi</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
@@ -29,27 +29,17 @@
    </vm>
 
    <plugins>
-      <plugin id="at.bestsolution.efxclipse.runtime.application"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.databinding"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.di"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.javafx"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.osgi" fragment="true"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.osgi.util"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.panels"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.services"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.theme"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.workbench"/>
-      <plugin id="at.bestsolution.efxclipse.runtime.workbench.renderers"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="com.toedter.e4.javafx.addons"/>
-      <plugin id="com.toedter.e4.javafx.control"/>
+      <plugin id="com.ibm.icu.base"/>
       <plugin id="com.toedter.e4.demo.contacts.generic"/>
+      <plugin id="com.toedter.e4.ui.controls.javafx"/>
       <plugin id="com.toedter.e4.ui.workbench.generic"/>
       <plugin id="com.toedter.e4.ui.workbench.javafx"/>
       <plugin id="com.toedter.e4.ui.workbench.renderers.javafx"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.servlet"/>
+      <plugin id="javax.xml"/>
       <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
@@ -87,6 +77,13 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.util"/>
+      <plugin id="org.eclipse.fx.core"/>
+      <plugin id="org.eclipse.fx.core.databinding"/>
+      <plugin id="org.eclipse.fx.javafx"/>
+      <plugin id="org.eclipse.fx.osgi" fragment="true"/>
+      <plugin id="org.eclipse.fx.osgi.util"/>
+      <plugin id="org.eclipse.fx.ui.services"/>
+      <plugin id="org.eclipse.fx.ui.theme"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
    </plugins>

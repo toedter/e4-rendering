@@ -6,4 +6,4 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Kai Toedter
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: com.toedter.e4.ui.controls.javafx
-Require-Bundle: at.bestsolution.efxclipse.runtime.javafx;bundle-version="2.0.0"
+Require-Bundle: org.eclipse.fx.javafx;bundle-version="2.2.0"

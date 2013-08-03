@@ -26,9 +26,8 @@ import org.eclipse.e4.ui.model.application.MApplicationElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.equinox.app.IApplication;
-
-import at.bestsolution.efxclipse.runtime.databinding.JFXRealm;
-import at.bestsolution.efxclipse.runtime.services.theme.ThemeManager;
+import org.eclipse.fx.core.databinding.JFXRealm;
+import org.eclipse.fx.ui.services.theme.ThemeManager;
 
 import com.toedter.e4.ui.workbench.generic.GenericPresentationEngine;
 import com.toedter.e4.ui.workbench.generic.RendererFactory;

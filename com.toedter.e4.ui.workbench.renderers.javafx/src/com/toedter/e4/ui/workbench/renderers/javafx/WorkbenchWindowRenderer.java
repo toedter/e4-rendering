@@ -36,9 +36,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MTrimBar;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
-
-import at.bestsolution.efxclipse.runtime.services.theme.Theme;
-import at.bestsolution.efxclipse.runtime.services.theme.ThemeManager;
+import org.eclipse.fx.ui.services.theme.Theme;
+import org.eclipse.fx.ui.services.theme.ThemeManager;
 
 import com.toedter.e4.ui.workbench.generic.GenericRenderer;
 import com.toedter.e4.ui.workbench.generic.PresentationEngine;

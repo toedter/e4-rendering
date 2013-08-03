@@ -12,8 +12,6 @@
 
 package com.toedter.e4.demo.contacts.javafx.views;
 
-import at.bestsolution.efxclipse.runtime.databinding.IJFXBeanValueProperty;
-import at.bestsolution.efxclipse.runtime.databinding.JFXBeanProperties;
 import com.toedter.e4.demo.contacts.generic.databinding.AggregateNameObservableValue;
 import com.toedter.e4.demo.contacts.generic.model.Contact;
 import java.io.ByteArrayInputStream;
@@ -39,7 +37,10 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.fx.core.databinding.IJFXBeanValueProperty;
+import org.eclipse.fx.core.databinding.JFXBeanProperties;
 import org.eclipse.osgi.internal.signedcontent.Base64;
+
 
 @SuppressWarnings("restriction")
 public class DetailsView {

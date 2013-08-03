@@ -12,12 +12,11 @@
 
 package com.toedter.e4.demo.contacts.javafx.handlers;
 
-import at.bestsolution.efxclipse.runtime.services.theme.ThemeManager;
 import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.fx.ui.services.theme.ThemeManager;
 
-@SuppressWarnings("restriction")
 public class SwitchThemeHandler {
 	@Execute
 	public void switchTheme(@Named("contacts.commands.switchtheme.themeid") String themeId,

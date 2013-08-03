@@ -12,8 +12,6 @@
 
 package com.toedter.e4.demo.contacts.javafx.processors;
 
-import at.bestsolution.efxclipse.runtime.services.theme.Theme;
-import at.bestsolution.efxclipse.runtime.services.theme.ThemeManager;
 import java.util.List;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
@@ -25,6 +23,8 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.commands.MCommand;
 import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
 import org.eclipse.e4.ui.model.application.commands.MParameter;
+import org.eclipse.fx.ui.services.theme.Theme;
+import org.eclipse.fx.ui.services.theme.ThemeManager;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -96,7 +96,7 @@ public abstract class AbstractThemeProcessor {
 	private String getCSSUri(String themeId) {
 		IExtensionRegistry registry = RegistryFactory.getRegistry();
 		IExtensionPoint extPoint = registry
-				.getExtensionPoint("at.bestsolution.efxclipse.runtime.theme");
+				.getExtensionPoint("org.eclipse.fx.ui.theme");
 
 		for (IExtension e : extPoint.getExtensions()) {
 			for (IConfigurationElement ce : e.getConfigurationElements()) {
