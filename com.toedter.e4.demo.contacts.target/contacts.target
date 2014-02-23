@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="efxclipse" sequenceNumber="8">
+<?pde version="3.8"?><target name="efxclipse" sequenceNumber="12">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.fx.target.feature.feature.group" version="0.9.0.201308030601"/>
-<repository location="http://download.eclipse.org/efxclipse/runtime-nightly/site"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.3.0.I20130605-2000"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.3"/>
+<unit id="org.eclipse.fx.target.feature.feature.group" version="0.9.0.201401250701"/>
+<repository location="http://download.eclipse.org/efxclipse/runtime-released/0.9.0/site"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.e4.core.tools.feature.feature.group" version="0.14.0.v20130620-0935"/>
 <repository location="http://download.eclipse.org/e4/downloads/drops/R-0.14-201306242200/repository"/>
 </location>
+<location path="${eclipse_home}" type="Directory"/>
 </locations>
 </target>
