@@ -7,8 +7,10 @@
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Dosgi.framework.extensions=org.eclipse.fx.osgi</vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgs>-Dosgi.framework.extensions=org.eclipse.fx.osgi
+      </vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
    </launcherArgs>
 
    <windowImages/>
@@ -29,8 +31,8 @@
    </vm>
 
    <plugins>
-      <plugin id="at.bestsolution.efxclipse.runtime.osgi" fragment="true"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="com.ibm.icu.base"/>
       <plugin id="com.toedter.e4.demo.contacts.generic"/>
       <plugin id="com.toedter.e4.demo.contacts.swing"/>
       <plugin id="com.toedter.e4.ui.workbench.addons.generic"/>
@@ -72,7 +74,9 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.util"/>
+      <plugin id="org.eclipse.fx.osgi" fragment="true"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
    </plugins>
 
