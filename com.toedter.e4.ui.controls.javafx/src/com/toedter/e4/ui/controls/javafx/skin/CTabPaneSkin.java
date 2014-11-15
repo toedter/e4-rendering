@@ -42,7 +42,7 @@ public class CTabPaneSkin extends TabPaneSkin {
 		maxButton.setVisible(false); // will be enabled by MinMax addon
 		maxButton.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
 
-		maxButton.translateXProperty().bind(widthProperty().subtract(24.0));
+		maxButton.translateXProperty().bind(tabPane.widthProperty().subtract(24.0));
 		maxButton.setLayoutY(6.0);
 
 		Image restoreImage = new Image(getClass().getResourceAsStream("restore.png"));
@@ -52,7 +52,7 @@ public class CTabPaneSkin extends TabPaneSkin {
 		restoreButton.setVisible(false); // will be enabled by MinMax addon
 		restoreButton.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
 
-		restoreButton.translateXProperty().bind(widthProperty().subtract(24.0));
+		restoreButton.translateXProperty().bind(tabPane.widthProperty().subtract(24.0));
 		restoreButton.setLayoutY(6.0);
 
 		Image minImage = new Image(getClass().getResourceAsStream("min.png"));
@@ -60,7 +60,7 @@ public class CTabPaneSkin extends TabPaneSkin {
 		minButton.setVisible(false); // will be enabled by MinMax addon
 		minButton.setStyle("-fx-background-color: transparent; -fx-padding: 4;");
 
-		minButton.translateXProperty().bind(widthProperty().subtract(44.0));
+		minButton.translateXProperty().bind(tabPane.widthProperty().subtract(44.0));
 		minButton.setLayoutY(6.0);
 
 		minMaxGroup.getChildren().add(minButton);

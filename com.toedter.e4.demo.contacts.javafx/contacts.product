@@ -7,8 +7,10 @@
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Dosgi.framework.extensions=org.eclipse.fx.osgi</vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgs>-Dosgi.framework.extensions=org.eclipse.fx.osgi
+      </vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
    </launcherArgs>
 
    <windowImages/>
@@ -76,6 +78,9 @@
       <plugin id="org.eclipse.equinox.util"/>
       <plugin id="org.eclipse.fx.core"/>
       <plugin id="org.eclipse.fx.core.databinding"/>
+      <plugin id="org.eclipse.fx.core.di"/>
+      <plugin id="org.eclipse.fx.core.di.context"/>
+      <plugin id="org.eclipse.fx.core.fxml"/>
       <plugin id="org.eclipse.fx.javafx"/>
       <plugin id="org.eclipse.fx.osgi" fragment="true"/>
       <plugin id="org.eclipse.fx.osgi.util"/>
@@ -87,7 +92,9 @@
       <plugin id="org.eclipse.fx.ui.theme"/>
       <plugin id="org.eclipse.fx.ui.workbench.base"/>
       <plugin id="org.eclipse.fx.ui.workbench.fx"/>
+      <plugin id="org.eclipse.fx.ui.workbench.services"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
    </plugins>
 
